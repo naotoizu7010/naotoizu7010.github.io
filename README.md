@@ -7,6 +7,8 @@ https://qiita.com/TAKANEKOMACHI/items/5d30e499c9dddbea4421
 
 https://zenn.dev/entaku/articles/f5b87912475a27
 
+https://note.com/wecken/n/n0f9cdb00c1f4
+
 ### ローカルで実行したいとき
 bundle exec jekyll serve
 
