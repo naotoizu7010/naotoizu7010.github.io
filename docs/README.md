@@ -11,8 +11,9 @@
 |大学|筑波大学 理工学群[社会工学類](https://www.sk.tsukuba.ac.jp/College/index.php) <br> 経営工学主専攻 B2 (2023/4~)|
 
 # affiliations
-- OneThing（筑波大学エンジニアコミュニティ） 代表
+- OneThing（筑波大学エンジニアコミュニティ） 代表（[Twitter](https://x.com/OneThingTsukuba)）
 - 筑波大学 宿舎祭実行委員（[やど祭HP](https://yadokarisai.com/)）
+- Startix（筑波大学起業サークル）（[リンク（現在アクセス不可(_ _)）](https://rocky-brace-0b2.notion.site/1359cfcd42068063bd14d93acb95e04f?pvs=4)）
 
 # favorites
 - スポーツ観戦
@@ -21,13 +22,23 @@
   - 国内サッカー（Ｊリーグ）
     - 水戸ホーリーホック
     - 鹿島アントラーズ
+  - 他のスポーツも大好きです
+- スポーツ
+  - 競技歴
+    - 水泳（年中～小4）
+    - 野球（中学・軟式）
+    - 硬式テニス（高校・大学）
 - ラーメン巡り
+  - インスタの投稿・ストーリーズのハイライトをみてください！
+- バイク
+  - motoGP
 - サイクリング
+  - [霞ヶ浦一周](https://www.ringringroad.com/k-course1/)しました
 - ガジェット
 - 金融投資・資産形成
-  - インデックスオンリー
-  - 個別やってみたいけど一歩踏み出せてない
-
+  - 最近、累計利益が10万円超えて嬉しい
+- Wikipedia
+  - 人の人生とかなにかの歴史を見てるだけでずっと時間使える
 
 # accounts
 <p>
@@ -41,6 +52,9 @@
 <a href="https://note.com/naotoizu_7010/"><img alt="Static Badge" src="https://img.shields.io/badge%2FNote-ffffff?style=flat-square&logoColor=%23000000">
 </a>
 </p>
+
+# contact
+Twitter・インスタのDM / Eメール（[naoto.oizu7010@gmail.com](<mailto:naoto.oizu7010@gmail.com>)）
 
 <!--
 **naotoizu7010/naotoizu7010** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
