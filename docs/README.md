@@ -56,6 +56,8 @@
 # contact
 Twitter・インスタのDM / Eメール（[naoto.oizu7010@gmail.com](<mailto:naoto.oizu7010@gmail.com>)）
 
+このページのデザインが壊れてて辛い...orz
+
 <!--
 **naotoizu7010/naotoizu7010** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
