@@ -12,8 +12,8 @@
 
 # affiliations
 - OneThing（筑波大学エンジニアコミュニティ） 代表（[Twitter](https://x.com/OneThingTsukuba)）
-- 筑波大学 宿舎祭実行委員（[やど祭HP](https://yadokarisai.com/)）
-- Startix（筑波大学起業サークル）（[リンク](https://aboard-bush-c04.notion.site/STARTiX-3c631d56f372474b959398ba378e4831?pvs=4)）
+- 筑波大学 宿舎祭実行委員（[HP](https://yadokarisai.com/)）
+- Startix（筑波大学起業サークル）（[紹介ページ](https://aboard-bush-c04.notion.site/STARTiX-3c631d56f372474b959398ba378e4831?pvs=4)）
 
 # favorites
 - スポーツ観戦
@@ -53,7 +53,8 @@
 - ガジェット
   - 「俺の一軍」みたいなnote執筆中
 - 金融投資・資産形成
-  - メインはインデックスのちょっとだけビットコイン（投資か？）
+  - メインはインデックス
+  - ちょっとだけビットコイン（投資と呼べるのか？）
 - Wikipedia
   - 人の人生とかなにかの歴史を見てるだけでずっと時間使える
 - ダーツ
