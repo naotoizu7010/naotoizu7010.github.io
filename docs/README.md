@@ -13,20 +13,26 @@
 # affiliations
 - OneThing（筑波大学エンジニアコミュニティ） 代表（[Twitter](https://x.com/OneThingTsukuba)）
 - 筑波大学 宿舎祭実行委員（[やど祭HP](https://yadokarisai.com/)）
-- Startix（筑波大学起業サークル）（[リンク（現在アクセス不可(_ _)）](https://rocky-brace-0b2.notion.site/1359cfcd42068063bd14d93acb95e04f?pvs=4)）
+- Startix（筑波大学起業サークル）（[リンク](https://aboard-bush-c04.notion.site/STARTiX-3c631d56f372474b959398ba378e4831?pvs=4)）
 
 # favorites
 - スポーツ観戦
   - 海外サッカー
-    - プレミアリーグ
+    - メインはプレミアリーグ
   - 国内サッカー（Ｊリーグ）
     - 水戸ホーリーホック
     - 鹿島アントラーズ
+  - ボクシング
+      - 日本人の世界タイトルは追ってます
+      - 井上尚弥の試合観に行きたい！
   - 他のスポーツも大好きです
+    - 例えば
     - アメフト
       - スーパーボウルだけ年1で見る
     - バスケ
       - Bリーグもっと詳しくなりたい
+      - ロボッツがんばれー
+    - スポーツ観戦誘ってください！
 - スポーツ
   - 競技歴
     - 水泳（年中～小4）
@@ -37,14 +43,17 @@
       - もっとやりたいので誘ってください
 - ラーメン巡り
   - インスタの投稿・ストーリーズのハイライトをみてください！
+  - 最近投稿サボり気味
 - バイク
   - motoGP
   - 大型二輪MT取得予定
+    - 沖縄で取得中です（2025/1/18～）
 - サイクリング
   - [霞ヶ浦一周](https://www.ringringroad.com/k-course1/)しました
 - ガジェット
+  - 「俺の一軍」みたいなnote執筆中
 - 金融投資・資産形成
-  - 累計利益が10万円超えて嬉しい
+  - メインはインデックスのちょっとだけビットコイン（投資か？）
 - Wikipedia
   - 人の人生とかなにかの歴史を見てるだけでずっと時間使える
 - ダーツ
@@ -66,8 +75,6 @@
 
 # contact
 Twitter・インスタのDM / Eメール（[naoto.oizu7010@gmail.com](<mailto:naoto.oizu7010@gmail.com>)）
-
-このページのデザインが壊れてて辛い...orz
 
 <!--
 **naotoizu7010/naotoizu7010** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
