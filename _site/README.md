@@ -1,5 +1,4 @@
-naotoizu7010.github.io
-
+[リンクはこちら](https://naotoizu7010.github.io/)
 # thank you
 https://note.com/kaze3desu/n/nd10ce74e0508
 
