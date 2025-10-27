@@ -1,4 +1,6 @@
 # 自己紹介スライド
+読み込みに少々時間がかかりますm(_ _)m
+
 
 [自己紹介スライド【1枚】](https://1drv.ms/p/c/02ef7504c4bd4c7d/EeUP1wn0J9tPgS415kWJDoUBpHHtQgDgx-oZW6pAqocwgQ
 )
