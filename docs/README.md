@@ -7,6 +7,7 @@
 |氏名|大泉直人 (Naoto Oizumi)|
 |居住地|茨城県 つくば市|
 |出身|茨城県 日立市|
+|所属|筑波大学 理工学群社会工学類 学部３年|
 
 
 # educational background
@@ -14,7 +15,7 @@
   茨城県立 [水戸第一高等学校](https://www.mito1-h.ibk.ed.jp/)（令和5年卒）  
   
 2023.04 -  
-  筑波大学 理工学群[社会工学類](https://www.sk.tsukuba.ac.jp/College/index.php) 経営工学主専攻 学部３年 （[大西研究室）](http://onishi-lab.jp/)）
+  筑波大学 理工学群[社会工学類](https://www.sk.tsukuba.ac.jp/College/index.php) 経営工学主専攻 （[大西研究室](http://onishi-lab.jp/)）
 
 
 # work experience
