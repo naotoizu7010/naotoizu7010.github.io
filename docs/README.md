@@ -14,7 +14,7 @@
   茨城県立 [水戸第一高等学校](https://www.mito1-h.ibk.ed.jp/)（令和5年卒）  
   
 2023.04 -  
-  筑波大学 理工学群[社会工学類](https://www.sk.tsukuba.ac.jp/College/index.php) 経営工学主専攻 B3 [大西研究室](http://onishi-lab.jp/)
+  筑波大学 理工学群[社会工学類](https://www.sk.tsukuba.ac.jp/College/index.php) 経営工学主専攻 学部３年 （[大西研究室）](http://onishi-lab.jp/)）
 
 
 # work experience
@@ -26,6 +26,7 @@
 [こちら](https://naotoizu7010.github.io/profileslide)
 
 # affiliations
+- 大西研究室（産業技術総合研究所 人工知能研究センター 社会知能研究チーム）
 - OneThing（筑波大学エンジニアコミュニティ） 前代表（[Twitter](https://x.com/OneThingTsukuba)）（[HP](https://onethingtsukuba.github.io/)）（[イベント一覧](https://luma.com/user/OneThingTsukuba)）
   - [LT会開催報告](https://note.com/naotoizu_7010/n/n9d00794c4227)
 - 筑波大学 宿舎祭実行委員（[HP](https://yadokarisai.com/)）
