@@ -9,15 +9,15 @@
 |Name|Naoto Oizumi（大泉 直人）|
 |Location|Tsukuba City, Ibaraki|
 |Hometown|Hitachi Citiy, ibaraki|
-|Affiliation|University of Tsukuba, College of Policy and Planning Sciences, 3rd Year|
+|Affiliation|University of Tsukuba 3rd Year|
 
 
 # educational background
 2020.04 - 2023.03  
-  Ibaraki Prefectural [Mito First High School](https://www.mito1-h.ibk.ed.jp/)
+  Ibaraki Prefectural [Mito First High School](https://www.mito1-h.ibk.ed.jp/English)
   
 2023.04 -  
-  University of Tsukuba, College of Engineering Systems, [Department of Policy and Planning Sciences](https://www.sk.tsukuba.ac.jp/College/index.php),  
+  University of Tsukuba, School of Engineering Systems, [College of Policy and Planning Sciences](https://www.sk.tsukuba.ac.jp/College/en/),  
   Major in Industrial Engineering and Management ([Onishi Lab](http://onishi-lab.jp/))
 
 
@@ -27,7 +27,7 @@
   Artificial Intelligence Research Center, [Social Intelligence Research Team](https://www.airc.aist.go.jp/en/cosine/) Technical Staff
 
 
-# profile slide
+# profile slide (Japanese)
 [Visit here](https://naotoizu7010.github.io/profileslide)
 
 # affiliations
@@ -50,7 +50,7 @@
 - Wikipedia Surfing
 - Contemplation
   
-[More details](https://naotoizu7010.github.io/favorites)
+[More details Japanese)](https://naotoizu7010.github.io/favorites)
 
 # accounts
 <p>
