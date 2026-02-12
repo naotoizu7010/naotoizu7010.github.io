@@ -1,4 +1,5 @@
 # Portfolio of 7010
+[English](https://naotoizu7010.github.io/en)
 
 # basic info
 
