@@ -50,7 +50,7 @@
 - Wikipedia Surfing
 - Contemplation
   
-[More details Japanese)](https://naotoizu7010.github.io/favorites)
+[More details (Japanese)](https://naotoizu7010.github.io/favorites)
 
 # accounts
 <p>
