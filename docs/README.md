@@ -10,15 +10,16 @@
 
 
 # educational background
-2020.04 - 2023.03
-  茨城県立 [水戸第一高等学校](https://www.mito1-h.ibk.ed.jp/)（令和5年卒）|
-2023.04 - 
-  筑波大学 理工学群[社会工学類](https://www.sk.tsukuba.ac.jp/College/index.php) <br> 経営工学主専攻 B3 [大西研究室](http://onishi-lab.jp/)|
+2020.04 - 2023.03  
+  茨城県立 [水戸第一高等学校](https://www.mito1-h.ibk.ed.jp/)（令和5年卒）  
+  
+2023.04 -  
+  筑波大学 理工学群[社会工学類](https://www.sk.tsukuba.ac.jp/College/index.php) 経営工学主専攻 B3 [大西研究室](http://onishi-lab.jp/)
 
 
 # work experience
-2026.02 - 
-  産業技術総合研究所 人工知能研究センター [社会知能研究チーム](https://www.airc.aist.go.jp/cosine/) テクニカルスタッフ|
+2026.02 -  
+  産業技術総合研究所 人工知能研究センター [社会知能研究チーム](https://www.airc.aist.go.jp/cosine/) テクニカルスタッフ
 
 
 # profile slide
