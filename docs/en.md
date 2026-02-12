@@ -1,6 +1,6 @@
 # Portfolio of 7010
 
-Writing now m(__)m
+[Japanese](https://naotoizu7010.github.io/)
 
 # basic info
 
@@ -17,14 +17,14 @@ Writing now m(__)m
   Ibaraki Prefectural [Mito First High School](https://www.mito1-h.ibk.ed.jp/)
   
 2023.04 -  
-  University of Tsukuba, College of Engineering Systems, [Department of Policy and Planning Sciences](https://www.sk.tsukuba.ac.jp/College/index.php)
+  University of Tsukuba, College of Engineering Systems, [Department of Policy and Planning Sciences](https://www.sk.tsukuba.ac.jp/College/index.php),  
   Major in Industrial Engineering and Management ([Onishi Lab](http://onishi-lab.jp/))
 
 
 # work experience
 2026.02 -  
-  National Institute of Advanced Industrial Science and Technology (AIST)
-Artificial Intelligence Research Center, [Social Intelligence Research Team](https://www.airc.aist.go.jp/en/cosine/) Technical Staff
+  National Institute of Advanced Industrial Science and Technology (AIST)  
+  Artificial Intelligence Research Center, [Social Intelligence Research Team](https://www.airc.aist.go.jp/en/cosine/) Technical Staff
 
 
 # profile slide
