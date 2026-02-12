@@ -14,12 +14,12 @@
 </div>
 ---
 
-[詳細スライド](https://1drv.ms/p/c/02ef7504c4bd4c7d/EWnk1orklQZNh-s9uObcBEwB5a3Ss0naSlqFPKIfw0642g?e=uVaYTg)
+[詳細スライド]()
 製作中です٩( 'ω' )و
 
 <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden;">
   <iframe
-    src="https://1drv.ms/p/c/02ef7504c4bd4c7d/IQRp5NaK5JUGTYfrPbjm3ARMAbbxsoxfPdNDJNbPGHuwoHM?em=2&amp;wdAr=1.7777777777777777&amp;wdEaaCheck=1"
+    src=""
     style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;"
     allowfullscreen
     loading="lazy">
