@@ -1,20 +1,30 @@
 # Portfolio of 7010
 
-# info
+# basic info
 
 |🏷️|📌|
 |---|---|
 |氏名|大泉直人 (Naoto Oizumi)|
 |居住地|茨城県 つくば市|
 |出身|茨城県 日立市|
-|高校|茨城県立 [水戸第一高等学校](https://www.mito1-h.ibk.ed.jp/)（令和5年卒, 2020 ~ 2023）|
-|大学|筑波大学 理工学群[社会工学類](https://www.sk.tsukuba.ac.jp/College/index.php) <br> 経営工学主専攻 B3 (2023/4~)|
+
+# educational background
+|🏷️|📌|
+|---|---|
+|2020.04 - 2023.03|茨城県立 [水戸第一高等学校](https://www.mito1-h.ibk.ed.jp/)（令和5年卒）|
+|2023.04 - |筑波大学 理工学群[社会工学類](https://www.sk.tsukuba.ac.jp/College/index.php) <br> 経営工学主専攻 B3 [大西研究室](http://onishi-lab.jp/)|
+
+# work experience
+|🏷️|📌|
+|---|---|
+|2026.02 - |産業技術総合研究所 人工知能研究センター [社会知能研究チーム](https://www.airc.aist.go.jp/cosine/) テクニカルスタッフ|
+
 
 # profile slide
 [こちら](https://naotoizu7010.github.io/profileslide)
 
 # affiliations
-- OneThing（筑波大学エンジニアコミュニティ） 代表（[Twitter](https://x.com/OneThingTsukuba)）（[HP](https://onethingtsukuba.github.io/)）（[イベント一覧](https://connpass.com/user/OneThingTsukuba/open/)）
+- OneThing（筑波大学エンジニアコミュニティ） 前代表（[Twitter](https://x.com/OneThingTsukuba)）（[HP](https://onethingtsukuba.github.io/)）（[イベント一覧](https://luma.com/user/OneThingTsukuba)）
   - [LT会開催報告](https://note.com/naotoizu_7010/n/n9d00794c4227)
 - 筑波大学 宿舎祭実行委員（[HP](https://yadokarisai.com/)）
 - STARTiX（筑波大学起業サークル）（[紹介ページ](https://aboard-bush-c04.notion.site/STARTiX-3c631d56f372474b959398ba378e4831?pvs=4)） 
@@ -75,7 +85,11 @@
 </p>
 
 # contact
-Twitter・インスタのDM / Eメール（[naoto.oizu7010@gmail.com](<mailto:naoto.oizu7010@gmail.com>)）
+Twitter・インスタのDM
+
+研究関連の方
+Eメール：naoto-oizumi⚽️aist.go.jp
+（⚽️をアットマークに置き換えてください）
 
 <!--
 **naotoizu7010/naotoizu7010** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
