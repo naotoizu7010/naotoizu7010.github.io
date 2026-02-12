@@ -1,7 +1,7 @@
 # Portfolio of 7010
 [English](https://naotoizu7010.github.io/en)
 
-# basic info
+# 基本情報
 
 |🏷️|📌|
 |---|---|
@@ -11,7 +11,7 @@
 |所属|筑波大学 理工学群社会工学類 学部３年|
 
 
-# educational background
+# 学歴
 2020.04 - 2023.03  
   茨城県立 [水戸第一高等学校](https://www.mito1-h.ibk.ed.jp/)（令和5年卒）  
   
@@ -19,22 +19,22 @@
   筑波大学 理工学群[社会工学類](https://www.sk.tsukuba.ac.jp/College/index.php) 経営工学主専攻 （[大西研究室](http://onishi-lab.jp/)）
 
 
-# work experience
+# 職歴
 2026.02 -  
   産業技術総合研究所 人工知能研究センター [社会知能研究チーム](https://www.airc.aist.go.jp/cosine/) テクニカルスタッフ
 
 
-# profile slide
+# プロフィールスライド
 [こちら](https://naotoizu7010.github.io/profileslide)
 
-# affiliations
+# 所属団体等
 - 大西研究室（産業技術総合研究所 人工知能研究センター 社会知能研究チーム）
 - OneThing（筑波大学エンジニアコミュニティ） 前代表（[Twitter](https://x.com/OneThingTsukuba)）（[HP](https://onethingtsukuba.github.io/)）（[イベント一覧](https://luma.com/user/OneThingTsukuba)）
   - [LT会開催報告](https://note.com/naotoizu_7010/n/n9d00794c4227)
 - 筑波大学 宿舎祭実行委員（[HP](https://yadokarisai.com/)）
 - STARTiX（筑波大学起業サークル）（[紹介ページ](https://aboard-bush-c04.notion.site/STARTiX-3c631d56f372474b959398ba378e4831?pvs=4)） 
 
-# favorites
+# 趣味
 - スポーツ観戦
   - 国内サッカー（Ｊリーグ）
     - 水戸ホーリーホック
@@ -57,7 +57,7 @@
   
 [もっとくわしく](https://naotoizu7010.github.io/favorites)
 
-# accounts
+# アカウント一覧
 <p>
 <a href="https://github.com/naotoizu7010" target="_blank"><img alt="Github" src="https://img.shields.io/badge/Github-%2312100E.svg?&style=flat-square&logo=Github&logoColor=white" /></a>
 <a href="https://x.com/naotoizu_7010" target="_blank"><img alt="Twitter（X）" src="https://img.shields.io/badge/Twitter-%231DA1F2.svg?&style=flat-square&logo=twitter&logoColor=white" /></a>
@@ -67,12 +67,11 @@
 </a>
 </p>
 
-# contact
-Twitter（X）・インスタのDM
-
-研究関連の方
-Eメール：naoto-oizumi⚽️aist.go.jp
-（⚽️をアットマークに置き換えてください）
+# 連絡方法
+- Twitter（X）・インスタのDM
+- 研究関連の方
+    - Eメール：naoto-oizumi⚽️aist.go.jp  
+      （⚽️をアットマークに置き換えてください）
 
 <!--
 **naotoizu7010/naotoizu7010** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
