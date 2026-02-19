@@ -21,14 +21,16 @@
 
 # 職歴
 2026.02 -  
-  産業技術総合研究所 人工知能研究センター [社会知能研究チーム](https://www.airc.aist.go.jp/cosine/) テクニカルスタッフ
+  [産業技術総合研究所](https://www.aist.go.jp/aist_j/information/about_aist.html) 人工知能研究センター [社会知能研究チーム](https://www.airc.aist.go.jp/cosine/) テクニカルスタッフ
 
 
 # プロフィールスライド
 [こちら](https://naotoizu7010.github.io/profileslide)
 
 # 所属団体等
-- 大西研究室（産業技術総合研究所 人工知能研究センター 社会知能研究チーム）
+- 大西研究室（産業技術総合研究所 人工知能研究センター 社会知能研究チーム）（[HP](http://onishi-lab.jp/)）
+  - Q. なんで筑波大学じゃなくて産総研で研究しているの？
+  - A. 連携大学院制度を使っています（[もっと詳しく](https://staff.aist.go.jp/onishi-masaki/joinus/tsukuba/)）
 - OneThing（筑波大学エンジニアコミュニティ） 前代表（[Twitter](https://x.com/OneThingTsukuba)）（[HP](https://onethingtsukuba.github.io/)）（[イベント一覧](https://luma.com/user/OneThingTsukuba)）
   - [LT会開催報告](https://note.com/naotoizu_7010/n/n9d00794c4227)
 - 筑波大学 宿舎祭実行委員（[HP](https://yadokarisai.com/)）
