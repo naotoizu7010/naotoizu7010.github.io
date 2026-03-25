@@ -13,15 +13,16 @@
 
 # 学歴
 2020.04 - 2023.03  
-  茨城県立 [水戸第一高等学校](https://www.mito1-h.ibk.ed.jp/)（令和5年卒）  
+　　茨城県立 [水戸第一高等学校](https://www.mito1-h.ibk.ed.jp/)（令和5年卒）  
   
 2023.04 -  
-  筑波大学 理工学群[社会工学類](https://www.sk.tsukuba.ac.jp/College/index.php) 経営工学主専攻 （[大西研究室](http://onishi-lab.jp/)）
+　　筑波大学 理工学群[社会工学類](https://www.sk.tsukuba.ac.jp/College/index.php) 経営工学主専攻 （[大西研究室](http://onishi-lab.jp/)）
 
 
 # 職歴
 2026.02 -  
-  [産業技術総合研究所](https://www.aist.go.jp/aist_j/information/about_aist.html) 人工知能研究センター [社会知能研究チーム](https://www.airc.aist.go.jp/cosine/) テクニカルスタッフ
+　　[産業技術総合研究所](https://www.aist.go.jp/aist_j/information/about_aist.html) 人工知能研究センター [社会知能研究チーム](https://www.airc.aist.go.jp/cosine/) テクニカルスタッフ  
+　　<span style="color: gray; ">鹿島アントラーズとの包括協定に関連するプロジェクトを中心とした、人工知能の社会実装に資する研究補助業務</span>
 
 
 # プロフィールスライド
