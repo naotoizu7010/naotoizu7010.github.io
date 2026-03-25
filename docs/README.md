@@ -22,7 +22,7 @@
 # 職歴
 2026.02 -  
 　　[産業技術総合研究所](https://www.aist.go.jp/aist_j/information/about_aist.html) 人工知能研究センター [社会知能研究チーム](https://www.airc.aist.go.jp/cosine/) テクニカルスタッフ  
-　　<span style="color: gray; ">鹿島アントラーズとの包括協定に関連するプロジェクトを中心とした、人工知能の社会実装に資する研究補助業務</span>
+　　<span style="color: gray; ">[鹿島アントラーズとの包括協定](https://www.aist.go.jp/aist_j/news/pr20170729.html)に関連するプロジェクトを中心とした、人工知能の社会実装に資する研究補助業務</span>
 
 
 # プロフィールスライド
