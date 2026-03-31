@@ -9,7 +9,7 @@
 |Name|Naoto Oizumi（大泉 直人）|
 |Location|Tsukuba City, Ibaraki|
 |Hometown|Hitachi Citiy, ibaraki|
-|Affiliation|University of Tsukuba 3rd Year|
+|Affiliation|University of Tsukuba senior student|
 
 
 # educational background
