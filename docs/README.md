@@ -21,7 +21,7 @@
 　　茨城県立 [水戸第一高等学校](https://www.mito1-h.ibk.ed.jp/)（令和5年卒）  
   
 2023.04 -  
-　　筑波大学 理工学群[社会工学類](https://www.sk.tsukuba.ac.jp/College/index.php) 経営工学主専攻 （[大西研究室](http://onishi-lab.jp/)）
+　　筑波大学 理工学群[社会工学類](https://www.sk.tsukuba.ac.jp/College/index.php) 経営工学主専攻 （[大西研究室](http://onishi-lab.jp/)）  
 　　<span style="color: gray; ">大規模スタジアムにおける人流解析</span>
 
 
