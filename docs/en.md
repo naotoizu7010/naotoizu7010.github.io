@@ -3,8 +3,8 @@
 [Japanese](https://naotoizu7010.github.io/)
 
 <p>
-  <img src="./img/main_profile.jpg" alt="Naoto Oizumi profile photo" width="35%" />
-  <img src="./img/naoto_oizumi_medium_body_白_1-1.PNG" alt="Naoto Oizumi standing photo" width="35%" />
+  <img src="./img/main_profile.jpg" alt="Naoto Oizumi profile photo" width="30%" />
+  <img src="./img/naoto_oizumi_medium_body_白_1-1.PNG" alt="Naoto Oizumi standing photo" width="30%" />
 </p>
 
 # basic info
