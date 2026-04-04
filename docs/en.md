@@ -2,23 +2,29 @@
 
 [Japanese](https://naotoizu7010.github.io/)
 
+<p>
+  <img src="../img/main_profile.jpg" alt="Naoto Oizumi profile photo" width="49%" />
+  <img src="../img/naoto_oizumi_medium_body_白_1-1.PNG" alt="Naoto Oizumi standing photo" width="49%" />
+</p>
+
 # basic info
 
 |🏷️|📌|
 |---|---|
 |Name|Naoto Oizumi（大泉 直人）|
-|Location|Tsukuba City, Ibaraki|
+|Residence|Tsukuba City, Ibaraki|
 |Hometown|Hitachi City, Ibaraki|
 |Affiliation|University of Tsukuba, Senior Student|
 
 
 # educational background
 2020.04 - 2023.03  
-  Ibaraki Prefectural [Mito First High School](https://www.mito1-h.ibk.ed.jp/English)
+　　Ibaraki Prefectural [Mito First High School](https://www.mito1-h.ibk.ed.jp/English)
   
 2023.04 -  
-  University of Tsukuba, School of Engineering Systems, [College of Policy and Planning Sciences](https://www.sk.tsukuba.ac.jp/College/en/),  
-  Major in Management Science and Engineering ([Onishi Lab](http://onishi-lab.jp/))
+　　University of Tsukuba, School of Engineering Systems, [College of Policy and Planning Sciences](https://www.sk.tsukuba.ac.jp/College/en/),  
+　　Major in Management Science and Engineering ([Onishi Lab](http://onishi-lab.jp/))
+　　<span style="color: gray; ">Crowd Analysis in Large-scale Stadiums</span>
 
 
 # work experience

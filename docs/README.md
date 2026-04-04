@@ -1,6 +1,11 @@
 # Portfolio of 7010
 [English](https://naotoizu7010.github.io/en)
 
+<p>
+  <img src="../img/main_profile.jpg" alt="Naoto Oizumi profile photo" width="49%" />
+  <img src="../img/naoto_oizumi_medium_body_白_1-1.PNG" alt="Naoto Oizumi standing photo" width="49%" />
+</p>
+
 # 基本情報
 
 |🏷️|📌|
@@ -17,12 +22,13 @@
   
 2023.04 -  
 　　筑波大学 理工学群[社会工学類](https://www.sk.tsukuba.ac.jp/College/index.php) 経営工学主専攻 （[大西研究室](http://onishi-lab.jp/)）
+　　<span style="color: gray; ">大規模スタジアムにおける人流解析</span>
 
 
 # 職歴
 2026.02 -  
-　　[産業技術総合研究所](https://www.aist.go.jp/aist_j/information/about_aist.html) 人工知能研究センター [社会知能研究チーム](https://www.airc.aist.go.jp/cosine/) テクニカルスタッフ  
-　　<span style="color: gray; ">[鹿島アントラーズとの包括協定](https://www.aist.go.jp/aist_j/news/pr20170729.html)に関連するプロジェクトを中心とした、人工知能の社会実装に資する研究補助業務</span>
+　　[産業技術総合研究所](https: //www.aist.go.jp/aist_j/information/about_aist.html) 人工知能研究センター [社会知能研究チーム](https://www.airc.aist.go.jp/cosine/) テクニカルスタッフ  
+　　<span style="color: gray; "><a href="https://www.aist.go.jp/aist_j/news/pr20170729.html" style="color: gray; text-decoration: underline;">鹿島アントラーズとの包括協定</a>に関連するプロジェクトを中心とした、人工知能の社会実装に資する研究補助業務</span>
 
 
 # プロフィールスライド
