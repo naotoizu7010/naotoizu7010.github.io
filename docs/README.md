@@ -40,8 +40,9 @@
   - A. 連携大学院制度を使っています（[もっと詳しく](https://staff.aist.go.jp/onishi-masaki/joinus/tsukuba/)）
 - OneThing（筑波大学エンジニアコミュニティ） 前代表（[Twitter](https://x.com/OneThingTsukuba)）（[HP](https://onethingtsukuba.github.io/)）（[イベント一覧](https://luma.com/user/OneThingTsukuba)）
   - [LT会開催報告](https://note.com/naotoizu_7010/n/n9d00794c4227)
+- STARTiX（筑波大学起業サークル）（[HP](https://startix-tsukuba.net/)）
+- 硬式テニス愛好会（テニスサークル）
 - 筑波大学 宿舎祭実行委員（[HP](https://yadokarisai.com/)）
-- STARTiX（筑波大学起業サークル）（[HP](https://startix-tsukuba.net/)） 
 
 # 趣味
 - スポーツ観戦
