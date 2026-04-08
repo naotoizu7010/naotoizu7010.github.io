@@ -24,7 +24,7 @@
 2023.04 -  
 　　University of Tsukuba, School of Engineering Systems, [College of Policy and Planning Sciences](https://www.sk.tsukuba.ac.jp/College/en/),  
 　　Major in Management Science and Engineering ([Onishi Lab](http://onishi-lab.jp/))  
-　　<span style="color: gray; ">Crowd Analysis in Large-scale Stadiums</span>
+　　<span style="color: gray; ">Crowd Analysis in Large Stadiums</span>
 
 
 # work experience
