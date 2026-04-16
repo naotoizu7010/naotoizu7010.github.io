@@ -67,6 +67,12 @@
   
 [もっとくわしく](https://naotoizu7010.github.io/favorites)
 
+# 最近のnote
+
+<iframe class="note-embed" src="https://note.com/embed/notes/nd02e75c8c307" style="border: 0; display: block; max-width: 99%; width: 494px; padding: 0px; margin: 10px 0px; position: static; visibility: visible;" height="400"></iframe><script async src="https://note.com/scripts/embed.js" charset="utf-8"></script>
+
+<iframe class="note-embed" src="https://note.com/embed/notes/n0a47646648df" style="border: 0; display: block; max-width: 99%; width: 494px; padding: 0px; margin: 10px 0px; position: static; visibility: visible;" height="400"></iframe><script async src="https://note.com/scripts/embed.js" charset="utf-8"></script>
+
 # アカウント一覧
 <p>
 <a href="https://github.com/naotoizu7010" target="_blank"><img alt="Github" src="https://img.shields.io/badge/Github-%2312100E.svg?&style=flat-square&logo=Github&logoColor=white" /></a>
