@@ -56,7 +56,7 @@
     - アメフト
     - バスケ
     - スポーツ観戦誘ってください！
-  - [ワールドカップ観戦予定スケジュール](https://naotoizu7010.github.io/worldcup2026)
+  - [ワールドカップ観戦予定スケジュール](https://naotoizu7010.github.io/worldcup)
 - スポーツ
 - ラーメン巡り
 - バイク
