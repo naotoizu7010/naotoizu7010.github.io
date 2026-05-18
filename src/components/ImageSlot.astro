@@ -1,0 +1,101 @@
+---
+/* ----------------------------------------------------------------
+   src/components/ImageSlot.astro
+   写真表示の薄いラッパー。
+   - src がある: <img> を表示 (alt 必須)
+   - src がない: 「ここに画像をどうぞ」プレースホルダ
+   width / height は CSS の aspect-ratio に使うので、論理サイズを渡してOK
+   ---------------------------------------------------------------- */
+
+interface Props {
+  src?: string;
+  alt: string;
+  width: number;
+  height: number;
+  placeholder?: string;
+  rounded?: boolean;
+  /** rect / circle / pill — clip shape */
+  shape?: 'rect' | 'circle' | 'pill';
+  class?: string;
+}
+
+const {
+  src,
+  alt,
+  width,
+  height,
+  placeholder = '画像をここに',
+  rounded = false,
+  shape = 'rect',
+  class: className = '',
+} = Astro.props;
+
+const aspect = `${width} / ${height}`;
+const classes = ['pf-img', `pf-img--${shape}`, rounded ? 'pf-img--rounded' : '', className]
+  .filter(Boolean)
+  .join(' ');
+---
+
+{
+  src ? (
+    <img
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      class={classes}
+      style={`aspect-ratio: ${aspect};`}
+      loading="lazy"
+      decoding="async"
+    />
+  ) : (
+    <div class={`${classes} pf-img--placeholder`} role="img" aria-label={alt} style={`aspect-ratio: ${aspect};`}>
+      <span class="pf-img-placeholder-text">{placeholder}</span>
+    </div>
+  )
+}
+
+<style>
+  .pf-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  .pf-img--rect {
+    border-radius: 6px;
+  }
+  .pf-img--rounded {
+    border-radius: 12px;
+  }
+  .pf-img--circle {
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+  }
+  .pf-img--pill {
+    border-radius: 999px;
+  }
+  .pf-img--placeholder {
+    display: grid;
+    place-items: center;
+    background: repeating-linear-gradient(
+      45deg,
+      rgba(10, 15, 31, 0.04),
+      rgba(10, 15, 31, 0.04) 8px,
+      rgba(10, 15, 31, 0.07) 8px,
+      rgba(10, 15, 31, 0.07) 16px
+    );
+    color: var(--df-fg-mute, #6a7286);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border: 1px dashed currentColor;
+  }
+  .pf-img-placeholder-text {
+    opacity: 0.8;
+    text-align: center;
+    padding: 10px 14px;
+    line-height: 1.5;
+  }
+</style>

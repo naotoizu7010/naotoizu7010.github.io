@@ -1,0 +1,73 @@
+---
+/* ----------------------------------------------------------------
+   src/layouts/Base.astro
+   全ページ共通の <html> 構造。
+   - メタ情報
+   - フォント / トークン読み込み
+   - "no-flash" 用の早期テーマ判定 (FOUC 防止)
+   ---------------------------------------------------------------- */
+import '../styles/tokens.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description = '大泉直人のポートフォリオ。スタジアムの人流とAIの社会実装を研究しています。',
+  ogImage = '/img/og.png',
+} = Astro.props;
+
+const canonical = new URL(
+  Astro.url.pathname,
+  Astro.site ?? 'https://naotoizu7010.github.io',
+).toString();
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <slot name="head" />
+
+    <!-- FOUC 防止: テーマだけ先に決めて html 属性として適用 -->
+    <script is:inline>
+      (function () {
+        try {
+          var k = 'df-theme';
+          var saved = localStorage.getItem(k);
+          var sys =
+            window.matchMedia &&
+            window.matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light';
+          var theme = saved === 'dark' || saved === 'light' ? saved : sys;
+          document.documentElement.setAttribute('data-pre-theme', theme);
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  html[data-pre-theme='dark'] body {
+    background: #060814;
+  }
+  html[data-pre-theme='light'] body {
+    background: #f7f8fb;
+  }
+</style>

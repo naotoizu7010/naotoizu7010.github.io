@@ -1,0 +1,322 @@
+---
+/* ----------------------------------------------------------------
+   src/pages/cv.astro
+   学歴・職歴をシンプルにまとめた文字ベースのページ。
+   既存の docs/README.md の情報を構造化して使用。
+   ---------------------------------------------------------------- */
+import Base from '../layouts/Base.astro';
+import { cv } from '../data/content.ts';
+---
+
+<Base title="CV — 大泉直人 / Naoto Oizumi" description="大泉直人の学歴・職歴。">
+  <main class="cv-root">
+    <header class="cv-header">
+      <a href="/" class="cv-back">← Back to top</a>
+      <h1 class="cv-name">大泉直人 <span lang="en">Naoto Oizumi</span></h1>
+      <p class="cv-sub">CV / 学歴・職歴 · 2026 update</p>
+    </header>
+
+    <section class="cv-block">
+      <h2 class="cv-h2">基本情報</h2>
+      <dl class="cv-list">
+        {cv.basic.map((b) => (
+          <div class="cv-row">
+            <dt>{b.k}</dt>
+            <dd>{b.v}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+
+    <section class="cv-block">
+      <h2 class="cv-h2">学歴</h2>
+      <ul class="cv-events">
+        {cv.education.map((e) => (
+          <li>
+            <time>{e.period}</time>
+            <div>
+              <h3>
+                {e.href ? (
+                  <a href={e.href} target="_blank" rel="noopener">{e.title}</a>
+                ) : (
+                  e.title
+                )}
+              </h3>
+              <p>{e.note}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="cv-block">
+      <h2 class="cv-h2">職歴</h2>
+      <ul class="cv-events">
+        {cv.work.map((e) => (
+          <li>
+            <time>{e.period}</time>
+            <div>
+              <h3>
+                {e.href ? (
+                  <a href={e.href} target="_blank" rel="noopener">{e.title}</a>
+                ) : (
+                  e.title
+                )}
+              </h3>
+              <p>{e.note}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="cv-block">
+      <h2 class="cv-h2">所属</h2>
+      <ul class="cv-affil">
+        {cv.affiliations.map((a) => (
+          <li>
+            {a.href ? (
+              <a href={a.href} target="_blank" rel="noopener">{a.name}</a>
+            ) : (
+              <span>{a.name}</span>
+            )}
+            {a.note && <p>{a.note}</p>}
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <footer class="cv-foot">
+      <p>連絡先 / Contact</p>
+      <p>X / Instagram の DM、または研究関連は naoto-oizumi[at]aist.go.jp</p>
+      <p class="cv-foot-back">
+        <a href="/">← Back to top</a>
+      </p>
+    </footer>
+  </main>
+</Base>
+
+<style>
+  :root {
+    --cv-fg: #0a0f1f;
+    --cv-fg-mute: #6a7286;
+    --cv-line: #dde2ec;
+    --cv-bg: #f7f8fb;
+    --cv-accent: #2a56f0;
+  }
+  :global(html[data-pre-theme='dark']) {
+    --cv-fg: #eceffb;
+    --cv-fg-mute: #7782a0;
+    --cv-line: #1a1f35;
+    --cv-bg: #060814;
+    --cv-accent: #5a7cff;
+  }
+
+  .cv-root {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 64px 32px 96px;
+    color: var(--cv-fg);
+    background: var(--cv-bg);
+    min-height: 100vh;
+    font-family: 'Inter', 'Noto Sans JP', system-ui, sans-serif;
+  }
+  .cv-back {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    color: var(--cv-fg-mute);
+  }
+  .cv-back:hover {
+    color: var(--cv-accent);
+  }
+  .cv-header {
+    margin-bottom: 64px;
+  }
+  .cv-name {
+    margin: 32px 0 8px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 800;
+    font-size: 40px;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+  .cv-name span {
+    margin-left: 12px;
+    font-family: 'Space Grotesk', 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 22px;
+    color: var(--cv-fg-mute);
+    letter-spacing: -0.005em;
+  }
+  .cv-sub {
+    margin: 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    color: var(--cv-fg-mute);
+    text-transform: uppercase;
+  }
+
+  .cv-block {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--cv-line);
+  }
+  .cv-h2 {
+    margin: 0 0 24px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: -0.005em;
+  }
+  .cv-h2::before {
+    content: '●';
+    color: var(--cv-accent);
+    margin-right: 12px;
+    font-size: 14px;
+    vertical-align: middle;
+  }
+
+  .cv-list {
+    margin: 0;
+    display: grid;
+    gap: 12px;
+  }
+  .cv-row {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 16px;
+    padding: 4px 0;
+  }
+  .cv-row dt {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cv-fg-mute);
+    padding-top: 3px;
+  }
+  .cv-row dd {
+    margin: 0;
+    font-size: 16px;
+  }
+
+  .cv-events {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 28px;
+  }
+  .cv-events li {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 20px;
+  }
+  .cv-events time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: var(--cv-fg-mute);
+    padding-top: 4px;
+  }
+  .cv-events h3 {
+    margin: 0 0 6px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 1.45;
+    letter-spacing: -0.005em;
+  }
+  .cv-events h3 a {
+    color: var(--cv-fg);
+    border-bottom: 1px solid var(--cv-line);
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .cv-events h3 a:hover {
+    color: var(--cv-accent);
+    border-bottom-color: var(--cv-accent);
+  }
+  .cv-events p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--cv-fg-mute);
+    line-height: 1.7;
+  }
+
+  .cv-affil {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 16px;
+  }
+  .cv-affil li {
+    padding: 16px 18px;
+    border: 1px solid var(--cv-line);
+    border-radius: 6px;
+  }
+  .cv-affil a,
+  .cv-affil span {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--cv-fg);
+  }
+  .cv-affil a:hover {
+    color: var(--cv-accent);
+  }
+  .cv-affil p {
+    margin: 6px 0 0;
+    font-size: 13px;
+    color: var(--cv-fg-mute);
+    line-height: 1.6;
+  }
+
+  .cv-foot {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid var(--cv-line);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--cv-fg-mute);
+    line-height: 1.8;
+    letter-spacing: 0.04em;
+  }
+  .cv-foot p {
+    margin: 0 0 8px;
+  }
+  .cv-foot-back {
+    margin-top: 32px;
+  }
+  .cv-foot-back a:hover {
+    color: var(--cv-accent);
+  }
+
+  @media (max-width: 600px) {
+    .cv-root {
+      padding: 32px 20px 72px;
+    }
+    .cv-name {
+      font-size: 30px;
+    }
+    .cv-name span {
+      display: block;
+      margin-left: 0;
+      margin-top: 6px;
+      font-size: 18px;
+    }
+    .cv-block {
+      margin-top: 32px;
+    }
+    .cv-row {
+      grid-template-columns: 88px 1fr;
+      gap: 12px;
+    }
+    .cv-events li {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+  }
+</style>
