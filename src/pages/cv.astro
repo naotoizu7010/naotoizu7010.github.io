@@ -13,7 +13,7 @@ import { cv } from '../data/content.ts';
     <header class="cv-header">
       <a href="/" class="cv-back">← Back to top</a>
       <h1 class="cv-name">大泉直人 <span lang="en">Naoto Oizumi</span></h1>
-      <p class="cv-sub">CV / 学歴・職歴 · 2026 update</p>
+      <p class="cv-sub">last update: 2026/5/19</p>
     </header>
 
     <section class="cv-block">
@@ -42,7 +42,20 @@ import { cv } from '../data/content.ts';
                   e.title
                 )}
               </h3>
-              <p>{e.note}</p>
+              {e.role && <p class="cv-role">{e.role}</p>}
+              <p>
+                {'noteParts' in e ? (
+                  e.noteParts.map((part) => (
+                    part.href ? (
+                      <a href={part.href} target="_blank" rel="noopener">{part.text}</a>
+                    ) : (
+                      part.text
+                    )
+                  ))
+                ) : (
+                  e.note
+                )}
+              </p>
             </div>
           </li>
         ))}
@@ -57,38 +70,42 @@ import { cv } from '../data/content.ts';
             <time>{e.period}</time>
             <div>
               <h3>
-                {e.href ? (
+                {'titleParts' in e ? (
+                  e.titleParts.map((part) => (
+                    part.href ? (
+                      <a href={part.href} target="_blank" rel="noopener">{part.text}</a>
+                    ) : (
+                      part.text
+                    )
+                  ))
+                ) : e.href ? (
                   <a href={e.href} target="_blank" rel="noopener">{e.title}</a>
                 ) : (
                   e.title
                 )}
               </h3>
-              <p>{e.note}</p>
+              {e.role && <p class="cv-role">{e.role}</p>}
+              <p>
+                {'noteParts' in e ? (
+                  e.noteParts.map((part) => (
+                    part.href ? (
+                      <a href={part.href} target="_blank" rel="noopener">{part.text}</a>
+                    ) : (
+                      part.text
+                    )
+                  ))
+                ) : (
+                  e.note
+                )}
+              </p>
             </div>
           </li>
         ))}
       </ul>
     </section>
 
-    <section class="cv-block">
-      <h2 class="cv-h2">所属</h2>
-      <ul class="cv-affil">
-        {cv.affiliations.map((a) => (
-          <li>
-            {a.href ? (
-              <a href={a.href} target="_blank" rel="noopener">{a.name}</a>
-            ) : (
-              <span>{a.name}</span>
-            )}
-            {a.note && <p>{a.note}</p>}
-          </li>
-        ))}
-      </ul>
-    </section>
-
     <footer class="cv-foot">
-      <p>連絡先 / Contact</p>
-      <p>X / Instagram の DM、または研究関連は naoto-oizumi[at]aist.go.jp</p>
+      <p>連絡先： 各 SNS の DM、または naoto-oizumi[at]aist.go.jp</p>
       <p class="cv-foot-back">
         <a href="/">← Back to top</a>
       </p>
@@ -102,14 +119,18 @@ import { cv } from '../data/content.ts';
     --cv-fg-mute: #6a7286;
     --cv-line: #dde2ec;
     --cv-bg: #f7f8fb;
-    --cv-accent: #2a56f0;
+    --cv-accent: #e5374b;
+    --cv-link-hover: #2a56f0;
+    --cv-note-link-hover: #4b5568;
   }
   :global(html[data-pre-theme='dark']) {
     --cv-fg: #eceffb;
     --cv-fg-mute: #7782a0;
     --cv-line: #1a1f35;
     --cv-bg: #060814;
-    --cv-accent: #5a7cff;
+    --cv-accent: #ff5b6f;
+    --cv-link-hover: #5a7cff;
+    --cv-note-link-hover: #a6aec4;
   }
 
   .cv-root {
@@ -235,8 +256,8 @@ import { cv } from '../data/content.ts';
     transition: color 0.15s, border-color 0.15s;
   }
   .cv-events h3 a:hover {
-    color: var(--cv-accent);
-    border-bottom-color: var(--cv-accent);
+    color: var(--cv-link-hover);
+    border-bottom-color: var(--cv-link-hover);
   }
   .cv-events p {
     margin: 0;
@@ -244,34 +265,26 @@ import { cv } from '../data/content.ts';
     color: var(--cv-fg-mute);
     line-height: 1.7;
   }
-
-  .cv-affil {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: grid;
-    gap: 16px;
+  .cv-events p a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    text-decoration-color: color-mix(in srgb, var(--cv-fg-mute) 48%, transparent);
+    transition: color 0.15s, text-decoration-color 0.15s;
   }
-  .cv-affil li {
-    padding: 16px 18px;
-    border: 1px solid var(--cv-line);
-    border-radius: 6px;
+  .cv-events p a:hover {
+    color: var(--cv-note-link-hover);
+    text-decoration-color: var(--cv-note-link-hover);
   }
-  .cv-affil a,
-  .cv-affil span {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-weight: 600;
-    font-size: 15px;
-    color: var(--cv-fg);
-  }
-  .cv-affil a:hover {
-    color: var(--cv-accent);
-  }
-  .cv-affil p {
-    margin: 6px 0 0;
-    font-size: 13px;
-    color: var(--cv-fg-mute);
-    line-height: 1.6;
+  .cv-role {
+    margin: -1px 0 8px !important;
+    font-family: 'JetBrains Mono', 'Noto Sans JP', monospace;
+    font-size: 12px !important;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--cv-fg-mute) !important;
+    line-height: 1.6 !important;
   }
 
   .cv-foot {

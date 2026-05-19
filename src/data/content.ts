@@ -245,8 +245,13 @@ export const cv = {
     },
     {
       period: '2023.04 -',
-      title: '筑波大学 理工学群 社会工学類 経営工学主専攻',
+      title: '筑波大学 理工学群 社会工学類',
+      role: '経営工学主専攻',
       note: '大西研究室 — 大規模スタジアムにおける人流解析',
+      noteParts: [
+        { text: '大西研究室', href: 'http://onishi-lab.jp/' },
+        { text: ' — 大規模スタジアムにおける人流解析' },
+      ],
       href: 'https://www.sk.tsukuba.ac.jp/College/index.php',
     },
   ],
@@ -254,9 +259,26 @@ export const cv = {
     {
       period: '2026.02 -',
       title:
-        '産業技術総合研究所 人工知能研究センター 社会知能研究チーム テクニカルスタッフ',
+        '産業技術総合研究所 人工知能研究センター 社会知能研究チーム',
+      titleParts: [
+        {
+          text: '産業技術総合研究所',
+          href: 'https://www.aist.go.jp/aist_j/information/about_aist.html',
+        },
+        {
+          text: ' 人工知能研究センター 社会知能研究チーム',
+          href: 'https://www.airc.aist.go.jp/cosine/',
+        },
+      ],
+      role: 'テクニカルスタッフ',
       note: '鹿島アントラーズとの包括協定に関連するプロジェクトを中心とした、人工知能の社会実装に資する研究補助業務',
-      href: 'https://www.airc.aist.go.jp/cosine/',
+      noteParts: [
+        {
+          text: '鹿島アントラーズとの包括協定',
+          href: 'https://www.aist.go.jp/aist_j/news/pr20170729.html',
+        },
+        { text: 'に関連するプロジェクトを中心とした、人工知能の社会実装に資する研究補助業務' },
+      ],
     },
   ],
   affiliations: [
