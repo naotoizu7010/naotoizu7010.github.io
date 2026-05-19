@@ -29,14 +29,14 @@ function applyTheme(theme: 'light' | 'dark') {
   }
   // update all toggle labels
   document.querySelectorAll<HTMLElement>('.df-theme-toggle').forEach((btn) => {
-    const labelEl = btn.querySelector('.df-theme-toggle-label');
-    if (labelEl) {
-      labelEl.textContent = theme === 'dark' ? 'DARK' : 'LIGHT';
-    }
+    btn.querySelectorAll<HTMLElement>('[data-theme-option]').forEach((option) => {
+      option.dataset.active = option.dataset.themeOption === theme ? 'true' : 'false';
+    });
     btn.setAttribute(
       'aria-label',
       theme === 'dark' ? 'ライトモードに切り替え' : 'ダークモードに切り替え',
     );
+    btn.setAttribute('title', theme === 'dark' ? 'ライトモードに切り替え' : 'ダークモードに切り替え');
   });
 }
 

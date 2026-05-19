@@ -28,14 +28,17 @@ const C = content;
       ))}
     </div>
     <div class="df-nav-right">
-      <a class="df-researcher-link" href="/researcher">/researcher ↗</a>
       <button
         type="button"
         class="df-theme-toggle"
         aria-label="テーマを切り替え"
       >
         <span class="ico" aria-hidden="true"></span>
-        <span class="df-theme-toggle-label">LIGHT</span>
+        <span class="df-theme-toggle-label" aria-hidden="true">
+          <span data-theme-option="light">LIGHT</span>
+          <span class="df-theme-toggle-separator">/</span>
+          <span data-theme-option="dark">DARK</span>
+        </span>
       </button>
       <button
         type="button"
@@ -87,7 +90,11 @@ const C = content;
     <div class="df-menu-foot">
       <button type="button" class="df-theme-toggle df-theme-toggle--big">
         <span class="ico" aria-hidden="true"></span>
-        <span class="df-theme-toggle-label">LIGHT</span>
+        <span class="df-theme-toggle-label" aria-hidden="true">
+          <span data-theme-option="light">LIGHT</span>
+          <span class="df-theme-toggle-separator">/</span>
+          <span data-theme-option="dark">DARK</span>
+        </span>
       </button>
     </div>
   </div>

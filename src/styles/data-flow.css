@@ -124,17 +124,42 @@
 }
 .df-nav-link:hover { color: var(--df-blue); }
 .df-nav-right { display: flex; align-items: center; gap: 16px; }
-.df-researcher-link {
-  font-family: var(--df-mono); font-size: 11px; letter-spacing: 0.12em;
-  color: var(--df-fg-mute);
-}
 .df-theme-toggle {
   border: 1px solid var(--df-line); border-radius: 999px;
   padding: 7px 14px;
   display: inline-flex; gap: 8px; align-items: center;
   font-family: var(--df-mono); font-size: 11px; letter-spacing: 0.12em;
+  color: var(--df-fg-mute);
+  transition: border-color 0.16s, color 0.16s, background 0.16s;
 }
 .df-theme-toggle .ico { width: 14px; height: 14px; border-radius: 50%; background: var(--df-fg); }
+.df-theme-toggle-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.df-theme-toggle-label [data-theme-option] {
+  opacity: 0.34;
+  transition: opacity 0.16s, color 0.16s;
+}
+.df-theme-toggle-label [data-active="true"] {
+  opacity: 1;
+  color: var(--df-fg);
+  font-weight: 700;
+}
+.df-theme-toggle-separator {
+  opacity: 0.28;
+}
+.df-theme-toggle:hover,
+.df-theme-toggle:focus-visible {
+  color: var(--df-fg);
+  border-color: var(--df-fg-mute);
+  background: color-mix(in srgb, var(--df-paper) 86%, var(--df-fg) 14%);
+}
+.df-theme-toggle:hover .df-theme-toggle-label [data-active="false"],
+.df-theme-toggle:focus-visible .df-theme-toggle-label [data-active="false"] {
+  opacity: 0.56;
+}
 .df-root[data-theme="dark"] .df-theme-toggle .ico {
   background: radial-gradient(circle at 60% 40%, transparent 35%, var(--df-fg) 36%);
 }
@@ -881,6 +906,14 @@
 
   .df-nav {
     padding: 14px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 900;
+    box-shadow: 0 10px 24px rgba(10, 15, 31, 0.06);
+  }
+
+  .df-root[data-theme="dark"] .df-nav {
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
   }
 
   .df-nav-links { display: none; }
@@ -890,8 +923,6 @@
   .df-nav-name small { font-size: 9px; }
 
   .df-nav-logo { width: 26px; height: 26px; }
-
-  .df-researcher-link { display: none; }
 
   .df-theme-toggle { padding: 5px 10px; font-size: 10px; }
 
