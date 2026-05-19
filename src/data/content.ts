@@ -240,6 +240,7 @@ export const cv = {
     {
       period: '2020.04 - 2023.03',
       title: '茨城県立 水戸第一高等学校',
+      role: '普通科',
       note: '令和5年卒',
       href: 'https://www.mito1-h.ibk.ed.jp/',
     },
