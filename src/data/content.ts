@@ -267,7 +267,7 @@ export const cv = {
           href: 'https://www.aist.go.jp/aist_j/information/about_aist.html',
         },
         {
-          text: ' 人工知能研究センター 社会知能研究チーム',
+          text: '人工知能研究センター 社会知能研究チーム',
           href: 'https://www.airc.aist.go.jp/cosine/',
         },
       ],

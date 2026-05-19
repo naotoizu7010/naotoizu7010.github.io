@@ -277,7 +277,7 @@
 .df-hero-stat-card .v.red  { color: var(--df-red); }
 .df-hero-stat-card .v.blue { color: var(--df-blue); }
 .df-hero-stat-card-1 { top: 0; left: -20px; }
-.df-hero-stat-card-2 { bottom: 24px; right: -28px; }
+.df-hero-stat-card-2 { bottom: -10px; right: -28px; }
 .df-hero-stat-card-3 { top: 50%; right: -36px; transform: translateY(-50%); }
 
 /* Revertable safety adjustments: keep the fixed two-line hero usable on narrow desktop widths. */
@@ -285,7 +285,7 @@
   .df-hero-inner { gap: 40px; }
   .df-hero-title { font-size: 88px; letter-spacing: -0.035em; }
   .df-hero-stat-card-1 { top: 4px; left: -8px; }
-  .df-hero-stat-card-2 { bottom: 18px; right: -10px; }
+  .df-hero-stat-card-2 { bottom: -30px; right: -10px; }
 }
 @media (min-width: 1121px) and (max-width: 1280px) {
   .df-hero-title { font-size: 100px; }
@@ -974,7 +974,7 @@
 
   .df-hero-stat-card-1 { top: -8px; left: -12px; }
 
-  .df-hero-stat-card-2 { bottom: 8px; right: -8px; }
+  .df-hero-stat-card-2 { bottom: -15px; right: -16px; }
 
   .df-hero-stat-card-3 { display: none; }
 
