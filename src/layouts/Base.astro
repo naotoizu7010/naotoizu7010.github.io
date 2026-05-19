@@ -17,13 +17,12 @@ interface Props {
 const {
   title,
   description = '大泉直人のポートフォリオ。スタジアムの人流とAIの社会実装を研究しています。',
-  ogImage = '/img/og.png',
+  ogImage = '/img/main_profile.jpg',
 } = Astro.props;
 
-const canonical = new URL(
-  Astro.url.pathname,
-  Astro.site ?? 'https://naotoizu7010.github.io',
-).toString();
+const site = Astro.site ?? 'https://naotoizu7010.github.io';
+const canonical = new URL(Astro.url.pathname, site).toString();
+const absoluteOgImage = new URL(ogImage, site).toString();
 ---
 
 <!doctype html>
@@ -36,8 +35,15 @@ const canonical = new URL(
     <link rel="canonical" href={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="Naoto Oizumi Portfolio" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:image" content={absoluteOgImage} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={absoluteOgImage} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <slot name="head" />
 

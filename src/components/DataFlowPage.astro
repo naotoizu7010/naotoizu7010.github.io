@@ -122,13 +122,18 @@ const C = content;
         </div>
         <div class="df-hero-right">
           <span class="df-hero-coordinates">tsukuba / 茨城</span>
-          <span class="df-hero-coordinates df-hero-coord-r">since 2003</span>
           <div class="df-hero-photo-wrap">
             <ImageSlot
-              src="/img/main_profile.jpg"
+              srcs={[
+                '/img/main_profile.jpg',
+                '/img/naoto_oizumi_medium_body_white_1-1.png',
+                '/img/profile_pixel.jpg',
+              ]}
               alt="大泉直人の写真"
               width={420}
               height={520}
+              interval={4800}
+              fade={1100}
               placeholder="本人写真 1:1.25"
             />
           </div>
@@ -172,7 +177,7 @@ const C = content;
             <span class="dot" aria-hidden="true"></span>01 / ABOUT
           </span>
           <h2 class="df-h2-ja">
-            つくばで<br />研究する大学生です。
+            {C.about.heading_ja[0]}<br />{C.about.heading_ja[1]}
           </h2>
           <div class="df-about-summary-card">
             <div class="k">いま、やっていること</div>

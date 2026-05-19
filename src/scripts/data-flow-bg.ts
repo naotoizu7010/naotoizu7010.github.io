@@ -52,50 +52,41 @@ function curveD(y: number, amp: number, phase: number) {
 
 function buildFlows(): Flow[] {
   const rnd = lcg(131);
-  const arr: Flow[] = [];
-  // Hero zone — 5 dense flows
-  for (let i = 0; i < 5; i++) {
-    arr.push({
-      y: 200 + i * 110 + rnd() * 40,
-      amp: 90 + rnd() * 90,
+  return [
+    {
+      y: 360 + rnd() * 60,
+      amp: 120 + rnd() * 60,
       phase: rnd() * 80,
-      sw: 1.4 + rnd() * 1.4,
-      baseOp: 0.18 + rnd() * 0.12,
-      sweepOp: 0.55 + rnd() * 0.35,
-      color: rnd() > 0.45 ? 'r' : 'b',
-      dur: 6 + rnd() * 12,
+      sw: 1.6,
+      baseOp: 0.16,
+      sweepOp: 0.42,
+      color: 'r',
+      dur: 12 + rnd() * 6,
+      delay: -rnd() * 12,
+    },
+    {
+      y: 2900 + rnd() * 100,
+      amp: 100 + rnd() * 80,
+      phase: rnd() * 100,
+      sw: 1.2,
+      baseOp: 0.12,
+      sweepOp: 0.34,
+      color: 'b',
+      dur: 14 + rnd() * 8,
       delay: -rnd() * 14,
-    });
-  }
-  // Mid-page band
-  for (let i = 0; i < 6; i++) {
-    arr.push({
-      y: 2700 + i * 130 + rnd() * 80,
-      amp: 70 + rnd() * 120,
+    },
+    {
+      y: 4700 + rnd() * 120,
+      amp: 90 + rnd() * 80,
       phase: rnd() * 100,
-      sw: 1.0 + rnd() * 1.2,
-      baseOp: 0.14 + rnd() * 0.1,
-      sweepOp: 0.4 + rnd() * 0.4,
+      sw: 1.2,
+      baseOp: 0.12,
+      sweepOp: 0.32,
       color: rnd() > 0.5 ? 'r' : 'b',
-      dur: 7 + rnd() * 14,
+      dur: 16 + rnd() * 8,
       delay: -rnd() * 16,
-    });
-  }
-  // Lower-page band
-  for (let i = 0; i < 6; i++) {
-    arr.push({
-      y: 4400 + i * 130 + rnd() * 80,
-      amp: 60 + rnd() * 130,
-      phase: rnd() * 100,
-      sw: 1.0 + rnd() * 1.6,
-      baseOp: 0.14 + rnd() * 0.12,
-      sweepOp: 0.45 + rnd() * 0.35,
-      color: rnd() > 0.5 ? 'r' : 'b',
-      dur: 8 + rnd() * 14,
-      delay: -rnd() * 16,
-    });
-  }
-  return arr;
+    },
+  ];
 }
 
 function buildSvg(flows: Flow[]): SVGSVGElement {
@@ -224,12 +215,14 @@ function init(root: HTMLElement) {
   for (let i = 0; i < COUNT; i++) {
     const r = 0.6 + rnd() * 2.4;
     const c = rnd();
+    const angle = rnd() * Math.PI * 2;
+    const speed = 0.004 + rnd() * 0.018;
     dots.push({
       x01: rnd(),
       y01: rnd(),
       r,
-      vx: (rnd() - 0.5) * 0.012,
-      vy: -0.006 - rnd() * 0.014,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed,
       parallax: 0.1 + rnd() * 0.8,
       amp: 3 + rnd() * 10,
       freq: 0.0003 + rnd() * 0.0009,
@@ -240,7 +233,7 @@ function init(root: HTMLElement) {
     el.style.width = `${r * 2}px`;
     el.style.height = `${r * 2}px`;
     el.style.background = c < 0.25 ? 'var(--df-red)' : c < 0.5 ? 'var(--df-blue)' : 'var(--df-fg-mute)';
-    el.style.opacity = String(0.35 + c * 0.45);
+    el.style.opacity = `calc(${(0.35 + c * 0.45).toFixed(3)} * var(--df-dot-opacity, 1))`;
     dotsHost.appendChild(el);
     els.push(el);
   }
