@@ -57,7 +57,7 @@ export const content = {
     title_a: '人の流れを、',
     title_b: '読む。',
     en_caption: 'SPORTS × CROWD × DATA',
-    sub: 'スタジアムでの人流とAIの社会実装をテーマに、つくばで研究しています。\nスポーツが大好きな大学生です。',
+    sub: 'スタジアムでの人流解析とAIの社会実装をテーマに、つくばで研究をしています。\nスポーツが大好きな大学生です。',
     stats: null as null | { k: string; v: string; tone?: 'red' | 'blue' | 'fg' }[],
   },
 
@@ -74,7 +74,7 @@ export const content = {
     heading: 'About',
     heading_ja: ['つくばで', '研究する大学生です。'],
     lead: 'こんにちは、大泉直人です。',
-    body: '筑波大学 社会工学類で経営工学を勉強しながら、\n産業技術総合研究所でスタジアムの人流解析をテーマに研究しています。',
+    body: '筑波大学 社会工学類で経営工学を勉強しながら、\n産業技術総合研究所でスタジアムの人流解析をテーマに研究をしています。',
     factoids: [
       { k: '氏名', v: '大泉直人' },
       { k: '居住地', v: '茨城県 つくば市' },
