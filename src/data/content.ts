@@ -1,4 +1,4 @@
-export type TextPart = { text: string; href?: string; tone?: 'muted' };
+export type TextPart = { text: string; href?: string; tone?: 'muted' | 'gap' };
 export type FactItem = { k: string; v: string; vParts?: TextPart[] };
 
 export type ResearchItem = {
@@ -93,7 +93,13 @@ export const content = {
         v: '大西研究室 (産業技術総合研究所 連携大学院)',
         vParts: [
           { text: '大西研究室', href: 'http://onishi-lab.jp/' },
-          { text: ' 産業技術総合研究所 連携大学院', tone: 'muted' },
+          { text: ' ', tone: 'gap' },
+          {
+            text: '産業技術総合研究所',
+            href: 'https://www.aist.go.jp/aist_j/information/about_aist.html',
+            tone: 'muted',
+          },
+          { text: ' 連携大学院', tone: 'muted' },
         ],
       },
       { k: '専門', v: '人流解析' },
@@ -200,7 +206,7 @@ export const content = {
       },
       {
         kind: 'cv',
-        title: 'CV(履歴書)',
+        title: 'CV（履歴書）',
         body: '履歴書ページ。',
         href: '/cv',
         cta: 'open'
@@ -221,7 +227,7 @@ export const content = {
     big_red: 'データで、',
     big_blue: '見てみよう。',
     cta_label: 'お問い合わせ（準備中）',
-    cta_href: '',
+    cta_href: '/contact',
     sns: [
       { label: 'Twitter / X', href: 'https://x.com/naotoizu_7010' },
       { label: 'GitHub', href: 'https://github.com/naotoizu7010' },
