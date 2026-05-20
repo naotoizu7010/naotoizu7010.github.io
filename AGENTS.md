@@ -1,5 +1,9 @@
 # Repository Notes
 
+## Project Notes
+
+- 今後の改善タスクや方針は `docs/roadmap.md` を参照する。
+
 ## Commit Messages
 
 - 日本語で書く。
