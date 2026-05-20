@@ -73,6 +73,13 @@ const C = content;
         </li>
       ))}
       <li>
+        <a class="df-menu-link" href="/personality">
+          <span class="df-menu-num">↗</span>
+          <span>/personality (人柄・好きなもの)</span>
+          <span class="df-menu-arrow" aria-hidden="true">→</span>
+        </a>
+      </li>
+      <li>
         <a class="df-menu-link df-menu-link--accent" href="/researcher">
           <span class="df-menu-num">↗</span>
           <span>/researcher (硬めの研究者ページ)</span>
@@ -104,17 +111,6 @@ const C = content;
     <div class="df-grid">
       <div class="df-hero-inner">
         <div>
-          <div class="df-hero-eyebrow-row">
-            <span class="df-hero-pill">
-              <span class="dot" aria-hidden="true"></span>
-              {C.hero.eyebrow}
-            </span>
-            <span
-              style="font-family: var(--df-mono); font-size: 11px; letter-spacing: 0.16em; color: var(--df-fg-mute);"
-            >
-              TOP / 2026
-            </span>
-          </div>
           <h1 class="df-hero-title">
             <span class="red">人の</span><span class="blue">流れ</span><span>を、</span><br />
             <span>読む。</span>
@@ -124,11 +120,10 @@ const C = content;
           <div class="df-hero-meta">
             <span>ROLE / <b>Undergrad Student</b></span>
             <span>BASE / <b>Tsukuba, JP</b></span>
-            <span>FIELD / <b>Crowd Analysis · Sports · AI</b></span>
+            <span>FIELD / <b>Crowd Analysis · AI</b></span>
           </div>
         </div>
         <div class="df-hero-right">
-          <span class="df-hero-coordinates">tsukuba / 茨城</span>
           <div class="df-hero-photo-wrap">
             <ImageSlot
               srcs={[
@@ -157,24 +152,6 @@ const C = content;
     </div>
   </section>
 
-  <!-- Researcher banner -->
-  <a class="df-researcher-banner" href="/researcher">
-    <div class="df-researcher-banner-inner">
-      <span class="df-researcher-banner-tag">FOR RESEARCHERS</span>
-      <span class="df-researcher-banner-title">
-        業績・所属・論文は <b>/researcher</b> へ
-      </span>
-      <span class="df-researcher-banner-body">
-        研究者向けの硬めのプロフィールページ。学会発表・査読論文・所属など、フォーマルな情報をまとめています。<br />
-        ※準備中です。
-      </span>
-      <span class="df-researcher-banner-cta" aria-hidden="true">
-        <span>OPEN</span>
-        <span class="df-researcher-banner-arrow">→</span>
-      </span>
-    </div>
-  </a>
-
   <!-- ABOUT -->
   <section class="df-section" id="about">
     <div class="df-grid">
@@ -188,136 +165,38 @@ const C = content;
           </h2>
           <div class="df-about-summary-card">
             <div class="k">いま、やっていること</div>
-            <div class="body-text">スタジアムの人流とAIの社会実装をテーマに、研究と現場のあいだを行き来しています。</div>
+            <div class="body-text">スタジアムでの人流の解析と、AIを用いた社会実装です。</div>
           </div>
           <div class="df-about-summary-card df-about-summary-card-2">
             <div class="k">大事にしていること</div>
-            <div class="body-text">"ややこしい話を、肩の力を抜いて。"<br />専門外の人とちゃんと話せる研究者でいたい。</div>
+            <div class="body-text">何事にも興味を持つこと。好奇心を満たし続けること。</div>
           </div>
         </div>
         <div>
           <p class="df-about-lead">{C.about.lead}</p>
-          <p style="font-size: 16px; line-height: 1.8;">{C.about.body}</p>
-          <p style="font-size: 16px; line-height: 1.8; margin-top: 16px;">{C.about.body2}</p>
+          <p class="df-about-copy">{C.about.body}</p>
+          <p class="df-about-copy df-about-copy--spaced">{C.about.body2}</p>
           <div class="df-about-facts">
             {C.about.factoids.map((f) => (
               <div class="df-about-fact">
                 <div class="k">{f.k}</div>
-                <div class="v">{f.v}</div>
+                <div class="v">
+                  {f.vParts ? (
+                    f.vParts.map((part) => (
+                      part.href ? (
+                        <a href={part.href} target="_blank" rel="noopener">{part.text}</a>
+                      ) : (
+                        <span class:list={[part.tone === 'muted' && 'df-about-fact-muted']}>{part.text}</span>
+                      )
+                    ))
+                  ) : (
+                    f.v
+                  )}
+                </div>
               </div>
             ))}
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- RESEARCH -->
-  <section class="df-section df-section--research" id="research">
-    <div class="df-grid">
-      <div class="df-research-head">
-        <div>
-          <span class="df-eyebrow">
-            <span class="dot" aria-hidden="true"></span>02 / RESEARCH
-          </span>
-          <h2 class="df-h2-ja" style="margin-top: 16px;">{C.research.heading}</h2>
-        </div>
-        <p style="max-width: 360px; color: var(--df-fg-mute); text-align: right; line-height: 1.7;">
-          {C.research.intro}
-        </p>
-      </div>
-      <div class="df-research-grid">
-        {C.research.items.map((r) => (
-          <article class="df-rcard">
-            <div class="df-rcard-chart">
-              {r.chart === 'crowd' && (
-                <svg viewBox="0 0 360 160" width="100%" height="100%" aria-hidden="true">
-                  {Array.from({ length: 8 }).flatMap((_, y) =>
-                    Array.from({ length: 18 }).map((__, x) => {
-                      const d = Math.sqrt((x - 11) ** 2 + (y - 4) ** 2);
-                      const v = Math.max(0, 1 - d / 8);
-                      return (
-                        <rect
-                          x={x * 20 + 1}
-                          y={y * 20 + 1}
-                          width="18"
-                          height="18"
-                          fill="var(--df-red)"
-                          opacity={v * 0.85}
-                        />
-                      );
-                    }),
-                  )}
-                  <path
-                    d="M 20 130 Q 100 90 200 80 T 340 40"
-                    fill="none"
-                    stroke="var(--df-fg)"
-                    stroke-width="1.5"
-                    stroke-dasharray="3 4"
-                  />
-                </svg>
-              )}
-              {r.chart === 'sports' && (
-                <svg viewBox="0 0 360 160" width="100%" height="100%" aria-hidden="true">
-                  {[0, 1, 2, 3].map((i) => (
-                    <line
-                      x1="0"
-                      x2="360"
-                      y1={40 * (i + 1) - 20}
-                      y2={40 * (i + 1) - 20}
-                      stroke="var(--df-line)"
-                      stroke-width="0.5"
-                    />
-                  ))}
-                  {[0, 1, 2, 3, 4].map((i) => (
-                    <line
-                      x1={72 * i}
-                      x2={72 * i}
-                      y1="0"
-                      y2="160"
-                      stroke="var(--df-line)"
-                      stroke-width="0.5"
-                    />
-                  ))}
-                  <path
-                    d="M 40 130 Q 120 60 200 90 T 330 30"
-                    fill="none"
-                    stroke="var(--df-fg)"
-                    stroke-width="1.5"
-                  />
-                  <circle cx="40" cy="130" r="5" fill="var(--df-fg)" />
-                  <circle cx="120" cy="80" r="5" fill="var(--df-blue)" opacity="0.6" />
-                  <circle cx="200" cy="90" r="6" fill="var(--df-blue)" />
-                  <circle cx="260" cy="60" r="4" fill="var(--df-red)" opacity="0.6" />
-                  <circle cx="330" cy="30" r="6" fill="var(--df-red)" />
-                </svg>
-              )}
-              {r.chart === 'city' && (
-                <svg viewBox="0 0 360 160" width="100%" height="100%" aria-hidden="true">
-                  <line x1="60" y1="20" x2="180" y2="20" stroke="var(--df-fg-mute)" stroke-width="1" opacity="0.5" />
-                  <line x1="180" y1="20" x2="260" y2="80" stroke="var(--df-fg-mute)" stroke-width="1" opacity="0.5" />
-                  <line x1="180" y1="20" x2="80" y2="120" stroke="var(--df-fg-mute)" stroke-width="1" opacity="0.5" />
-                  <line x1="260" y1="80" x2="320" y2="120" stroke="var(--df-fg-mute)" stroke-width="1" opacity="0.5" />
-                  <line x1="80" y1="120" x2="160" y2="140" stroke="var(--df-fg-mute)" stroke-width="1" opacity="0.5" />
-                  <line x1="160" y1="140" x2="260" y2="80" stroke="var(--df-fg-mute)" stroke-width="1" opacity="0.5" />
-                  <circle cx="60" cy="20" r="8" fill="var(--df-red)" />
-                  <circle cx="180" cy="20" r="14" fill="var(--df-blue)" />
-                  <circle cx="260" cy="80" r="10" fill="var(--df-fg)" />
-                  <circle cx="320" cy="120" r="7" fill="var(--df-blue)" />
-                  <circle cx="80" cy="120" r="9" fill="var(--df-red)" />
-                  <circle cx="160" cy="140" r="6" fill="var(--df-fg)" />
-                </svg>
-              )}
-            </div>
-            <div class="df-rcard-head">
-              <span class="df-rcard-no">RES / {r.no}</span>
-              <span class="df-rcard-tag">{r.tag}</span>
-            </div>
-            <div class="df-rcard-en">{r.en}</div>
-            <h3 class="df-rcard-ja">{r.ja}</h3>
-            <p class="df-rcard-body">{r.body}</p>
-          </article>
-        ))}
       </div>
     </div>
   </section>
@@ -328,7 +207,7 @@ const C = content;
       <div class="df-act-head">
         <div>
           <span class="df-eyebrow">
-            <span class="dot" aria-hidden="true"></span>03 / ACTIVITIES
+            <span class="dot" aria-hidden="true"></span>02 / ACTIVITIES
           </span>
           <h2 class="df-h2-ja" style="margin-top: 16px;">{C.activities.heading}</h2>
         </div>
@@ -347,7 +226,10 @@ const C = content;
             <div class="df-act-node">{String(i + 1).padStart(2, '0')}</div>
             <div>
               <div class="df-act-cat">{a.tag}</div>
-              <div class="df-act-title">{a.title}</div>
+              <div class="df-act-title">
+                {a.title}
+              </div>
+              {a.titleSub && <div class="df-act-title-sub">{a.titleSub}</div>}
             </div>
             <div class="df-act-body">{a.body}</div>
             <div class="df-act-meta">
@@ -355,7 +237,7 @@ const C = content;
               {a.meta.role && <span>role <b>{a.meta.role}</b></span>}
               {a.meta.cases && <span>cases <b>{a.meta.cases}</b></span>}
             </div>
-            <div class="df-act-cta">{a.href ? 'OPEN' : 'DETAIL'}</div>
+            <div class="df-act-cta">{a.cta ?? (a.href ? 'OPEN' : 'DETAIL')}</div>
           </a>
         ))}
       </div>
@@ -368,10 +250,10 @@ const C = content;
       <div class="df-pers-inner">
         <div class="df-pers-head">
           <span class="df-eyebrow">
-            <span class="dot" aria-hidden="true"></span>04 / OFF THE FIELD
+            <span class="dot" aria-hidden="true"></span>03 / personality
           </span>
           <h2 class="df-h2-ja" style="margin-top: 16px;">{C.personality.heading}</h2>
-          <p style="color: var(--df-fg-mute); line-height: 1.8; margin-top: 16px;">
+          <p class="df-pers-copy">
             {C.personality.lead}<br /><br />
             {C.personality.body}
           </p>
@@ -381,8 +263,12 @@ const C = content;
             <span
               style="display: inline-block; width: 24px; height: 1px; background: var(--df-blue); margin-right: 12px; vertical-align: middle;"
             ></span>
-            NODES = INTERESTS · EDGES = HOW THEY CONNECT
+
           </div>
+          <a class="df-pers-detail-link" href="/personality">
+            <span>もっと人柄を知る（準備中）</span>
+            <span aria-hidden="true">→</span>
+          </a>
         </div>
         <div class="df-pers-network">
           <svg
@@ -438,7 +324,7 @@ const C = content;
       <div class="df-links-head">
         <div>
           <span class="df-eyebrow">
-            <span class="dot" aria-hidden="true"></span>05 / LINKS
+            <span class="dot" aria-hidden="true"></span>04 / LINKS
           </span>
           <h2 class="df-h2-ja" style="margin-top: 16px;">{C.links.heading}</h2>
         </div>
@@ -454,7 +340,7 @@ const C = content;
             target={l.href.startsWith('http') ? '_blank' : undefined}
             rel={l.href.startsWith('http') ? 'noopener' : undefined}
           >
-            <div class="df-link-card-no">N° {String(i + 1).padStart(2, '0')}</div>
+            <div class="df-link-card-no"> {String(i + 1).padStart(2, '0')}</div>
             <h3 class="df-link-card-title">{l.title}</h3>
             <p class="df-link-card-body">{l.body}</p>
             <span class="df-link-card-cta">{l.cta}</span>

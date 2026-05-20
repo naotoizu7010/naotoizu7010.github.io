@@ -69,8 +69,8 @@
   display: inline-flex; align-items: center; gap: 10px;
 }
 .df-eyebrow .dot {
-  width: 6px; height: 6px; border-radius: 50%; background: var(--df-blue);
-  box-shadow: 0 0 0 4px rgba(42, 86, 240, 0.15);
+  width: 6px; height: 6px; border-radius: 50%; background: var(--df-red);
+  box-shadow: 0 0 0 4px rgba(229, 55, 75, 0.15);
 }
 .df-h2 {
   font-family: var(--df-display); font-weight: 700;
@@ -200,10 +200,6 @@
   display: grid; grid-template-columns: 1.2fr 1fr; gap: 56px;
   align-items: center;
 }
-.df-hero-eyebrow-row {
-  display: flex; gap: 24px; align-items: center;
-  margin-bottom: 36px;
-}
 .df-hero-pill {
   display: inline-flex; align-items: center; gap: 8px;
   padding: 6px 12px;
@@ -233,7 +229,7 @@
 .df-hero-sub {
   margin-top: 32px;
   font-size: 17px; line-height: 1.8;
-  max-width: 520px;
+  max-width: 600px;
 }
 .df-hero-meta {
   margin-top: 44px;
@@ -254,12 +250,6 @@
   border-radius: 6px;
   z-index: 3;
   overflow: hidden;
-}
-.df-hero-coordinates {
-  position: absolute; left: -10px; top: -22px;
-  font-family: var(--df-mono); font-size: 10px;
-  color: var(--df-fg-mute); letter-spacing: 0.14em;
-  z-index: 4;
 }
 .df-hero-coord-r {
   position: absolute; right: -10px; bottom: -22px;
@@ -318,6 +308,13 @@
   font-size: 24px; line-height: 1.55;
   margin-bottom: 24px;
 }
+.df-about-copy {
+  font-size: 16px;
+  line-height: 1.8;
+}
+.df-about-copy--spaced {
+  margin-top: 16px;
+}
 .df-about-facts {
   margin-top: 28px;
   display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
@@ -331,6 +328,23 @@
   color: var(--df-fg-mute); text-transform: uppercase;
 }
 .df-about-fact .v { font-family: var(--df-display); font-weight: 600; font-size: 17px; margin-top: 4px; }
+.df-about-fact-muted {
+  font-size: 0.78em;
+  font-weight: 500;
+  color: var(--df-fg-mute);
+}
+.df-about-fact .v a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, var(--df-fg-mute) 44%, transparent);
+  transition: color 0.15s, text-decoration-color 0.15s;
+}
+.df-about-fact .v a:hover {
+  color: var(--df-blue);
+  text-decoration-color: var(--df-blue);
+}
 
 /* RESEARCH */
 /* paper section — covers most of the page bg, but leaves a gutter at left/right
@@ -434,6 +448,14 @@
   font-family: 'Noto Sans JP', sans-serif; font-weight: 700;
   font-size: 18px; letter-spacing: -0.005em;
 }
+.df-act-title-sub {
+  margin-top: 3px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--df-fg-mute);
+}
 .df-act-body { font-size: 14.5px; line-height: 1.7; color: var(--df-fg-mute); }
 .df-act-meta {
   font-family: var(--df-mono); font-size: 11px;
@@ -484,6 +506,32 @@
 }
 .df-root[data-theme="dark"] .df-bite-tag { box-shadow: 0 4px 12px rgba(0,0,0,0.4); }
 .df-bite-tag .emo { font-size: 18px; line-height: 1; }
+.df-pers-copy {
+  color: var(--df-fg-mute);
+  line-height: 1.8;
+  margin-top: 16px;
+}
+.df-pers-detail-link {
+  margin-top: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  border: 1px solid var(--df-line);
+  border-radius: 999px;
+  background: var(--df-paper);
+  color: var(--df-fg);
+  font-family: var(--df-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: transform 0.16s, border-color 0.16s, color 0.16s;
+}
+.df-pers-detail-link:hover {
+  transform: translateY(-1px);
+  border-color: var(--df-blue);
+  color: var(--df-blue);
+}
 
 /* Revertable safety layout: avoid personality tags colliding on tablet/small desktop widths. */
 @media (min-width: 761px) and (max-width: 1180px) {
@@ -512,13 +560,15 @@
 
 /* LINKS */
 .df-links-head { display: flex; justify-content: space-between; align-items: end; margin-bottom: 40px; }
-.df-links-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.df-links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
 .df-link-card {
   background: var(--df-paper);
   border: 1px solid var(--df-line);
   border-radius: 6px;
   padding: 28px;
-  display: flex; flex-direction: column; gap: 16px;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 16px;
   position: relative; overflow: hidden;
   min-height: 240px;
 }
@@ -530,17 +580,19 @@
 }
 .df-link-card:nth-child(1) .df-link-card-arrow { background: var(--df-red); color: #fff; }
 .df-link-card:nth-child(2) .df-link-card-arrow { background: var(--df-blue); color: #fff; }
+.df-link-card:nth-child(3) .df-link-card-arrow { background: var(--df-fg); color: var(--df-bg); }
 .df-link-card-no { font-family: var(--df-mono); font-size: 11px; letter-spacing: 0.16em; color: var(--df-fg-mute); }
 .df-link-card-title {
   font-family: 'Noto Sans JP', sans-serif; font-weight: 800;
   font-size: 22px; letter-spacing: -0.005em; line-height: 1.3;
-  margin-top: auto;
+  margin-top: 48px;
 }
-.df-link-card-body { font-size: 14px; line-height: 1.7; color: var(--df-fg-mute); }
+.df-link-card-body { font-size: 14px; line-height: 1.7; color: var(--df-fg-mute); align-self: start; }
 .df-link-card-cta {
   font-family: var(--df-mono); font-size: 11px; letter-spacing: 0.16em;
   text-transform: uppercase;
   display: inline-flex; align-items: center; gap: 8px;
+  align-self: end;
 }
 .df-link-card-cta::before { content: ""; width: 24px; height: 1px; background: currentColor; }
 
@@ -594,6 +646,16 @@
   font-family: var(--df-mono); font-size: 11px; letter-spacing: 0.14em;
   text-transform: uppercase;
   opacity: 0.55;
+}
+
+.df-hero-sub,
+.df-about-summary-card .body-text,
+.df-about-lead,
+.df-about-copy,
+.df-act-body,
+.df-pers-copy,
+.df-link-card-body {
+  white-space: pre-line;
 }
 
 
@@ -935,11 +997,6 @@
     gap: 40px;
     align-items: stretch;
   }
-
-  .df-hero-eyebrow-row {
-    flex-wrap: wrap; gap: 12px; margin-bottom: 20px;
-  }
-
   .df-hero-title {
     font-size: 56px;
     letter-spacing: -0.035em;
@@ -963,8 +1020,6 @@
   }
 
   .df-hero-photo-wrap { inset: 24px; }
-
-  .df-hero-coordinates { font-size: 9px; }
 
   .df-hero-stat-card { padding: 8px 12px; }
 

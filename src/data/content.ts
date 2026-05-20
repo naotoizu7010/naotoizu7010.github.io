@@ -1,10 +1,5 @@
-/* ----------------------------------------------------------------
-   src/data/content.ts — 本人情報 + コピー
-   既存 docs/README.md と docs/favorites.md からの情報をベースに、
-   トップページ用に整形しています。
-   ---------------------------------------------------------------- */
-
-export type FactItem = { k: string; v: string };
+export type TextPart = { text: string; href?: string; tone?: 'muted' };
+export type FactItem = { k: string; v: string; vParts?: TextPart[] };
 
 export type ResearchItem = {
   no: string;
@@ -18,9 +13,11 @@ export type ResearchItem = {
 export type ActivityItem = {
   tag: string;
   title: string;
+  titleSub?: string;
   body: string;
   meta: { since?: string; cases?: string; role?: string };
   href?: string;
+  cta?: string;
 };
 
 export type PersonalityBite = {
@@ -59,19 +56,16 @@ export const content = {
     eyebrow: 'PORTFOLIO / 2026',
     title_a: '人の流れを、',
     title_b: '読む。',
-    en_caption: 'READ THE FLOW · BUILD WITH SPORTS · WALK THE CITY',
-    sub: 'スタジアムの人流とAIの社会実装をテーマに、つくばで研究しています。スポーツが好きで、ラーメンが好きで、街を歩くのが好きな研究者です。',
-    /* 数字は仮置きではなく、書かないことを推奨。
-       入れる場合は本人にカウントしてもらう */
+    en_caption: 'SPORTS × CROWD × DATA',
+    sub: 'スタジアムでの人流とAIの社会実装をテーマに、つくばで研究しています。\nスポーツが大好きな大学生です。',
     stats: null as null | { k: string; v: string; tone?: 'red' | 'blue' | 'fg' }[],
   },
 
   /* ナビゲーション */
   nav: [
     { label: 'About', href: '#about' },
-    { label: 'Research', href: '#research' },
     { label: 'Activities', href: '#activities' },
-    { label: 'Off the field', href: '#personality' },
+    { label: 'Personality', href: '#personality' },
     { label: 'Links', href: '#links' },
   ] satisfies NavItem[],
 
@@ -80,15 +74,29 @@ export const content = {
     heading: 'About',
     heading_ja: ['つくばで', '研究する大学生です。'],
     lead: 'こんにちは、大泉直人です。',
-    body: '茨城県日立市出身、つくばで研究する大学生です。筑波大学 社会工学類で経営工学を勉強しながら、大西研究室（連携大学院制度で産業技術総合研究所所属）で、スタジアムの人流解析をテーマに研究しています。',
-    body2: '2026年からは、産総研の人工知能研究センターでテクニカルスタッフとしても働き始めました。鹿島アントラーズとの包括協定に関わるAIの社会実装プロジェクトに、研究補助として関わっています。',
+    body: '筑波大学 社会工学類で経営工学を勉強しながら、\n産業技術総合研究所でスタジアムの人流解析をテーマに研究しています。',
     factoids: [
-      { k: '氏名', v: '大泉直人 (Naoto Oizumi)' },
-      { k: '居住', v: '茨城県 つくば市' },
-      { k: '出身', v: '茨城県 日立市' },
-      { k: '所属', v: '筑波大学 社会工学類 学部4年' },
-      { k: '研究室', v: '大西研究室 (産総研 連携大学院)' },
-      { k: '専門', v: '人流解析 / スポーツ × データ' },
+      { k: '氏名', v: '大泉直人' },
+      { k: '居住地', v: '茨城県 つくば市' },
+      { k: '出身地', v: '茨城県 日立市' },
+      {
+        k: '所属',
+        v: '筑波大学 社会工学類 学部4年',
+        vParts: [
+          { text: '筑波大学 ' },
+          { text: '社会工学類', href: 'https://www.sk.tsukuba.ac.jp/College/index.php' },
+          { text: ' 学部4年' },
+        ],
+      },
+      {
+        k: '研究室',
+        v: '大西研究室 (産業技術総合研究所 連携大学院)',
+        vParts: [
+          { text: '大西研究室', href: 'http://onishi-lab.jp/' },
+          { text: ' 産業技術総合研究所 連携大学院', tone: 'muted' },
+        ],
+      },
+      { k: '専門', v: '人流解析' },
     ] satisfies FactItem[],
   },
 
@@ -128,103 +136,100 @@ export const content = {
 
   /* Activities */
   activities: {
-    heading: 'Activities',
+    heading: '活動',
     lead: '研究室の外でやっていること。',
     items: [
       {
-        tag: 'COMMUNITY',
-        title: 'OneThing (筑波大学エンジニアコミュニティ) 前代表',
-        body: 'LT会の主催、コミュニティ運営。エンジニア同士が話すきっかけ作りをやってきました。',
+        tag: 'ENGINEER COMMUNITY',
+        title: 'OneThing',
+        titleSub: '筑波大学エンジニアコミュニティ',
+        body: '勉強会やLT会の主催、筑波大生エンジニアの情報交換を行うコミュニティ。',
         meta: { since: '2023-', role: '前代表' },
         href: 'https://onethingtsukuba.github.io/',
+        cta: 'HP',
       },
       {
-        tag: 'STARTUP',
-        title: 'STARTiX (筑波大学起業サークル)',
-        body: '学生発の起業・新規事業を応援する筑波大学のサークル。所属しています。',
-        meta: { role: 'メンバー' },
+        tag: 'STARTUP COMMUNITY',
+        title: 'STARTiX',
+        titleSub: '筑波大学起業サークル',
+        body: '起業やビジネスに興味がある筑波大生向けにイベントを開催したり、\n情報交換をするコミュニティです。',
+        meta: { since: '2024-', role: 'メンバー' },
         href: 'https://startix-tsukuba.net/',
-      },
-      {
-        tag: 'CAMPUS',
-        title: '筑波大学 宿舎祭実行委員',
-        body: '筑波大の宿舎祭を運営する学生団体の実行委員。',
-        meta: { role: '実行委員' },
-        href: 'https://yadokarisai.com/',
-      },
-      {
-        tag: 'TENNIS',
-        title: '硬式テニス愛好会',
-        body: '高校・大学と続けてきた硬式テニス。週末はだいたいラケット握ってます。',
-        meta: { since: '高校〜', role: 'メンバー' },
-      },
+        cta: 'HP',
+      }
     ] satisfies ActivityItem[],
   },
 
-  /* Personality (Off the field) */
   personality: {
-    heading: 'Off the field',
-    lead: '研究の外側にいる、もう一人の自分。',
-    body: '研究テーマと、テーマの外側にいる自分の関心は、たいていどこかで繋がっています。',
+    heading: '人柄',
+    lead: '趣味がたくさん。',
+    body: '',
     bites: [
-      { emoji: '⚽', text: 'Jリーグ。水戸ホーリーホックと鹿島アントラーズを応援。' },
-      { emoji: '🥊', text: 'ボクシング。日本人の世界戦は追ってます。' },
-      { emoji: '🎾', text: '硬式テニス。高校・大学と続けて、いまも週末は握ってます。' },
-      { emoji: '🍜', text: 'ラーメン巡り。Instagram に記録を残してます。' },
-      { emoji: '🏍️', text: 'バイク。motoGP も観るし、大型二輪MT 持ちです。' },
-      { emoji: '🚴', text: 'サイクリング。霞ヶ浦一周しました。' },
-      { emoji: '🎯', text: 'ダーツ。マイダーツ買いました。Bフラから A 目指し中。' },
-      { emoji: '📈', text: '金融投資。メインはインデックス、ちょっとだけBTC。' },
-      { emoji: '📖', text: 'Wikipedia サーフィン。人の人生と歴史を読むのが好き。' },
+      { emoji: '⚽', text: 'サッカー' },
+      { emoji: '🥊', text: 'ボクシング観戦' },
+      { emoji: '🎾', text: '硬式テニス' },
+      { emoji: '🍜', text: 'ラーメン巡り' },
+      { emoji: '🏍️', text: 'バイク' },
+      { emoji: '🚴', text: 'サイクリング' },
+      { emoji: '🎯', text: 'ダーツ' },
+      { emoji: '📈', text: '金融投資' },
+      { emoji: '📖', text: 'Wikipedia サーフィン' },
     ] satisfies PersonalityBite[],
   },
 
   /* Links */
   links: {
     heading: 'Links',
-    lead: 'もっと知りたい人へ。',
+    lead: 'もっとくわしく。',
     items: [
       {
-        kind: 'researcher',
-        title: '研究者向け / Researcher Page',
-        body: '業績・所属・論文など、フォーマルな情報はこちら。準備中です。',
-        href: '/researcher',
-        cta: 'open /researcher',
+        kind: 'personality',
+        title: 'Personality',
+        body: '好きなもの、休日の過ごし方、\n研究の外側にある関心はこちら。',
+        href: '/personality',
+        cta: 'open',
         accent: 'red',
       },
       {
-        kind: 'cv',
-        title: 'CV (学歴・職歴)',
-        body: '学歴と職歴をまとめたシンプルなページ。',
-        href: '/cv',
-        cta: 'open /cv',
+        kind: 'researcher',
+        title: '研究情報',
+        body: '業績・所属・論文などの情報まとめ。\n（準備中）',
+        href: '/researcher',
+        cta: 'open',
         accent: 'blue',
       },
       {
+        kind: 'cv',
+        title: 'CV(履歴書)',
+        body: '履歴書ページ。',
+        href: '/cv',
+        cta: 'open'
+      },
+      {
         kind: 'note',
-        title: 'note (記事)',
-        body: 'LT会開催報告など、書いたものを置いています。',
+        title: 'Blog (note)',
+        body: '趣味とか思考とか色々書いてます。',
         href: 'https://note.com/naotoizu_7010/',
-        cta: 'open note',
+        cta: 'open',
       },
     ] satisfies LinkItem[],
   },
 
   /* Footer */
   footer: {
-    big_top: 'スポーツと、街と、',
-    big_red: 'データを、',
-    big_blue: '橋渡し。',
-    cta_label: 'お話しませんか',
-    cta_href: 'https://x.com/naotoizu_7010',
+    big_top: 'スポーツを、',
+    big_red: 'データで、',
+    big_blue: '見てみよう。',
+    cta_label: 'お問い合わせ（準備中）',
+    cta_href: '',
     sns: [
-      { label: 'X / Twitter', href: 'https://x.com/naotoizu_7010' },
+      { label: 'Twitter / X', href: 'https://x.com/naotoizu_7010' },
       { label: 'GitHub', href: 'https://github.com/naotoizu7010' },
       { label: 'Instagram', href: 'https://www.instagram.com/naotoizu_7010/' },
       { label: 'Facebook', href: 'https://www.facebook.com/naotoizu7010/' },
       { label: 'note', href: 'https://note.com/naotoizu_7010/' },
     ] satisfies SnsItem[],
-    legal: '© 2026 Naoto Oizumi · 7010',
+    legal: '© 2026 Naoto Oizumi · naotoizu_7010',
   },
 };
 
