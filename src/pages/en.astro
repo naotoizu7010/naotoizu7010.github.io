@@ -1,0 +1,156 @@
+---
+/* ----------------------------------------------------------------
+   src/pages/en.astro
+   English old homepage based on docs/en.md.
+   Uses the same text-focused shape as /oldHP and /cv.
+   ---------------------------------------------------------------- */
+import Base from '../layouts/Base.astro';
+import '../styles/oldhp.css';
+---
+
+<Base title="English — Naoto Oizumi" description="English profile page for Naoto Oizumi based on docs/en.md.">
+  <main class="cv-root oldhp-root">
+    <header class="cv-header">
+      <h1 class="cv-name">Portfolio of 7010</h1>
+      <p class="cv-sub">
+        <a href="/">Japanese</a>
+      </p>
+    </header>
+
+    <section class="oldhp-photos" aria-label="Profile photos">
+      <img src="/img/main_profile.jpg" alt="Naoto Oizumi profile photo" />
+      <img src="/img/naoto_oizumi_medium_body_white_1-1.png" alt="Naoto Oizumi standing photo" />
+    </section>
+
+    <section class="cv-block">
+      <h2 class="cv-h2">basic info</h2>
+      <dl class="cv-list">
+        <div class="cv-row">
+          <dt>Name</dt>
+          <dd>Naoto Oizumi（大泉 直人）</dd>
+        </div>
+        <div class="cv-row">
+          <dt>Residence</dt>
+          <dd>Tsukuba City, Ibaraki</dd>
+        </div>
+        <div class="cv-row">
+          <dt>Hometown</dt>
+          <dd>Hitachi City, Ibaraki</dd>
+        </div>
+        <div class="cv-row">
+          <dt>Affiliation</dt>
+          <dd>University of Tsukuba, Senior Student</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="cv-block">
+      <h2 class="cv-h2">educational background</h2>
+      <ul class="cv-events">
+        <li>
+          <time>2020.04 - 2023.03</time>
+          <div>
+            <h3>
+              Ibaraki Prefectural
+              <a href="https://www.mito1-h.ibk.ed.jp/English" target="_blank" rel="noopener">Mito First High School</a>
+            </h3>
+          </div>
+        </li>
+        <li>
+          <time>2023.04 -</time>
+          <div>
+            <h3>
+              University of Tsukuba, School of Science and Engineering,
+              <a href="https://www.sk.tsukuba.ac.jp/College/en/" target="_blank" rel="noopener">College of Policy and Planning Sciences</a>
+            </h3>
+            <p class="cv-role">Major in Management Science and Engineering (<a href="http://onishi-lab.jp/" target="_blank" rel="noopener">Onishi Lab</a>)</p>
+            <p>Crowd Analysis in Large Stadiums</p>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section class="cv-block">
+      <h2 class="cv-h2">work experience</h2>
+      <ul class="cv-events">
+        <li>
+          <time>2026.02 -</time>
+          <div>
+            <h3>
+              National Institute of Advanced Industrial Science and Technology (AIST)
+            </h3>
+            <p class="cv-role">
+              Artificial Intelligence Research Center,
+              <a href="https://www.airc.aist.go.jp/en/cosine/" target="_blank" rel="noopener">Social Intelligence Research Team</a>
+              Technical Staff
+            </p>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section class="cv-block">
+      <h2 class="cv-h2">profile slide (Japanese)</h2>
+      <p class="oldhp-text"><a href="/profileslide">Visit here</a></p>
+    </section>
+
+    <section class="cv-block">
+      <h2 class="cv-h2">affiliations</h2>
+      <ul class="oldhp-list">
+        <li>Onishi Lab (AIST, Artificial Intelligence Research Center, Social Intelligence Research Team)</li>
+      </ul>
+    </section>
+
+    <section class="cv-block">
+      <h2 class="cv-h2">favorites</h2>
+      <ul class="oldhp-list">
+        <li>
+          Watching Sports
+          <ul>
+            <li>J.League — Mito HollyHock / Kashima Antlers</li>
+            <li>
+              International Football
+              <ul>
+                <li>Premier League</li>
+                <li>etc</li>
+              </ul>
+            </li>
+            <li>
+              Boxing, American Football, Basketball, and more
+              <ul>
+                <li>Feel free to invite me to watch games together!</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>Playing Sports</li>
+        <li>Ramen Hunting</li>
+        <li>Motorcycle</li>
+        <li>Cycling</li>
+        <li>Gadgets</li>
+        <li>Finance & Investing</li>
+        <li>Wikipedia Surfing</li>
+        <li>Contemplation</li>
+      </ul>
+    </section>
+
+    <section class="cv-block">
+      <h2 class="cv-h2">accounts</h2>
+      <p class="oldhp-badges">
+        <a href="https://github.com/naotoizu7010" target="_blank" rel="noopener"><img alt="Github" src="https://img.shields.io/badge/Github-%2312100E.svg?&style=flat-square&logo=Github&logoColor=white" /></a>
+        <a href="https://twitter.com/naotoizu_7010" target="_blank" rel="noopener"><img alt="Twitter" src="https://img.shields.io/badge/Twitter-%231DA1F2.svg?&style=flat-square&logo=twitter&logoColor=white" /></a>
+        <a href="https://www.instagram.com/naotoizu_7010/?hl=ja" target="_blank" rel="noopener"><img alt="Instagram" src="https://img.shields.io/badge/Instagram-%23E4405F?style=flat-square&logo=Instagram&logoColor=fff&link=https%3A%2F%2Fwww.instagram.com%2Fnaotoizu_7010%2F%3Fhl%3Dja" /></a>
+        <a href="https://www.facebook.com/naotoizu7010/" target="_blank" rel="noopener"><img alt="Facebook" src="https://img.shields.io/badge/Facebook-%230866FF?style=flat-square&logo=Facebook&logoColor=fff" /></a>
+        <a href="https://note.com/naotoizu_7010/" target="_blank" rel="noopener"><img alt="note" src="https://img.shields.io/badge%2FNote-ffffff?style=flat-square&logoColor=%23000000" /></a>
+      </p>
+    </section>
+
+    <footer class="cv-foot">
+      <h2 class="cv-h2">contact</h2>
+      <p class="oldhp-text">DM on Twitter(X) or Instagram</p>
+      <p class="oldhp-text oldhp-more">For research inquiries: naoto-oizumi[at]aist.go.jp</p>
+      <p class="cv-foot-back">
+      </p>
+    </footer>
+  </main>
+</Base>
