@@ -126,7 +126,8 @@
 .df-nav-link:nth-child(even)::before {
   background: var(--df-blue);
 }
-.df-nav-link:hover { color: var(--df-blue); }
+.df-nav-link:hover { color: var(--df-red); }
+.df-nav-link:nth-child(even):hover { color: var(--df-blue); }
 .df-nav-right {
   display: flex;
   align-items: center;
@@ -693,6 +694,7 @@
   text-transform: uppercase;
   border-radius: 999px;
 }
+.df-footer-cta:hover { background: var(--df-blue); color: #fff; }
 .df-footer-cta::after { content: "→"; font-size: 18px; }
 .df-footer-sns h4 {
   font-family: var(--df-mono); font-size: 11px; letter-spacing: 0.18em;
@@ -705,7 +707,8 @@
   display: inline-flex; align-items: center; gap: 10px;
 }
 .df-footer-sns a::after { content: "↗"; opacity: 0.55; }
-.df-footer-sns a:hover { color: var(--df-red); }
+.df-footer-sns li:nth-child(odd) a:hover { color: var(--df-red); }
+.df-footer-sns li:nth-child(even) a:hover { color: var(--df-blue); }
 .df-footer-bottom {
   display: flex; justify-content: space-between; align-items: center;
   padding-top: 28px;
