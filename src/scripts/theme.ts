@@ -23,10 +23,9 @@ function getInitial(): 'light' | 'dark' {
 }
 
 function applyTheme(theme: 'light' | 'dark') {
-  const root = document.querySelector<HTMLElement>('.df-root');
-  if (root) {
+  document.querySelectorAll<HTMLElement>('.df-root').forEach((root) => {
     root.setAttribute('data-theme', theme);
-  }
+  });
   // update all toggle labels
   document.querySelectorAll<HTMLElement>('.df-theme-toggle').forEach((btn) => {
     btn.querySelectorAll<HTMLElement>('[data-theme-option]').forEach((option) => {
@@ -55,6 +54,8 @@ function toggle() {
 export function mountTheme() {
   applyTheme(getInitial());
   document.querySelectorAll<HTMLElement>('.df-theme-toggle').forEach((btn) => {
+    if (btn.dataset.themeReady === '1') return;
+    btn.dataset.themeReady = '1';
     btn.addEventListener('click', toggle);
   });
 }

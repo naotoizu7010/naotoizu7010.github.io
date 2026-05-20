@@ -1,0 +1,77 @@
+---
+import { content } from '../../data/content.ts';
+
+const C = content;
+const networkLines = [
+  [14, 22, 58, 14],
+  [58, 14, 84, 40],
+  [14, 22, 24, 62],
+  [58, 14, 52, 78],
+  [24, 62, 52, 78],
+  [52, 78, 78, 86],
+  [84, 40, 78, 86],
+  [84, 40, 52, 78],
+];
+const networkNodes = [
+  [14, 22],
+  [58, 14],
+  [84, 40],
+  [24, 62],
+  [52, 78],
+  [78, 86],
+];
+---
+
+<section class="df-section df-section--personality" id="personality">
+  <div class="df-grid">
+    <div class="df-pers-inner">
+      <div class="df-pers-head">
+        <span class="df-eyebrow">
+          <span class="dot" aria-hidden="true"></span>03 / personality
+        </span>
+        <h2 class="df-h2-ja df-section-title">{C.personality.heading}</h2>
+        <p class="df-pers-copy">
+          {C.personality.lead}<br /><br />
+          {C.personality.body}
+        </p>
+        <div class="df-pers-marker">
+          <span aria-hidden="true"></span>
+        </div>
+        <a class="df-pers-detail-link" href="/personality">
+          <span>もっと人柄を知る（準備中）</span>
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+      <div class="df-pers-network">
+        <svg
+          class="df-pers-network-graph"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          {networkLines.map(([x1, y1, x2, y2]) => (
+            <line
+              x1={x1}
+              y1={y1}
+              x2={x2}
+              y2={y2}
+              stroke="var(--df-fg-mute)"
+              stroke-width="0.2"
+              stroke-dasharray="0.8 0.8"
+              opacity="0.6"
+            />
+          ))}
+          {networkNodes.map(([cx, cy]) => (
+            <circle cx={cx} cy={cy} r="0.7" fill="var(--df-blue)" />
+          ))}
+        </svg>
+        {C.personality.bites.map((b, i) => (
+          <span class:list={['df-bite-tag', `df-bite-tag--${i + 1}`]}>
+            <span class="emo">{b.emoji}</span>
+            <span>{b.text}</span>
+          </span>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

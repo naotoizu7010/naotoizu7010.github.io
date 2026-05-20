@@ -1,0 +1,265 @@
+/* ===============================================================
+   Mobile overrides — 760px and below
+=============================================================== */
+@media (max-width: 760px) {
+  .df-root {
+    font-size: 14px;
+  }
+
+  .df-root::before {
+    background-size: 32px 32px;
+  }
+
+  .df-grid { padding: 0 20px; }
+
+  .df-section { padding: 64px 0; }
+
+  .df-nav {
+    padding: 14px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 900;
+    box-shadow: 0 10px 24px rgba(10, 15, 31, 0.06);
+  }
+
+  .df-root[data-theme="dark"] .df-nav {
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+  }
+
+  .df-nav-links { display: none; }
+
+  .df-nav-right {
+    width: auto;
+    flex-basis: auto;
+    gap: 8px;
+  }
+
+  .df-nav-name { font-size: 13px; }
+
+  .df-nav-name small { font-size: 10px; letter-spacing: 0.04em; }
+
+  .df-nav-logo { width: 26px; height: 26px; }
+
+  .df-lang-link {
+    padding: 5px 8px;
+    font-size: 10px;
+    gap: 6px;
+    letter-spacing: 0.08em;
+  }
+
+  .df-lang-ico {
+    width: 12px;
+    height: 12px;
+  }
+
+  .df-theme-toggle {
+    padding: 5px 9px;
+    font-size: 10px;
+    gap: 7px;
+    letter-spacing: 0.08em;
+  }
+
+  .df-hero { padding: 32px 0 56px; min-height: 0; }
+
+  .df-page-bg-flows { opacity: 0.7; }
+
+  .df-hero-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: stretch;
+  }
+  .df-hero-title {
+    font-size: 56px;
+    letter-spacing: -0.035em;
+  }
+
+  .df-hero-en { font-size: 11px; letter-spacing: 0.14em; }
+
+  .df-hero-sub { font-size: 15px; margin-top: 20px; }
+
+  .df-hero-meta {
+    margin-top: 28px;
+    flex-direction: column; gap: 8px;
+    font-size: 11px;
+  }
+
+  .df-hero-right {
+    width: 100%;
+    aspect-ratio: 1 / 1.1;
+    max-width: 320px;
+    margin: 8px auto 0;
+  }
+
+  .df-hero-photo-wrap { inset: 24px; }
+
+  .df-hero-stat-card { padding: 8px 12px; }
+
+  .df-hero-stat-card .v { font-size: 18px; }
+
+  .df-hero-stat-card .k { font-size: 8px; }
+
+  .df-hero-stat-card-1 { top: -8px; left: -12px; }
+
+  .df-hero-stat-card-2 { bottom: -15px; right: -16px; }
+
+  .df-hero-stat-card-3 { display: none; }
+
+  .df-h2-ja { font-size: 34px; line-height: 1.15; }
+
+  .df-h2 { font-size: 36px; }
+
+  .df-about-inner {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .df-about-lead { font-size: 18px; }
+
+  .df-about-facts { grid-template-columns: 1fr; gap: 8px; }
+
+  .df-research-head {
+    flex-direction: column; align-items: flex-start; gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .df-research-head p { text-align: left !important; }
+
+  .df-research-grid { grid-template-columns: 1fr; gap: 16px; }
+
+  .df-rcard-chart { height: 140px; }
+
+  .df-rcard-ja { font-size: 22px; }
+
+  .df-act-head {
+    flex-direction: column; align-items: flex-start; gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .df-act-head p { text-align: left !important; }
+
+  .df-act-row {
+    grid-template-columns: 40px 1fr;
+    row-gap: 10px;
+    padding: 20px 18px;
+  }
+
+  .df-act-node { width: 28px; height: 28px; font-size: 10px; }
+
+  .df-act-row > div:nth-child(3),
+
+  .df-act-row > div:nth-child(4),
+
+  .df-act-row > div:nth-child(5) {
+    grid-column: 2 / 3;
+  }
+
+  .df-act-title { font-size: 16px; }
+
+  .df-act-meta { flex-direction: row; gap: 14px; }
+
+  .df-act-cta {
+    justify-self: start; text-align: left;
+  }
+
+  .df-act-photos {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .df-pers-inner {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .df-pers-network {
+    aspect-ratio: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .df-pers-network > svg { display: none; }
+
+  .df-bite-tag {
+    position: relative !important;
+    left: auto !important; top: auto !important;
+    font-size: 13px;
+    align-self: flex-start;
+  }
+
+  .df-links-head {
+    flex-direction: column; align-items: flex-start; gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .df-links-head p { text-align: left !important; }
+
+  .df-links-grid { grid-template-columns: 1fr; gap: 12px; }
+
+  .df-link-card {
+    padding: 18px;
+    min-height: 0;
+    gap: 10px;
+    grid-template-rows: auto auto auto auto;
+  }
+
+  .df-link-card-arrow {
+    right: 18px;
+    top: 18px;
+    width: 34px;
+    height: 34px;
+    font-size: 14px;
+  }
+
+  .df-link-card-title {
+    font-size: 19px;
+    margin-top: 22px;
+    padding-right: 44px;
+  }
+
+  .df-link-card-body { line-height: 1.6; }
+
+  .df-link-card-cta { margin-top: 4px; }
+
+  .df-footer { padding: 56px 20px 28px; }
+
+  .df-footer-top {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding-bottom: 32px;
+  }
+
+  .df-footer-big { font-size: 38px; }
+
+  .df-footer-cta { padding: 12px 18px; font-size: 11px; }
+
+  .df-footer-sns a { font-size: 14px; }
+
+  .df-footer-bottom {
+    flex-direction: column; gap: 10px; align-items: flex-start;
+    text-align: left;
+  }
+
+  .df-burger { display: flex; }
+
+  .df-researcher-banner {
+    margin: -24px 20px 56px;
+  }
+
+  .df-researcher-banner-inner {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 20px 20px 20px 28px;
+  }
+
+  .df-researcher-banner-body {
+    grid-column: auto; grid-row: auto;
+    margin-top: 0;
+  }
+
+  .df-researcher-banner-cta {
+    margin-top: 8px;
+  }
+}

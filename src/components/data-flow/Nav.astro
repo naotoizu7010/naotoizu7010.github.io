@@ -1,0 +1,58 @@
+---
+import { content } from '../../data/content.ts';
+import ThemeToggle from './ThemeToggle.astro';
+
+const C = content;
+---
+
+<nav class="df-nav" aria-label="Primary">
+  <div class="df-nav-brand">
+    <div class="df-nav-name">
+      Naoto Oizumi
+      <small>SPORTS × SOCIETY × DATA</small>
+    </div>
+  </div>
+  <div class="df-nav-links">
+    {C.nav.map((n) => (
+      <a class="df-nav-link" href={n.href}>{n.label}</a>
+    ))}
+  </div>
+  <div class="df-nav-right">
+    <a class="df-lang-link" href="/en" aria-label="English page">
+      <span class="df-lang-ico" aria-hidden="true"></span>
+      <span>EN</span>
+    </a>
+    <ThemeToggle />
+    <button
+      type="button"
+      class="df-burger"
+      aria-label="メニューを開く"
+      aria-expanded="false"
+    >
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </button>
+  </div>
+</nav>
+
+<div class="df-menu" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="df-menu-head">
+    <span class="df-menu-eyebrow">MENU</span>
+    <button type="button" class="df-menu-close" aria-label="メニューを閉じる">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </button>
+  </div>
+  <ul class="df-menu-list">
+    {C.nav.map((n, i) => (
+      <li>
+        <a class="df-menu-link" href={n.href}>
+          <span class="df-menu-num">{String(i + 1).padStart(2, '0')}</span>
+          <span>{n.label}</span>
+          <span class="df-menu-arrow" aria-hidden="true">→</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>

@@ -1,0 +1,68 @@
+---
+import { content } from '../../data/content.ts';
+
+const C = content;
+const aboutExtraBody = (C.about as { body2?: string }).body2;
+---
+
+<section class="df-section" id="about">
+  <div class="df-grid">
+    <div class="df-about-inner">
+      <div class="df-about-head">
+        <span class="df-eyebrow">
+          <span class="dot" aria-hidden="true"></span>01 / ABOUT
+        </span>
+        <h2 class="df-h2-ja">
+          {C.about.heading_ja[0]}<br />{C.about.heading_ja[1]}
+        </h2>
+        <div class="df-about-summary-card">
+          <div class="k">いま、やっていること</div>
+          <div class="body-text">スタジアムでの人流の解析と、AIを用いた社会実装に取り組んでいます。</div>
+        </div>
+        <div class="df-about-summary-card df-about-summary-card-2">
+          <div class="k">大事にしていること</div>
+          <div class="body-text">何事にも興味を持つこと。好奇心を満たし続けること。</div>
+        </div>
+      </div>
+      <div>
+        <p class="df-about-lead">{C.about.lead}</p>
+        <p class="df-about-copy">{C.about.body}</p>
+        {aboutExtraBody && <p class="df-about-copy df-about-copy--spaced">{aboutExtraBody}</p>}
+        <div class="df-about-facts">
+          {C.about.factoids.map((f) => (
+            <div class="df-about-fact">
+              <div class="k">{f.k}</div>
+              <div class="v">
+                {f.vParts ? (
+                  f.vParts.map((part) => (
+                    part.href ? (
+                      <a
+                        href={part.href}
+                        target="_blank"
+                        rel="noopener"
+                        class:list={[part.tone === 'muted' && 'df-about-fact-muted']}
+                      >
+                        {part.text}
+                      </a>
+                    ) : (
+                      <span
+                        class:list={[
+                          part.tone === 'muted' && 'df-about-fact-muted',
+                          part.tone === 'gap' && 'df-about-fact-gap',
+                        ]}
+                      >
+                        {part.text}
+                      </span>
+                    )
+                  ))
+                ) : (
+                  f.v
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

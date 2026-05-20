@@ -1,0 +1,37 @@
+---
+import { content } from '../../data/content.ts';
+
+const C = content;
+---
+
+<section class="df-section" id="links">
+  <div class="df-grid">
+    <div class="df-links-head">
+      <div>
+        <span class="df-eyebrow">
+          <span class="dot" aria-hidden="true"></span>04 / LINKS
+        </span>
+        <h2 class="df-h2-ja df-section-title">{C.links.heading}</h2>
+      </div>
+      <p class="df-section-lead df-section-lead--right df-links-lead">
+        {C.links.lead}
+      </p>
+    </div>
+    <div class="df-links-grid">
+      {C.links.items.map((l, i) => (
+        <a
+          class="df-link-card"
+          href={l.href}
+          target={l.href.startsWith('http') ? '_blank' : undefined}
+          rel={l.href.startsWith('http') ? 'noopener' : undefined}
+        >
+          <div class="df-link-card-no"> {String(i + 1).padStart(2, '0')}</div>
+          <h3 class="df-link-card-title">{l.title}</h3>
+          <p class="df-link-card-body">{l.body}</p>
+          <span class="df-link-card-cta">{l.cta}</span>
+          <span class="df-link-card-arrow" aria-hidden="true">→</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

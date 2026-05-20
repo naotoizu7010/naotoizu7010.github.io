@@ -177,6 +177,9 @@ const isSlideshow = list.length > 1;
     const slides = Array.from(root.querySelectorAll<HTMLImageElement>('.pf-img-slide'));
     if (slides.length < 2) return;
 
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reducedMotion) return;
+
     const interval = Number(root.dataset.interval || 4500);
     const fade = Number(root.dataset.fade || 1100);
     slides.forEach((slide) => {
