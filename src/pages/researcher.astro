@@ -1,0 +1,22 @@
+---
+/* ----------------------------------------------------------------
+   src/pages/researcher.astro
+   研究者向けページのComing Soon表示。
+   共通テンプレートは src/components/ComingSoon.astro を使用。
+   ---------------------------------------------------------------- */
+import Base from '../layouts/Base.astro';
+import ComingSoon from '../components/ComingSoon.astro';
+
+const redirectSeconds = 5;
+---
+
+<Base
+  title="Researcher — 準備中 / Naoto Oizumi"
+  description="研究者向けのプロフィールページは準備中です。"
+>
+  <meta http-equiv="refresh" content={`${redirectSeconds};url=/`} slot="head" />
+  <ComingSoon
+    body="研究業績・論文・査読歴などをまとめたページを準備しています。"
+    redirectSeconds={redirectSeconds}
+  />
+</Base>

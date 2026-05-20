@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+import ComingSoon from '../components/ComingSoon.astro';
+
+const redirectSeconds = 5;
+---
+
+<Base
+  title="Contact — 準備中 / Naoto Oizumi"
+  description="お問い合わせページは準備中です。"
+>
+  <meta http-equiv="refresh" content={`${redirectSeconds};url=/`} slot="head" />
+  <ComingSoon
+    titleJa="お問い合わせページは準備中です。"
+    titleEn="Contact coming soon."
+    body="お問い合わせフォームを準備しています。\nしばらくはSNSのDMからご連絡ください。"
+    redirectSeconds={redirectSeconds}
+  />
+</Base>

@@ -1,0 +1,186 @@
+---
+/* ----------------------------------------------------------------
+   src/pages/oldHP.astro
+   旧 README ベースのプロフィールページ。
+   /cv と同じ文字組みの型を使い、docs/README.md の内容を移植。
+   ---------------------------------------------------------------- */
+import Base from '../layouts/Base.astro';
+import '../styles/oldhp.css';
+---
+
+<Base title="oldHP — 大泉直人 / Naoto Oizumi" description="docs/README.md をベースにした大泉直人の旧プロフィールページ。">
+  <main class="cv-root oldhp-root">
+    <header class="cv-header">
+      <h1 class="cv-name">Portfolio of 7010</h1>
+      <p class="cv-sub">
+        <a href="/oldHPen">English</a>
+      </p>
+    </header>
+
+    <section class="oldhp-photos" aria-label="プロフィール写真">
+      <img src="/img/main_profile.jpg" alt="Naoto Oizumi profile photo" />
+      <img src="/img/naoto_oizumi_medium_body_white_1-1.png" alt="Naoto Oizumi standing photo" />
+    </section>
+
+    <section class="cv-block">
+      <h2 class="cv-h2">基本情報</h2>
+      <dl class="cv-list">
+        <div class="cv-row">
+          <dt>氏名</dt>
+          <dd>大泉直人 (Naoto Oizumi)</dd>
+        </div>
+        <div class="cv-row">
+          <dt>居住地</dt>
+          <dd>茨城県 つくば市</dd>
+        </div>
+        <div class="cv-row">
+          <dt>出身</dt>
+          <dd>茨城県 日立市</dd>
+        </div>
+        <div class="cv-row">
+          <dt>所属</dt>
+          <dd>
+            筑波大学 理工学群社会工学類
+            <br class="cv-mobile-break" />
+            学部4年
+          </dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="cv-block">
+      <h2 class="cv-h2">学歴</h2>
+      <ul class="cv-events">
+        <li>
+          <time>2020.04 - 2023.03</time>
+          <div>
+            <h3>茨城県立 <a href="https://www.mito1-h.ibk.ed.jp/" target="_blank" rel="noopener">水戸第一高等学校</a></h3>
+            <p>令和5年卒</p>
+          </div>
+        </li>
+        <li>
+          <time>2023.04 -</time>
+          <div>
+            <h3>
+              筑波大学 理工学群<a href="https://www.sk.tsukuba.ac.jp/College/index.php" target="_blank" rel="noopener">社会工学類</a>
+            </h3>
+            <p class="cv-role">経営工学主専攻（<a href="http://onishi-lab.jp/" target="_blank" rel="noopener">大西研究室</a>）</p>
+            <p>大規模スタジアムにおける人流解析</p>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section class="cv-block">
+      <h2 class="cv-h2">職歴</h2>
+      <ul class="cv-events">
+        <li>
+          <time>2026.02 -</time>
+          <div>
+            <h3>
+              <a href="https://www.aist.go.jp/aist_j/information/about_aist.html" target="_blank" rel="noopener">産業技術総合研究所</a>
+              人工知能研究センター
+              <a href="https://www.airc.aist.go.jp/cosine/" target="_blank" rel="noopener">社会知能研究チーム</a>
+            </h3>
+            <p class="cv-role">テクニカルスタッフ</p>
+            <p>
+              <a href="https://www.aist.go.jp/aist_j/news/pr20170729.html" target="_blank" rel="noopener">鹿島アントラーズとの包括協定</a>に関連するプロジェクトを中心とした、人工知能の社会実装に資する研究補助業務
+            </p>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section class="cv-block">
+      <h2 class="cv-h2">プロフィールスライド</h2>
+      <p class="oldhp-text"><a href="/profileslide">こちら</a></p>
+    </section>
+
+    <section class="cv-block">
+      <h2 class="cv-h2">所属団体等</h2>
+      <ul class="oldhp-list">
+        <li>
+          大西研究室（産業技術総合研究所 人工知能研究センター 社会知能研究チーム）（<a href="http://onishi-lab.jp/" target="_blank" rel="noopener">HP</a>）
+          <ul>
+            <li>Q. なんで筑波大学じゃなくて産総研で研究しているの？</li>
+            <li>A. 連携大学院制度を使っています（<a href="https://staff.aist.go.jp/onishi-masaki/joinus/tsukuba/" target="_blank" rel="noopener">もっと詳しく</a>）</li>
+          </ul>
+        </li>
+        <li>
+          OneThing（筑波大学エンジニアコミュニティ） 前代表（<a href="https://x.com/OneThingTsukuba" target="_blank" rel="noopener">Twitter</a>）（<a href="https://onethingtsukuba.github.io/" target="_blank" rel="noopener">HP</a>）（<a href="https://luma.com/user/OneThingTsukuba" target="_blank" rel="noopener">イベント一覧</a>）
+          <ul>
+            <li><a href="https://note.com/naotoizu_7010/n/n9d00794c4227" target="_blank" rel="noopener">LT会開催報告</a></li>
+          </ul>
+        </li>
+        <li>STARTiX（筑波大学起業サークル）（<a href="https://startix-tsukuba.net/" target="_blank" rel="noopener">HP</a>）</li>
+        <li>硬式テニス愛好会（テニスサークル）</li>
+        <li>筑波大学 宿舎祭実行委員（<a href="https://yadokarisai.com/" target="_blank" rel="noopener">HP</a>）</li>
+      </ul>
+    </section>
+
+    <section class="cv-block">
+      <h2 class="cv-h2">趣味</h2>
+      <ul class="oldhp-list">
+        <li>
+          スポーツ観戦
+          <ul>
+            <li>
+              国内サッカー（Ｊリーグ）
+              <ul>
+                <li>水戸ホーリーホック</li>
+                <li>鹿島アントラーズ</li>
+              </ul>
+            </li>
+            <li>海外サッカー</li>
+            <li>ボクシング</li>
+            <li>
+              他のスポーツも大好きです
+              <ul>
+                <li>例えば</li>
+                <li>アメフト</li>
+                <li>バスケ</li>
+                <li>スポーツ観戦誘ってください！</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>スポーツ</li>
+        <li>ラーメン巡り</li>
+        <li>バイク</li>
+        <li>サイクリング</li>
+        <li>ガジェット</li>
+        <li>金融投資・資産形成</li>
+        <li>Wikipediaサーフィン</li>
+        <li>思索</li>
+      </ul>
+    </section>
+
+    <section class="cv-block">
+      <h2 class="cv-h2">最近のnote</h2>
+      <div class="oldhp-embeds">
+        <iframe class="note-embed" src="https://note.com/embed/notes/nd02e75c8c307" title="note embed 1" height="400"></iframe>
+        <iframe class="note-embed" src="https://note.com/embed/notes/n0a47646648df" title="note embed 2" height="400"></iframe>
+      </div>
+      <script async src="https://note.com/scripts/embed.js" charset="utf-8"></script>
+    </section>
+
+    <section class="cv-block">
+      <h2 class="cv-h2">アカウント一覧</h2>
+      <p class="oldhp-badges">
+        <a href="https://github.com/naotoizu7010" target="_blank" rel="noopener"><img alt="Github" src="https://img.shields.io/badge/Github-%2312100E.svg?&style=flat-square&logo=Github&logoColor=white" /></a>
+        <a href="https://x.com/naotoizu_7010" target="_blank" rel="noopener"><img alt="Twitter（X）" src="https://img.shields.io/badge/Twitter-%231DA1F2.svg?&style=flat-square&logo=twitter&logoColor=white" /></a>
+        <a href="https://www.instagram.com/naotoizu_7010/?hl=ja" target="_blank" rel="noopener"><img alt="Instagram" src="https://img.shields.io/badge/Instagram-%23E4405F?style=flat-square&logo=Instagram&logoColor=fff&link=https%3A%2F%2Fwww.instagram.com%2Fnaotoizu_7010%2F%3Fhl%3Dja" /></a>
+        <a href="https://www.facebook.com/naotoizu7010/" target="_blank" rel="noopener"><img alt="Facebook" src="https://img.shields.io/badge/Facebook-%230866FF?style=flat-square&logo=Facebook&logoColor=fff" /></a>
+        <a href="https://note.com/naotoizu_7010/" target="_blank" rel="noopener"><img alt="note" src="https://img.shields.io/badge%2FNote-ffffff?style=flat-square&logoColor=%23000000" /></a>
+      </p>
+    </section>
+
+    <footer class="cv-foot">
+      <h2 class="cv-h2">連絡方法</h2>
+      <ul class="oldhp-list oldhp-contact">
+        <li>Twitter（X）・インスタのDM</li>
+        <li>研究関連の方：Eメール naoto-oizumi[at]aist.go.jp</li>
+      </ul>
+    </footer>
+  </main>
+</Base>
