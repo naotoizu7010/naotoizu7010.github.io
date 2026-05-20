@@ -1,61 +1,82 @@
-[リンクはこちら](https://naotoizu7010.github.io/)
-# thank you
-https://note.com/kaze3desu/n/nd10ce74e0508
+# naotoizu7010.github.io
 
-https://qiita.com/TAKANEKOMACHI/items/5d30e499c9dddbea4421
+大泉直人の個人ポートフォリオサイト
 
-https://zenn.dev/entaku/articles/f5b87912475a27
+Astro で構築し、GitHub Pages で公開
 
-https://note.com/wecken/n/n0f9cdb00c1f4
+- Site: https://naotoizu7010.github.io/
+- Framework: Astro
+- Hosting: GitHub Pages
 
-### ローカルで実行したいとき
-`bundle exec jekyll serve`
+## 開発環境
 
+Node.js は 22 系を想定
 
-# { name } resume
-
-## Sample
-
-https://github.com/kawamataryo/resume
-
-## Features
-
-### 💅 Lint text
-
-Automatic proofreading with [textlint](https://github.com/textlint/textlint).
-
-```
-$ yarn lint --fix
-```
-It is also automatically executed when pre-commit by [husky](https://github.com/typicode/husky).  
-proofreading rules are set with `.textlintrc`.
-
-
-
-### 📝 Convert MD to PDF
-
-You can generate PDF with [md-to-pdf](https://www.npmjs.com/package/md-to-pdf).
-
-
-```
-$ yarn build:pdf
+```bash
+npm install
 ```
 
-The output PDF can be styled as you like with CSS. Edit the `pdf-configs/style.css`.  
+ローカル開発サーバーの起動
 
-### 🛠 Create release
-
-When you push with a `v**` tag, GitHub Actions will run the build, generate the PDF, create a Release, and register the PDF to Assets.
-
-```
-$ git commit -m "add job"
-$ git tag v1.0
-$ git push origin --tags
+```bash
+npm run dev
 ```
 
-### 📆 Remind update
+本番用ビルド
 
-Automatically generate issues every three months with GitHub Actions Schedules triggers to prompt you to update your resume.
+```bash
+npm run build
+```
 
-To change the duration or stop the job, edit `.github/workflows/create-issue.yml`.  
-To change the issue contents, edit `.github/ISSUE_TEMPLATE.md`.
+ビルド結果のローカル確認
+
+```bash
+npm run preview
+```
+
+## ページ
+
+現在の主なページ
+
+- `/`: 暫定トップページ
+- `/en`: 英語プロフィールページ
+- `/cv`: CVページ
+- `/personality`: Personalityページ
+- `/researcher`: 研究者向けページ
+- `/contact`: Contactページ
+- `/oldHP`: 旧日本語ページ
+- `/oldHPen`: 旧英語ページ
+
+## ディレクトリ構成
+
+```text
+src/pages/       ページ
+src/components/  UIコンポーネント
+src/data/        表示コンテンツ
+src/styles/      CSS
+public/          静的アセット
+docs/roadmap.md  今後の改善メモ
+```
+
+## デプロイ
+
+`main` ブランチへの push で、GitHub Actions によるビルドとデプロイを実行
+
+- Workflow: `.github/workflows/deploy.yml`
+- Build command: `npm run build`
+- Output directory: `dist/`
+- Deploy target: GitHub Pages
+
+`astro.config.mjs` では以下の `site` を設定
+
+```js
+site: 'https://naotoizu7010.github.io'
+```
+
+このリポジトリは `username.github.io` 形式のため、Astro の `base` は未設定
+
+## 今後の改善
+
+今後の改善タスクや方針は `docs/roadmap.md` に集約
+
+大きな変更は、暫定公開版を壊さないように小さめのPRへ分割
