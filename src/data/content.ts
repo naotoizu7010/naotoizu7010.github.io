@@ -198,7 +198,7 @@ export const content = {
 
   /* Footer */
   footer: {
-    big_top: 'スポーツを、',
+    big_top: '人の流れを、',
     big_red: 'データで、',
     big_blue: '見てみよう。',
     cta_label: 'お問い合わせ（準備中）',
