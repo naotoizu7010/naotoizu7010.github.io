@@ -205,10 +205,11 @@ export const content = {
     cta_href: '/contact',
     sns: [
       { label: 'Twitter / X', href: 'https://x.com/naotoizu_7010' },
-      { label: 'GitHub', href: 'https://github.com/naotoizu7010' },
       { label: 'Instagram', href: 'https://www.instagram.com/naotoizu_7010/' },
       { label: 'Facebook', href: 'https://www.facebook.com/naotoizu7010/' },
+      { label: 'LinkedIn', href: 'https://www.linkedin.com/in/%E7%9B%B4%E4%BA%BA-%E5%A4%A7%E6%B3%89-5804892a0/' },
       { label: 'note', href: 'https://note.com/naotoizu_7010/' },
+      { label: 'GitHub', href: 'https://github.com/naotoizu7010' },
     ] satisfies SnsItem[],
     legal: '© 2026 Naoto Oizumi · naotoizu_7010',
   },
