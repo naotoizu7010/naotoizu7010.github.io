@@ -1,0 +1,169 @@
+---
+import Base from '../layouts/Base.astro';
+
+const calendarSrc =
+  'https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Asia%2FTokyo&showPrint=0&showTabs=0&showTz=0&showCalendars=0&src=YjAyOTRhZTk3YThkOGYzYjc3ZTVhMjE2ZTE1OGYxOWU1MjU0ZWE1OWYwYzIzMGIwM2RhZmRiZWZmODVkZWY0NUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23000000';
+---
+
+<Base
+  title="W杯2026観戦予定"
+  description="ワールドカップ2026で観戦したい試合の予定です。"
+>
+  <meta slot="head" name="robots" content="noindex, nofollow" />
+
+  <main class="worldcup-page" aria-labelledby="worldcup-title">
+    <section class="worldcup-shell">
+      <a class="home-link" href="/">Home</a>
+
+      <div class="worldcup-header">
+        <p class="worldcup-kicker">FIFA World Cup 2026</p>
+        <h1 id="worldcup-title">FIFAワールドカップ2026 観戦予定</h1>
+        <p>グループリーグ注目試合・ノックアウトステージ全試合</p>
+      </div>
+
+      <div class="calendar-frame">
+        <iframe
+          src={calendarSrc}
+          title="ワールドカップ2026観戦予定カレンダー"
+          frameborder="0"
+          scrolling="no"
+          loading="lazy"
+        ></iframe>
+      </div>
+
+      <p class="worldcup-footer">© 2026 Naoto Oizumi · naotoizu_7010</p>
+    </section>
+  </main>
+</Base>
+
+<style>
+  :global(body) {
+    margin: 0;
+    color: #f8fafc;
+    background:
+      radial-gradient(circle at 18% 12%, rgba(128, 189, 128, 0.22), transparent 22rem),
+      radial-gradient(circle at 82% 18%, rgba(217, 55, 51, 0.22), transparent 22rem),
+      linear-gradient(
+        135deg,
+        #3266ad 0%,
+        #3266ad 30%,
+        #80bd80 34%,
+        #80bd80 63%,
+        #d93733 67%,
+        #d93733 100%
+      );
+    font-family:
+      Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+      sans-serif;
+  }
+
+  :global(html[data-pre-theme='dark'] body),
+  :global(html[data-pre-theme='light'] body) {
+    background:
+      radial-gradient(circle at 18% 12%, rgba(128, 189, 128, 0.22), transparent 22rem),
+      radial-gradient(circle at 82% 18%, rgba(217, 55, 51, 0.22), transparent 22rem),
+      linear-gradient(
+        135deg,
+        #3266ad 0%,
+        #3266ad 30%,
+        #80bd80 34%,
+        #80bd80 63%,
+        #d93733 67%,
+        #d93733 100%
+      );
+  }
+
+  .worldcup-page {
+    min-height: 100vh;
+    padding: 48px 18px;
+    box-sizing: border-box;
+  }
+
+  .worldcup-shell {
+    width: min(980px, 100%);
+    margin: 0 auto;
+  }
+
+  .worldcup-header {
+    margin-bottom: 22px;
+  }
+
+  .home-link {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 30px;
+    color: #d9e7ff;
+    font-size: 0.92rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .home-link::before {
+    content: '<';
+    margin-right: 0.45rem;
+  }
+
+  .home-link:hover,
+  .home-link:focus-visible {
+    color: #ffffff;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .worldcup-kicker {
+    margin: 0 0 10px;
+    color: #b8e3b8;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    line-height: 1.08;
+    letter-spacing: 0;
+    text-wrap: balance;
+    word-break: keep-all;
+  }
+
+  .worldcup-header p:last-child {
+    margin: 14px 0 0;
+    color: #cbd5e1;
+    font-size: 1rem;
+  }
+
+  .calendar-frame {
+    overflow: hidden;
+    border: 1px solid rgba(23, 32, 42, 0.12);
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: 0 24px 70px rgba(15, 23, 42, 0.16);
+  }
+
+  .calendar-frame iframe {
+    display: block;
+    width: 100%;
+    height: min(72vh, 720px);
+    min-height: 560px;
+    border: 0;
+  }
+
+  .worldcup-footer {
+    margin: 28px 0 0;
+    color: rgba(226, 232, 240, 0.76);
+    font-size: 0.88rem;
+    text-align: center;
+  }
+
+  @media (max-width: 640px) {
+    .worldcup-page {
+      padding: 30px 12px;
+    }
+
+    .calendar-frame iframe {
+      min-height: 620px;
+    }
+  }
+</style>
