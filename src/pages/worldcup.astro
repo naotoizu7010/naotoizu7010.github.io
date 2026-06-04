@@ -1,8 +1,303 @@
 ---
 import Base from '../layouts/Base.astro';
 
-const calendarSrc =
-  'https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Asia%2FTokyo&showPrint=0&showTabs=0&showTz=0&showCalendars=0&src=YjAyOTRhZTk3YThkOGYzYjc3ZTVhMjE2ZTE1OGYxOWU1MjU0ZWE1OWYwYzIzMGIwM2RhZmRiZWZmODVkZWY0NUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23000000';
+const calendarUrl =
+  'https://calendar.google.com/calendar/ical/b0294ae97a8d8f3b77e5a216e158f19e5254ea59f0c230b03dafdbeff85def45%40group.calendar.google.com/public/basic.ics';
+const timeZone = 'Asia/Tokyo';
+const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const visibleStartKey = '2026-06-12';
+const visibleEndKey = '2026-07-20';
+
+type IcsEvent = {
+  id: string;
+  title: string;
+  description: string;
+  start: Date;
+  end: Date;
+  dateKey: string;
+  day: string;
+  dateLabel: string;
+  weekdayLabel: string;
+  timeRange: string;
+};
+
+type CalendarDay = {
+  key: string;
+  day: number;
+  weekday: number;
+  events: IcsEvent[];
+};
+
+type CalendarWeek = {
+  key: string;
+  label: string;
+  eventCount: number;
+  days: Array<CalendarDay | null>;
+};
+
+const formatParts = (date: Date) =>
+  new Intl.DateTimeFormat('ja-JP', {
+    timeZone,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).formatToParts(date);
+
+const getDatePart = (date: Date, type: Intl.DateTimeFormatPartTypes) =>
+  formatParts(date).find((part) => part.type === type)?.value ?? '';
+
+const formatDateKey = (date: Date) =>
+  `${getDatePart(date, 'year')}-${getDatePart(date, 'month')}-${getDatePart(date, 'day')}`;
+
+const formatTime = (date: Date) =>
+  new Intl.DateTimeFormat('ja-JP', {
+    timeZone,
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  }).format(date);
+
+const formatDateLabel = (date: Date) =>
+  `${Number(getDatePart(date, 'month'))}/${Number(getDatePart(date, 'day'))}`;
+
+const formatWeekdayLabel = (date: Date) =>
+  new Intl.DateTimeFormat('en-US', {
+    timeZone,
+    weekday: 'short',
+  }).format(date);
+
+const formatMonthLabel = (month: number) => `${month}月`;
+
+const parseIcsDate = (value: string) => {
+  const match = value.match(
+    /^(\d{4})(\d{2})(\d{2})(?:T(\d{2})(\d{2})(\d{2})(Z)?)?$/,
+  );
+
+  if (!match) {
+    return null;
+  }
+
+  const [, year, month, day, hour = '00', minute = '00', second = '00'] = match;
+  return new Date(
+    Date.UTC(
+      Number(year),
+      Number(month) - 1,
+      Number(day),
+      Number(hour),
+      Number(minute),
+      Number(second),
+    ),
+  );
+};
+
+const decodeIcsText = (value = '') =>
+  value
+    .replace(/\\n/g, '\n')
+    .replace(/\\,/g, ',')
+    .replace(/\\;/g, ';')
+    .replace(/\\\\/g, '\\');
+
+const unfoldIcsLines = (text: string) => {
+  const lines: string[] = [];
+
+  for (const line of text.split(/\r?\n/)) {
+    if (/^[ \t]/.test(line) && lines.length > 0) {
+      lines[lines.length - 1] += line.slice(1);
+    } else {
+      lines.push(line);
+    }
+  }
+
+  return lines;
+};
+
+const parseIcsEvents = (text: string): IcsEvent[] => {
+  const events: IcsEvent[] = [];
+  let current: Record<string, string> | null = null;
+
+  for (const line of unfoldIcsLines(text)) {
+    if (line === 'BEGIN:VEVENT') {
+      current = {};
+      continue;
+    }
+
+    if (line === 'END:VEVENT') {
+      if (current?.DTSTART && current?.DTEND && current?.SUMMARY) {
+        const start = parseIcsDate(current.DTSTART);
+        const end = parseIcsDate(current.DTEND);
+
+        if (start && end) {
+          const dateKey = formatDateKey(start);
+
+          events.push({
+            id: current.UID ?? `${dateKey}-${current.SUMMARY}`,
+            title: decodeIcsText(current.SUMMARY),
+            description: decodeIcsText(current.DESCRIPTION),
+            start,
+            end,
+            dateKey,
+            day: getDatePart(start, 'day'),
+            dateLabel: formatDateLabel(start),
+            weekdayLabel: formatWeekdayLabel(start),
+            timeRange: `${formatTime(start)}-${formatTime(end)}`,
+          });
+        }
+      }
+
+      current = null;
+      continue;
+    }
+
+    if (!current) {
+      continue;
+    }
+
+    const separator = line.indexOf(':');
+    if (separator === -1) {
+      continue;
+    }
+
+    const name = line.slice(0, separator).split(';')[0];
+    const value = line.slice(separator + 1);
+    current[name] = value;
+  }
+
+  return events.sort((a, b) => a.start.getTime() - b.start.getTime());
+};
+
+const getJstWeekday = (year: number, month: number, day: number) => {
+  const jstNoon = new Date(Date.UTC(year, month - 1, day, 12));
+  return jstNoon.getUTCDay();
+};
+
+const getWeekLabel = (week: Array<CalendarDay | null>) => {
+  const activeDays = week.filter((day): day is CalendarDay => Boolean(day));
+  const firstDay = activeDays[0];
+  const lastDay = activeDays[activeDays.length - 1];
+
+  if (!firstDay || !lastDay) {
+    return '';
+  }
+
+  const [, firstMonth, firstDate] = firstDay.key.split('-').map(Number);
+  const [, lastMonth, lastDate] = lastDay.key.split('-').map(Number);
+
+  return `${firstMonth}/${firstDate}-${lastMonth}/${lastDate}`;
+};
+
+const chunkWeeks = (days: Array<CalendarDay | null>): CalendarWeek[] => {
+  const paddedDays = [...days];
+
+  while (paddedDays.length % 7 !== 0) {
+    paddedDays.push(null);
+  }
+
+  const weeks: CalendarWeek[] = [];
+
+  for (let index = 0; index < paddedDays.length; index += 7) {
+    const week = paddedDays.slice(index, index + 7);
+    const eventCount = week.reduce(
+      (total, day) => total + (day?.events.length ?? 0),
+      0,
+    );
+
+    weeks.push({
+      key: `week-${index / 7 + 1}`,
+      label: getWeekLabel(week),
+      eventCount,
+      days: week,
+    });
+  }
+
+  return weeks;
+};
+
+const buildCalendarMonths = (events: IcsEvent[]) => {
+  const eventsByDate = new Map<string, IcsEvent[]>();
+
+  for (const event of events) {
+    const dayEvents = eventsByDate.get(event.dateKey) ?? [];
+    dayEvents.push(event);
+    eventsByDate.set(event.dateKey, dayEvents);
+  }
+
+  const monthKeys = Array.from(
+    new Set(events.map((event) => event.dateKey.slice(0, 7))),
+  ).sort();
+
+  return monthKeys.map((key) => {
+    const [year, month] = key.split('-').map(Number);
+    const daysInMonth = new Date(Date.UTC(year, month, 0)).getUTCDate();
+    const firstWeekday = getJstWeekday(year, month, 1);
+    const days: Array<CalendarDay | null> = Array.from(
+      { length: firstWeekday },
+      () => null,
+    );
+
+    for (let day = 1; day <= daysInMonth; day += 1) {
+      const dateKey = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+
+      if (dateKey < visibleStartKey || dateKey > visibleEndKey) {
+        days.push(null);
+        continue;
+      }
+
+      days.push({
+        key: dateKey,
+        day,
+        weekday: getJstWeekday(year, month, day),
+        events: eventsByDate.get(dateKey) ?? [],
+      });
+    }
+
+    return {
+      key,
+      label: formatMonthLabel(month),
+      eventCount: events.filter((event) => event.dateKey.startsWith(key)).length,
+      days,
+      weeks: chunkWeeks(days),
+    };
+  });
+};
+
+let icsText = '';
+let fetchError = '';
+
+try {
+  const response = await fetch(calendarUrl);
+
+  if (!response.ok) {
+    throw new Error(`Calendar request failed: ${response.status}`);
+  }
+
+  icsText = await response.text();
+} catch (error) {
+  fetchError = error instanceof Error ? error.message : 'Unknown calendar error';
+}
+
+const events = parseIcsEvents(icsText);
+const months = buildCalendarMonths(events);
+const now = new Date();
+const nowTime = now.getTime();
+const nowDateKey = formatDateKey(now);
+const nextEvent =
+  events.find((event) => event.end.getTime() >= nowTime) ??
+  events[events.length - 1];
+const eventCount = events.length;
+const completedEventCount = events.filter(
+  (event) => event.end.getTime() < nowTime,
+).length;
+const remainingEventCount = eventCount - completedEventCount;
+const nextMatchData = JSON.stringify(
+  events.map((event) => ({
+    title: event.title,
+    start: event.start.toISOString(),
+    end: event.end.toISOString(),
+    dateLabel: event.dateLabel,
+    weekdayLabel: event.weekdayLabel,
+    timeRange: event.timeRange,
+  })),
+).replace(/</g, '\\u003c');
 ---
 
 <Base
@@ -13,27 +308,191 @@ const calendarSrc =
 
   <main class="worldcup-page" aria-labelledby="worldcup-title">
     <section class="worldcup-shell">
-      <a class="home-link" href="/">Home</a>
+      <a class="home-link" href="/">Top Page</a>
 
       <div class="worldcup-header">
         <p class="worldcup-kicker">FIFA World Cup 2026</p>
-        <h1 id="worldcup-title">FIFAワールドカップ2026 観戦予定</h1>
-        <p>グループリーグ注目試合・ノックアウトステージ全試合</p>
+        <h1 id="worldcup-title">
+          <span class="title-main">ワールドカップ2026</span>
+          <span class="title-sub">観戦スケジュール</span>
+        </h1>
+        <p class="worldcup-lead">
+          グループリーグ注目試合・ノックアウトステージ全試合
+        </p>
       </div>
 
-      <div class="calendar-frame">
-        <iframe
-          src={calendarSrc}
-          title="ワールドカップ2026観戦予定カレンダー"
-          frameborder="0"
-          scrolling="no"
-          loading="lazy"
-        ></iframe>
+      <section class="calendar-summary" aria-label="カレンダー概要">
+        <div class="schedule-card">
+          <span class="summary-label">Schedule</span>
+          <div class="schedule-row">
+            <div class="schedule-total">
+              <strong data-match-total>{eventCount}</strong>
+              <span>matches</span>
+            </div>
+            <div class="summary-breakdown">
+              <span>
+                <b data-match-completed>{completedEventCount}</b>
+                finished
+              </span>
+              <span>
+                <b data-match-remaining>{remainingEventCount}</b>
+                remaining
+              </span>
+            </div>
+          </div>
+        </div>
+        {
+          nextEvent && (
+            <div class="next-match-card" data-next-match>
+              <span class="summary-label">NEXT MATCH</span>
+              <strong data-next-match-date>{nextEvent.dateLabel}</strong>
+              <span class="next-match-weekday" data-next-match-weekday>
+                {nextEvent.weekdayLabel}
+              </span>
+              <span class="next-match-detail" data-next-match-detail>
+                {nextEvent.timeRange} / {nextEvent.title}
+              </span>
+            </div>
+          )
+        }
+      </section>
+
+      {
+        fetchError && (
+          <p class="calendar-alert">
+            カレンダーデータを取得できませんでした: {fetchError}
+          </p>
+        )
+      }
+
+      <div class="calendar-stack">
+        {
+          months.map((month) => (
+            <section class="month-panel" aria-labelledby={`month-${month.key}`}>
+              <header class="month-header">
+                <h2 id={`month-${month.key}`}>{month.label}</h2>
+                <span>{month.eventCount} matches</span>
+              </header>
+
+              <div class="weekday-row" aria-hidden="true">
+                {weekdays.map((weekday) => (
+                  <span>{weekday}</span>
+                ))}
+              </div>
+
+              <div class="calendar-grid">
+                {month.weeks.map((week, weekIndex) => (
+                  <div
+                    class="week-row"
+                    data-week-label={week.label}
+                    data-week-count={`${week.eventCount} matches`}
+                  >
+                    {week.days.map((day) =>
+                      day ? (
+                        <article
+                          class:list={[
+                            'day-cell',
+                            {
+                              'has-events': day.events.length > 0,
+                              'is-finished-day':
+                                day.events.length > 0 &&
+                                day.events.every(
+                                  (event) => event.end.getTime() < nowTime,
+                                ),
+                              'is-past-empty-day':
+                                day.events.length === 0 && day.key < nowDateKey,
+                              'is-current-day': day.key === nowDateKey,
+                            },
+                          ]}
+                        >
+                          <div class="day-number">
+                            <span>{day.day}</span>
+                            <span class="day-weekday">{weekdays[day.weekday]}</span>
+                          </div>
+                          <div class="event-list">
+                            {day.events.map((event) => (
+                              <div
+                                class:list={[
+                                  'match-card',
+                                  {
+                                    'is-finished':
+                                      event.end.getTime() < nowTime,
+                                  },
+                                ]}
+                              >
+                                <time datetime={event.start.toISOString()}>
+                                  {event.timeRange}
+                                </time>
+                                <strong>{event.title}</strong>
+                                {event.description && (
+                                  <p>{event.description.split('\n')[0]}</p>
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                        </article>
+                      ) : (
+                        <div
+                          class="day-cell is-empty"
+                          aria-hidden="true"
+                          data-week-index={weekIndex}
+                        ></div>
+                      ),
+                    )}
+                  </div>
+                ))}
+              </div>
+            </section>
+          ))
+        }
       </div>
 
       <p class="worldcup-footer">© 2026 Naoto Oizumi · naotoizu_7010</p>
     </section>
   </main>
+
+  <script id="next-match-data" type="application/json" set:html={nextMatchData} />
+  <script is:inline>
+    (() => {
+      const data = document.getElementById('next-match-data');
+      const date = document.querySelector('[data-next-match-date]');
+      const weekday = document.querySelector('[data-next-match-weekday]');
+      const detail = document.querySelector('[data-next-match-detail]');
+      const total = document.querySelector('[data-match-total]');
+      const completed = document.querySelector('[data-match-completed]');
+      const remaining = document.querySelector('[data-match-remaining]');
+
+      if (!data || !date || !weekday || !detail) {
+        return;
+      }
+
+      try {
+        const matches = JSON.parse(data.textContent || '[]');
+        const now = Date.now();
+        const completedCount = matches.filter(
+          (match) => new Date(match.end).getTime() < now,
+        ).length;
+        const nextMatch =
+          matches.find((match) => new Date(match.end).getTime() >= now) ||
+          matches[matches.length - 1];
+
+        if (!nextMatch) {
+          return;
+        }
+
+        date.textContent = nextMatch.dateLabel;
+        weekday.textContent = nextMatch.weekdayLabel;
+        detail.textContent = `${nextMatch.timeRange} / ${nextMatch.title}`;
+
+        if (total && completed && remaining) {
+          total.textContent = String(matches.length);
+          completed.textContent = String(completedCount);
+          remaining.textContent = String(matches.length - completedCount);
+        }
+      } catch (error) {
+      }
+    })();
+  </script>
 </Base>
 
 <style>
@@ -80,11 +539,14 @@ const calendarSrc =
   }
 
   .worldcup-shell {
-    width: min(980px, 100%);
+    width: min(1180px, calc(100% - 24px));
     margin: 0 auto;
   }
 
   .worldcup-header {
+    width: 100%;
+    padding-inline: 22px;
+    box-sizing: border-box;
     margin-bottom: 22px;
   }
 
@@ -112,7 +574,7 @@ const calendarSrc =
 
   .worldcup-kicker {
     margin: 0 0 10px;
-    color: #b8e3b8;
+    color: #d9ffd9;
     font-size: 0.78rem;
     font-weight: 800;
     letter-spacing: 0.08em;
@@ -121,33 +583,332 @@ const calendarSrc =
 
   h1 {
     margin: 0;
-    font-size: clamp(2.2rem, 5vw, 4rem);
     line-height: 1.08;
     letter-spacing: 0;
-    text-wrap: balance;
-    word-break: keep-all;
   }
 
-  .worldcup-header p:last-child {
-    margin: 14px 0 0;
-    color: #cbd5e1;
-    font-size: 1rem;
-  }
-
-  .calendar-frame {
-    overflow: hidden;
-    border: 1px solid rgba(23, 32, 42, 0.12);
-    border-radius: 8px;
-    background: #ffffff;
-    box-shadow: 0 24px 70px rgba(15, 23, 42, 0.16);
-  }
-
-  .calendar-frame iframe {
+  .title-main,
+  .title-sub {
     display: block;
-    width: 100%;
-    height: min(72vh, 720px);
-    min-height: 560px;
-    border: 0;
+    font-size: clamp(2.12rem, 5.2vw, 4rem);
+  }
+
+  .title-main {
+    white-space: nowrap;
+  }
+
+  .title-sub {
+    margin-top: 0.12em;
+  }
+
+  .worldcup-lead {
+    margin: 16px 0 0;
+    color: #eef4ff;
+    font-size: clamp(0.88rem, 1.8vw, 1rem);
+    line-height: 1.55;
+  }
+
+  .calendar-summary {
+    display: grid;
+    grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+    gap: 12px;
+    margin: 28px 0 18px;
+  }
+
+  .calendar-summary > div,
+  .month-panel,
+  .calendar-alert {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(6, 12, 24, 0.34);
+    box-shadow: 0 24px 70px rgba(15, 23, 42, 0.24);
+    backdrop-filter: blur(18px);
+  }
+
+  .calendar-summary > div {
+    min-width: 0;
+    padding: 18px;
+    border-radius: 8px;
+  }
+
+  .summary-label {
+    display: block;
+    margin-bottom: 8px;
+    color: rgba(248, 250, 252, 0.68);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .calendar-summary strong {
+    display: inline-block;
+    margin-right: 0.36rem;
+    font-size: clamp(1.7rem, 4vw, 2.7rem);
+    line-height: 1;
+  }
+
+  .schedule-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .schedule-total {
+    flex: 0 0 auto;
+  }
+
+  .schedule-total span {
+    color: rgba(248, 250, 252, 0.84);
+  }
+
+  .summary-breakdown {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .summary-breakdown span {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 5px;
+    padding: 6px 8px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(248, 250, 252, 0.78);
+    font-size: 0.78rem;
+    font-weight: 750;
+  }
+
+  .summary-breakdown b {
+    color: #ffffff;
+    font-size: 0.95rem;
+  }
+
+  .next-match-weekday {
+    color: rgba(248, 250, 252, 0.76);
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: 800;
+  }
+
+  .next-match-detail {
+    display: block;
+    margin-top: 8px;
+  }
+
+  .calendar-summary > div > span:last-child {
+    color: rgba(248, 250, 252, 0.84);
+  }
+
+  .calendar-alert {
+    margin: 0 0 18px;
+    padding: 14px 16px;
+    border-radius: 8px;
+    color: #fff7ed;
+  }
+
+  .calendar-stack {
+    display: grid;
+    gap: 18px;
+  }
+
+  .month-panel {
+    overflow: hidden;
+    border-radius: 8px;
+  }
+
+  .month-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 20px 22px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+  }
+
+  .month-header h2 {
+    margin: 0;
+    font-size: clamp(1.35rem, 3vw, 2rem);
+    letter-spacing: 0;
+  }
+
+  .month-header span {
+    color: rgba(248, 250, 252, 0.74);
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+
+  .weekday-row,
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+
+  .weekday-row {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+    color: rgba(248, 250, 252, 0.72);
+    font-size: 0.78rem;
+    font-weight: 800;
+    text-align: center;
+  }
+
+  .calendar-grid {
+    gap: 1px;
+    background: rgba(255, 255, 255, 0.16);
+  }
+
+  .week-row {
+    display: contents;
+  }
+
+  .day-cell {
+    min-height: 138px;
+    padding: 10px;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.11);
+  }
+
+  .day-cell.has-events {
+    background: rgba(255, 255, 255, 0.18);
+  }
+
+  .day-cell.is-finished-day,
+  .day-cell.is-past-empty-day {
+    border-color: transparent;
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: none;
+  }
+
+  .day-cell.is-finished-day::before,
+  .day-cell.is-finished-day::after,
+  .day-cell.is-past-empty-day::before,
+  .day-cell.is-past-empty-day::after {
+    content: none;
+  }
+
+  .day-cell.is-finished-day .day-number,
+  .day-cell.is-past-empty-day .day-number {
+    color: rgba(248, 250, 252, 0.48);
+  }
+
+  .day-cell.is-current-day {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(250, 204, 21, 0.68);
+    background:
+      linear-gradient(135deg, rgba(250, 204, 21, 0.28), rgba(217, 119, 6, 0.14)),
+      rgba(255, 255, 255, 0.18);
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 247, 183, 0.14),
+      0 0 24px rgba(250, 204, 21, 0.14);
+  }
+
+  .day-cell.is-current-day::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    border-radius: 8px 0 0 8px;
+    background: #facc15;
+  }
+
+  .day-cell.is-current-day .day-number {
+    position: relative;
+    z-index: 1;
+    color: #fff8d6;
+  }
+
+  .day-cell.is-current-day .event-list {
+    position: relative;
+    z-index: 1;
+  }
+
+  .day-cell:not(.has-events):not(.is-empty):not(.is-current-day) {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .day-cell:not(.has-events):not(.is-empty):not(.is-current-day) .day-number {
+    color: rgba(248, 250, 252, 0.48);
+  }
+
+  .day-cell.is-empty {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .day-number {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 8px;
+    color: rgba(248, 250, 252, 0.86);
+    font-size: 0.8rem;
+    font-variant-numeric: tabular-nums;
+    font-weight: 800;
+  }
+
+  .day-number span:first-child {
+    min-width: 2ch;
+    text-align: right;
+  }
+
+  .day-weekday {
+    display: none;
+  }
+
+  .event-list {
+    display: grid;
+    gap: 6px;
+  }
+
+  .match-card {
+    display: grid;
+    gap: 3px;
+    min-width: 0;
+    padding: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    border-radius: 8px;
+    background: rgba(8, 17, 31, 0.42);
+  }
+
+  .match-card time {
+    color: #cfe2ff;
+    font-size: 0.72rem;
+    font-weight: 800;
+  }
+
+  .match-card strong {
+    overflow-wrap: anywhere;
+    font-size: 0.9rem;
+    line-height: 1.25;
+  }
+
+  .match-card p {
+    margin: 0;
+    overflow: hidden;
+    color: rgba(248, 250, 252, 0.72);
+    font-size: 0.72rem;
+    line-height: 1.35;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .match-card.is-finished {
+    border-color: rgba(255, 255, 255, 0.12);
+    background: rgba(8, 17, 31, 0.18);
+  }
+
+  .match-card.is-finished time,
+  .match-card.is-finished p {
+    display: none;
+  }
+
+  .match-card.is-finished strong {
+    color: rgba(248, 250, 252, 0.58);
+    font-weight: 750;
   }
 
   .worldcup-footer {
@@ -157,13 +918,108 @@ const calendarSrc =
     text-align: center;
   }
 
-  @media (max-width: 640px) {
-    .worldcup-page {
-      padding: 30px 12px;
+  @media (max-width: 800px) {
+    .worldcup-header {
+      padding-inline: 12px;
     }
 
-    .calendar-frame iframe {
-      min-height: 620px;
+    .calendar-summary {
+      grid-template-columns: 1fr;
+    }
+
+    .month-panel {
+      overflow: hidden;
+    }
+
+    .weekday-row {
+      display: none;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      padding: 12px;
+      background: transparent;
+    }
+
+    .week-row {
+      display: contents;
+    }
+
+    .day-cell {
+      display: grid;
+      grid-template-columns: 4.5rem minmax(0, 1fr);
+      gap: 10px;
+      min-height: 0;
+      padding: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 8px;
+    }
+
+    .day-cell.is-empty {
+      display: none;
+    }
+
+    .day-number {
+      align-items: baseline;
+      flex-direction: row;
+      justify-content: flex-start;
+      margin: 0;
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    .day-weekday {
+      display: inline;
+      color: rgba(248, 250, 252, 0.62);
+      font-size: 0.72rem;
+    }
+
+    .event-list {
+      align-content: start;
+    }
+
+    .day-cell:not(.has-events) {
+      align-items: center;
+      padding-block: 7px;
+    }
+
+    .day-cell:not(.has-events) .event-list {
+      display: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .worldcup-page {
+      padding: 30px 0;
+    }
+
+    .worldcup-shell {
+      width: min(100%, calc(100% - 28px));
+    }
+
+    .title-main {
+      font-size: clamp(1.92rem, 9vw, 2.35rem);
+    }
+
+    .title-sub {
+      font-size: clamp(1.92rem, 9vw, 2.35rem);
+    }
+
+    .worldcup-lead {
+      font-size: 0.86rem;
+    }
+
+    .month-header {
+      align-items: baseline;
+      gap: 12px;
+      padding-inline: 16px;
+    }
+
+    .month-header span {
+      flex: 0 0 auto;
+      font-size: 0.82rem;
     }
   }
 </style>
