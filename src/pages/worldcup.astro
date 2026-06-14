@@ -391,6 +391,7 @@ const nextMatchData = JSON.stringify(
                     {week.days.map((day) =>
                       day ? (
                         <article
+                          data-date-key={day.key}
                           class:list={[
                             'day-cell',
                             {
@@ -413,6 +414,7 @@ const nextMatchData = JSON.stringify(
                           <div class="event-list">
                             {day.events.map((event) => (
                               <div
+                                data-match-end={event.end.toISOString()}
                                 class:list={[
                                   'match-card',
                                   {
@@ -462,10 +464,50 @@ const nextMatchData = JSON.stringify(
       const total = document.querySelector('[data-match-total]');
       const completed = document.querySelector('[data-match-completed]');
       const remaining = document.querySelector('[data-match-remaining]');
+      const dayCells = document.querySelectorAll('[data-date-key]');
+      const matchCards = document.querySelectorAll('[data-match-end]');
 
       if (!data || !date || !weekday || !detail) {
         return;
       }
+
+      const formatDateKey = (value) => {
+        const parts = new Intl.DateTimeFormat('ja-JP', {
+          timeZone: 'Asia/Tokyo',
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+        }).formatToParts(value);
+        const getPart = (type) =>
+          parts.find((part) => part.type === type)?.value || '';
+
+        return `${getPart('year')}-${getPart('month')}-${getPart('day')}`;
+      };
+
+      const updateCalendarState = (now) => {
+        const todayKey = formatDateKey(new Date(now));
+
+        matchCards.forEach((card) => {
+          const end = new Date(card.dataset.matchEnd || '').getTime();
+          card.classList.toggle('is-finished', Number.isFinite(end) && end < now);
+        });
+
+        dayCells.forEach((cell) => {
+          const dateKey = cell.dataset.dateKey || '';
+          const matches = cell.querySelectorAll('[data-match-end]');
+          const isPastEmptyDay = matches.length === 0 && dateKey < todayKey;
+          const isFinishedDay =
+            matches.length > 0 &&
+            Array.from(matches).every((match) => {
+              const end = new Date(match.dataset.matchEnd || '').getTime();
+              return Number.isFinite(end) && end < now;
+            });
+
+          cell.classList.toggle('is-current-day', dateKey === todayKey);
+          cell.classList.toggle('is-past-empty-day', isPastEmptyDay);
+          cell.classList.toggle('is-finished-day', isFinishedDay);
+        });
+      };
 
       try {
         const matches = JSON.parse(data.textContent || '[]');
@@ -490,6 +532,8 @@ const nextMatchData = JSON.stringify(
           completed.textContent = String(completedCount);
           remaining.textContent = String(matches.length - completedCount);
         }
+
+        updateCalendarState(now);
       } catch (error) {
       }
     })();
