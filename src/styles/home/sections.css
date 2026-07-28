@@ -58,7 +58,14 @@
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: clamp(20px, 2vw, 32px);
 }
-.hp-cards--4 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+/* 4枚のときは 4列 → 2×2 → 1列。3列 (3+1で1枚あまる) は挟まない */
+.hp-cards--4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 1215px) {
+  .hp-cards--4 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .hp-cards--4 { grid-template-columns: 1fr; }
+}
 
 /* 旧 .df-link-card / .df-act-node と同じく、奇数=赤 / 偶数=青で交互に */
 .hp-cards > .hp-card { --hp-accent: var(--df-red); }
