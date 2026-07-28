@@ -1,0 +1,250 @@
+/* ===============================================================
+   src/styles/home/tokens.css
+   トップページのトークン。
+   色とフォントは data-flow (旧トップページ) の値をそのまま流用する。
+   レイアウトだけを別ファイルで組み替える。
+=============================================================== */
+
+.hp-root {
+  /* --- 配色: data-flow/core.css と同じ値 --- */
+  --df-red: #E5374B;
+  --df-blue: #2A56F0;
+  --df-bg: #F7F8FB;
+  --df-paper: #FFFFFF;
+  --df-fg: #0A0F1F;
+  --df-fg-mute: #6A7286;
+  --df-line: #DDE2EC;
+  --df-line-strong: #0A0F1F;
+
+  /* --- フォント: data-flow/core.css と同じ値 --- */
+  --df-display: 'Space Grotesk', 'Inter', 'Noto Sans JP', sans-serif;
+  --df-text:    'Inter', 'Noto Sans JP', sans-serif;
+  --df-mono:    'JetBrains Mono', monospace;
+  --df-ja:      'Noto Sans JP', sans-serif;
+
+  /* --- レイアウト --- */
+  --hp-container: 1280px;
+  --hp-pad: clamp(20px, 5vw, 64px);
+  --hp-header-h: 72px;
+  --hp-radius: 16px;
+  --hp-section-y: clamp(72px, 9vw, 128px);
+
+  /* --- 面 (既存パレット内の色のみ) --- */
+  --hp-panel: #2A56F0;      /* ヒーローの主面 = --df-blue のライト値 */
+  --hp-panel-deep: #0A0F1F; /* ヒーローの奥面 = --df-fg のライト値 */
+  --hp-ink: #0A0F1F;        /* 濃色セクションの地 */
+  --hp-on-dark: #FFFFFF;
+
+  --hp-shadow: 0 8px 32px rgba(10, 15, 31, 0.07);
+  --hp-shadow-hover: 0 24px 56px rgba(42, 86, 240, 0.16);
+
+  background: var(--df-bg);
+  color: var(--df-fg);
+  font-family: var(--df-text);
+  overflow-x: clip;
+}
+
+.hp-root[data-theme='dark'] {
+  --df-red: #FF4E62;
+  --df-blue: #5A7CFF;
+  --df-bg: #060814;
+  --df-paper: #101733;
+  --df-fg: #ECEFFB;
+  --df-fg-mute: #7782A0;
+  --df-line: #26304a;
+  --df-line-strong: #ECEFFB;
+
+  /* ヒーロー面は白文字の可読性を保つためライト側の青を使う */
+  --hp-panel: #2A56F0;
+  --hp-panel-deep: #060814;
+  --hp-ink: #101733;
+
+  --hp-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --hp-shadow-hover: 0 24px 56px rgba(0, 0, 0, 0.66);
+}
+
+/* ---------------------------------------------------------------
+   共通パーツ
+   --------------------------------------------------------------- */
+
+.hp-container {
+  width: 100%;
+  max-width: var(--hp-container);
+  margin: 0 auto;
+  padding: 0 var(--hp-pad);
+  position: relative;
+  z-index: 2;
+}
+
+.hp-section {
+  position: relative;
+  padding: var(--hp-section-y) 0;
+  overflow: hidden;
+}
+.hp-section[id] { scroll-margin-top: calc(var(--hp-header-h) + 16px); }
+.hp-section--paper { background: var(--df-paper); }
+.hp-section--bg { background: var(--df-bg); }
+.hp-section--ink { background: var(--hp-ink); color: var(--hp-on-dark); }
+
+/* 見出しの上に置く「バー + ラベル」 */
+.hp-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.hp-eyebrow::before {
+  content: '';
+  width: 32px;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--df-blue);
+}
+.hp-eyebrow span {
+  font-family: var(--df-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--df-blue);
+}
+.hp-eyebrow--red::before { background: var(--df-red); }
+.hp-eyebrow--red span { color: var(--df-red); }
+.hp-section--ink .hp-eyebrow::before { background: var(--hp-on-dark); }
+.hp-section--ink .hp-eyebrow span { color: rgba(255, 255, 255, 0.8); }
+
+.hp-h2 {
+  font-family: var(--df-ja);
+  font-weight: 800;
+  font-size: clamp(28px, 3.6vw, 48px);
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+  margin: 0;
+}
+.hp-h2 .red { color: var(--df-red); }
+.hp-h2 .blue { color: var(--df-blue); }
+
+.hp-lead {
+  margin: 24px 0 0;
+  font-size: clamp(14px, 1.1vw, 15px);
+  line-height: 2.2;
+  letter-spacing: 0.03em;
+  color: var(--df-fg-mute);
+  white-space: pre-line;
+}
+.hp-section--ink .hp-lead { color: rgba(255, 255, 255, 0.72); }
+
+/* セクション背面の巨大な透かし文字 */
+.hp-watermark {
+  position: absolute;
+  z-index: 0;
+  font-family: var(--df-display);
+  font-weight: 700;
+  font-size: clamp(96px, 15vw, 260px);
+  line-height: 0.8;
+  letter-spacing: -0.03em;
+  color: color-mix(in srgb, var(--df-blue) 6%, transparent);
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
+.hp-watermark--left { top: 12px; left: -2%; }
+.hp-watermark--right { top: 12px; right: -2%; }
+.hp-section--ink .hp-watermark { color: rgba(255, 255, 255, 0.05); }
+
+/* 透かし文字を置くセクションは、本文をその下に逃がす */
+.hp-section--wm > .hp-container { padding-top: clamp(40px, 6vw, 96px); }
+
+/* セクション境目の斜めカット */
+.hp-cut {
+  position: absolute;
+  inset-inline: 0;
+  height: clamp(40px, 6vw, 88px);
+  pointer-events: none;
+  z-index: 1;
+}
+.hp-cut--top { top: 0; clip-path: polygon(0 0, 100% 0, 0 100%); }
+.hp-cut--bottom { bottom: 0; clip-path: polygon(0 100%, 100% 0, 100% 100%); }
+.hp-cut--paper { background: var(--df-paper); }
+.hp-cut--bg { background: var(--df-bg); }
+.hp-cut--ink { background: var(--hp-ink); }
+
+/* ボタン */
+.hp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  height: 54px;
+  padding: 0 34px;
+  border-radius: 999px;
+  font-family: var(--df-text);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+  transition: transform 0.24s, background 0.24s, color 0.24s, box-shadow 0.24s, border-color 0.24s;
+}
+.hp-btn .hp-arrow { font-family: var(--df-mono); font-size: 15px; }
+.hp-btn:hover { transform: translateY(-2px); }
+.hp-btn--primary {
+  background: var(--df-blue);
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(42, 86, 240, 0.3);
+}
+.hp-btn--primary:hover { box-shadow: 0 14px 32px rgba(42, 86, 240, 0.36); }
+.hp-btn--onpanel {
+  background: #fff;
+  color: var(--hp-panel);
+  box-shadow: 0 8px 24px rgba(10, 15, 31, 0.25);
+}
+.hp-btn--ghost-onpanel {
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  color: #fff;
+}
+.hp-btn--ghost-onpanel:hover { background: #fff; color: var(--hp-panel); }
+.hp-btn--outline {
+  border: 2px solid var(--df-line-strong);
+  color: var(--df-fg);
+}
+.hp-btn--outline:hover { background: var(--df-fg); color: var(--df-bg); }
+
+/* カード内の「詳しく見る →」 */
+.hp-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--df-fg);
+  transition: color 0.24s;
+}
+.hp-more::after {
+  content: '→';
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--df-fg);
+  color: var(--df-bg);
+  font-family: var(--df-mono);
+  font-size: 13px;
+  transition: background 0.24s, transform 0.24s;
+}
+
+/* スクロールで下から出す */
+/* JS が動く環境でだけ隠す。JS 無効時は最初から見えている状態にする */
+html.hp-js .hp-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+html.hp-js .hp-reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  html.hp-js .hp-reveal { opacity: 1; transform: none; transition: none; }
+  .hp-btn:hover { transform: none; }
+}

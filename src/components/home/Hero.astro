@@ -1,0 +1,69 @@
+---
+/* ----------------------------------------------------------------
+   src/components/home/Hero.astro
+   斜めに切った面の上に、左ビジュアル / 右コピーを置くヒーロー。
+   ---------------------------------------------------------------- */
+import { content } from '../../data/content.ts';
+import ImageSlot from '../ImageSlot.astro';
+
+const C = content;
+---
+
+<section class="hp-hero" id="top">
+  <div class="hp-hero-bg" aria-hidden="true">
+    <div class="hp-hero-shape hp-hero-shape--deep"></div>
+    <div class="hp-hero-shape hp-hero-shape--deep2"></div>
+    <div class="hp-hero-shape hp-hero-shape--paper"></div>
+  </div>
+
+  <div class="hp-container hp-hero-inner">
+    <div class="hp-hero-visual hp-reveal">
+      <div class="hp-hero-visual-bg" aria-hidden="true"></div>
+      <div class="hp-hero-photo">
+        <ImageSlot
+          srcs={[
+            '/img/main_profile.jpg',
+            '/img/naoto_oizumi_medium_body_white_1-1.png',
+            '/img/profile_pixel.jpg',
+          ]}
+          alt="大泉直人の写真"
+          width={420}
+          height={470}
+          interval={4800}
+          fade={1100}
+          placeholder="本人写真"
+        />
+      </div>
+      <div class="hp-hero-badge hp-hero-badge--1">
+        <div class="k">所属</div>
+        <div class="v blue">筑波大学</div>
+      </div>
+      <div class="hp-hero-badge hp-hero-badge--2">
+        <div class="k">勤務</div>
+        <div class="v red">産業技術総合研究所</div>
+      </div>
+    </div>
+
+    <div class="hp-hero-copy hp-reveal">
+      <span class="hp-eyebrow"><span>{C.hero.en_caption}</span></span>
+      <h1 class="hp-hero-title">
+        <span class="sm">{C.hero.title_a}</span>
+        <span class="lg">{C.hero.title_b}</span>
+      </h1>
+      <p class="hp-hero-sub">{C.hero.sub}</p>
+      <div class="hp-hero-actions">
+        <a class="hp-btn hp-btn--onpanel" href="#about">
+          詳しく見る<span class="hp-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="hp-btn hp-btn--ghost-onpanel" href="#links">リンク一覧</a>
+      </div>
+      <div class="hp-hero-meta">
+        <span>Role <b>Undergrad Student</b></span>
+        <span>Base <b>Tsukuba, JP</b></span>
+        <span>Field <b>Crowd Analysis · AI</b></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hp-cut hp-cut--bottom hp-cut--paper" aria-hidden="true"></div>
+</section>

@@ -1,0 +1,74 @@
+---
+/* ----------------------------------------------------------------
+   src/components/home/Header.astro
+   固定ヘッダー。ロゴ / 中央ナビ / 右側にEN・テーマ・CONTACT。
+   モバイルはバーガー + フルスクリーンメニュー。
+   ---------------------------------------------------------------- */
+import { content } from '../../data/content.ts';
+import ThemeToggle from '../data-flow/ThemeToggle.astro';
+
+const C = content;
+---
+
+<header class="hp-header">
+  <div class="hp-header-inner">
+    <a class="hp-brand" href="#top">
+      <span class="hp-brand-mark" aria-hidden="true"></span>
+      <span>
+        <span class="hp-brand-name">Naoto Oizumi</span>
+        <span class="hp-brand-sub">Sports × Society × Data</span>
+      </span>
+    </a>
+
+    <nav class="hp-nav" aria-label="Primary">
+      {C.nav.map((n) => (
+        <a class="hp-nav-link" href={n.href}>{n.label}</a>
+      ))}
+    </nav>
+
+    <div class="hp-header-right">
+      <a class="hp-lang" href="/en" aria-label="English page">EN</a>
+      <ThemeToggle />
+      <a class="hp-header-cta" href="/contact">
+        CONTACT<span aria-hidden="true">→</span>
+      </a>
+      <button type="button" class="df-burger" aria-label="メニューを開く" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="df-menu" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="df-menu-head">
+    <span class="df-menu-eyebrow">MENU</span>
+    <button type="button" class="df-menu-close" aria-label="メニューを閉じる">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </button>
+  </div>
+  <ul class="df-menu-list">
+    {C.nav.map((n, i) => (
+      <li>
+        <a class="df-menu-link" href={n.href}>
+          <span class="df-menu-num">{String(i + 1).padStart(2, '0')}</span>
+          <span>{n.label}</span>
+          <span class="df-menu-arrow" aria-hidden="true">→</span>
+        </a>
+      </li>
+    ))}
+    <li>
+      <a class="df-menu-link" href="/contact">
+        <span class="df-menu-num">{String(C.nav.length + 1).padStart(2, '0')}</span>
+        <span>Contact</span>
+        <span class="df-menu-arrow" aria-hidden="true">→</span>
+      </a>
+    </li>
+  </ul>
+  <div class="df-menu-foot">
+    <a class="hp-lang" href="/en" aria-label="English page">EN</a>
+    <ThemeToggle />
+  </div>
+</div>

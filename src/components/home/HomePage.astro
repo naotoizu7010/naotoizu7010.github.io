@@ -1,0 +1,46 @@
+---
+/* ----------------------------------------------------------------
+   src/components/home/HomePage.astro
+   トップページ本体。
+   - 固定ヘッダー → ヒーロー → 各セクション → フッター の縦積み
+   - 色とフォントは data-flow 版のトークンをそのまま使用
+   - クライアント側の動きは scripts/ の TS で実装
+   ---------------------------------------------------------------- */
+import Header from './Header.astro';
+import Hero from './Hero.astro';
+import Mission from './Mission.astro';
+import About from './About.astro';
+import Activities from './Activities.astro';
+import Personality from './Personality.astro';
+import Links from './Links.astro';
+import Profile from './Profile.astro';
+import Contact from './Contact.astro';
+import Footer from './Footer.astro';
+import '../../styles/home.css';
+---
+
+<!-- JS が使えるときだけスクロール演出を有効化 (JS 無効時は最初から表示) -->
+<script is:inline>
+  document.documentElement.classList.add('hp-js');
+</script>
+
+<div class="df-root hp-root" data-theme="light">
+  <Header />
+  <main>
+    <Hero />
+    <Mission />
+    <About />
+    <Activities />
+    <Personality />
+    <Links />
+    <Profile />
+    <Contact />
+  </main>
+  <Footer />
+</div>
+
+<script>
+  import '../../scripts/theme.ts';
+  import '../../scripts/menu.ts';
+  import '../../scripts/home-ui.ts';
+</script>

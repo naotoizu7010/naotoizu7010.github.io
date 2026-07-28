@@ -1,0 +1,71 @@
+/* ===============================================================
+   src/styles/home/responsive.css
+   タブレット / スマホの組み替え。
+=============================================================== */
+
+@media (max-width: 1080px) {
+  .hp-nav-link { padding: 0 10px; font-size: 12px; }
+  .hp-brand-sub { display: none; }
+}
+
+@media (max-width: 900px) {
+  .hp-nav { display: none; }
+  .hp-header .hp-lang,
+  .hp-header .df-theme-toggle,
+  .hp-header-cta { display: none; }
+  .df-burger { display: grid; }
+  .hp-header-inner { justify-content: space-between; }
+  .hp-brand-sub { display: block; }
+
+  /* HERO: 縦積み。白い面は写真の背面だけに絞る */
+  .hp-hero-shape--paper { display: none; }
+  .hp-hero-shape--deep { clip-path: polygon(100% 0, 100% 18%, 68% 0); }
+  .hp-hero-shape--deep2 { display: none; }
+  .hp-hero-visual-bg {
+    display: block;
+    position: absolute;
+    left: calc(var(--hp-pad) * -1);
+    right: calc(var(--hp-pad) * -1);
+    top: 24px;
+    bottom: calc(clamp(48px, 6vw, 88px) * -1);
+    background: var(--df-paper);
+    clip-path: polygon(0 12%, 100% 0, 100% 100%, 0 100%);
+  }
+  .hp-hero-inner {
+    grid-template-columns: 1fr;
+    min-height: 0;
+    padding-top: clamp(32px, 6vw, 56px);
+  }
+  .hp-hero-copy { order: 1; padding-left: 0; }
+  .hp-hero-visual { order: 2; margin-top: 8px; }
+  .hp-hero-photo { max-width: 420px; box-shadow: 0 18px 36px rgba(10, 15, 31, 0.2); }
+  .hp-hero-badge--1 { top: 4%; left: 0; }
+  .hp-hero-badge--2 { bottom: 4%; right: 0; }
+
+  .hp-head--split { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .hp-head--split .hp-head-lead { text-align: left; max-width: none; }
+
+  .hp-about-inner,
+  .hp-profile-inner,
+  .hp-pers-inner,
+  .hp-contact-inner {
+    grid-template-columns: 1fr;
+  }
+  .hp-contact-side { align-items: flex-start; }
+
+  .hp-footer-top { grid-template-columns: 1fr 1fr; }
+  .hp-footer-brand { grid-column: 1 / -1; }
+}
+
+@media (max-width: 620px) {
+  .hp-hero-badge { padding: 10px 13px; }
+  .hp-hero-badge .v { font-size: 15px; }
+  .hp-hero-actions .hp-btn { width: 100%; }
+
+  .hp-highlights { grid-template-columns: 1fr; }
+  .hp-row { grid-template-columns: 1fr; gap: 6px; padding: 18px 4px; }
+  .hp-row dt { padding-top: 0; }
+
+  .hp-footer-top { grid-template-columns: 1fr; }
+  .hp-footer-bottom { justify-content: flex-start; }
+}

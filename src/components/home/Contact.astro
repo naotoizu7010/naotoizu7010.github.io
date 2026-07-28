@@ -1,0 +1,36 @@
+---
+/* ----------------------------------------------------------------
+   src/components/home/Contact.astro
+   締めのCTA帯。
+   ---------------------------------------------------------------- */
+import { content } from '../../data/content.ts';
+
+const C = content;
+const external = C.footer.cta_href.startsWith('http');
+---
+
+<section class="hp-section hp-section--paper" id="contact">
+  <div class="hp-container">
+    <div class="hp-contact-inner">
+      <h2 class="hp-contact-big hp-reveal">
+        {C.footer.big_top}<br />
+        <span class="red">{C.footer.big_red}</span><br />
+        <span class="blue">{C.footer.big_blue}</span>
+      </h2>
+
+      <div class="hp-contact-side hp-reveal">
+        <p class="hp-contact-note">
+          研究・活動のこと、気になることがあれば気軽にどうぞ。
+        </p>
+        <a
+          class="hp-btn hp-btn--primary"
+          href={C.footer.cta_href}
+          target={external ? '_blank' : undefined}
+          rel={external ? 'noopener' : undefined}
+        >
+          {C.footer.cta_label}<span class="hp-arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

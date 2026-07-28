@@ -1,0 +1,47 @@
+---
+/* ----------------------------------------------------------------
+   src/components/home/Activities.astro
+   研究室の外の活動をカードグリッドで並べる。
+   ---------------------------------------------------------------- */
+import { content } from '../../data/content.ts';
+
+const C = content;
+---
+
+<section class="hp-section hp-section--paper hp-section--wm" id="activities">
+  <div class="hp-cut hp-cut--top hp-cut--bg" aria-hidden="true"></div>
+  <div class="hp-watermark hp-watermark--right" aria-hidden="true">Activity</div>
+
+  <div class="hp-container">
+    <div class="hp-head hp-head--split hp-reveal">
+      <div>
+        <span class="hp-eyebrow"><span>02 / Activities</span></span>
+        <h2 class="hp-h2">{C.activities.heading}</h2>
+      </div>
+      <p class="hp-head-lead">{C.activities.lead}</p>
+    </div>
+
+    <div class="hp-cards">
+      {C.activities.items.map((a, i) => (
+        <a
+          class="hp-card hp-reveal"
+          href={a.href ?? '#'}
+          target={a.href ? '_blank' : undefined}
+          rel={a.href ? 'noopener' : undefined}
+        >
+          <span class="hp-card-cat">{a.tag}</span>
+          <span class="hp-card-no">{String(i + 1).padStart(2, '0')}</span>
+          <h3 class="hp-card-title">{a.title}</h3>
+          {a.titleSub && <p class="hp-card-sub">{a.titleSub}</p>}
+          <p class="hp-card-body">{a.body}</p>
+          <div class="hp-card-meta">
+            {a.meta.since && <span class="hp-tag">since {a.meta.since}</span>}
+            {a.meta.role && <span class="hp-tag">{a.meta.role}</span>}
+            {a.meta.cases && <span class="hp-tag">cases {a.meta.cases}</span>}
+          </div>
+          <span class="hp-more">{a.cta ?? (a.href ? 'OPEN' : 'DETAIL')}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

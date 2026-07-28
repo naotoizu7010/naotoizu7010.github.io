@@ -1,0 +1,501 @@
+/* ===============================================================
+   src/styles/home/sections.css
+   トップページ各セクションのレイアウト。
+=============================================================== */
+
+/* ---------------------------------------------------------------
+   HERO — 斜めに切った面 + 左ビジュアル / 右コピーの2カラム
+   --------------------------------------------------------------- */
+.hp-hero {
+  position: relative;
+  padding-top: var(--hp-header-h);
+  background: var(--hp-panel);
+  overflow: hidden;
+}
+.hp-hero-bg { position: absolute; inset: 0; pointer-events: none; }
+.hp-hero-shape { position: absolute; inset: 0; }
+.hp-hero-shape--deep {
+  background: var(--hp-panel-deep);
+  clip-path: polygon(100% 0, 100% 30%, 62% 0);
+}
+.hp-hero-shape--deep2 {
+  background: var(--hp-panel-deep);
+  opacity: 0.7;
+  clip-path: polygon(100% 8%, 100% 44%, 55% 0, 74% 0);
+}
+.hp-hero-shape--paper {
+  background: var(--df-paper);
+  clip-path: polygon(0 0, 56% 0, 30% 100%, 0 100%);
+}
+
+.hp-hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(24px, 3vw, 48px);
+  min-height: calc(100svh - var(--hp-header-h));
+  padding-top: clamp(32px, 4vw, 64px);
+  padding-bottom: clamp(48px, 6vw, 88px);
+}
+
+.hp-hero-visual { position: relative; }
+/* スマホでは写真の背面だけを白く抜く (デスクトップは大きな斜めの面を使う) */
+.hp-hero-visual-bg { display: none; }
+.hp-hero-photo {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  margin-inline: auto;
+  border-radius: var(--hp-radius);
+  overflow: hidden;
+  box-shadow: 0 24px 48px rgba(10, 15, 31, 0.22);
+}
+.hp-hero-badge {
+  position: absolute;
+  z-index: 3;
+  background: var(--df-paper);
+  border-radius: 12px;
+  padding: 12px 16px;
+  box-shadow: 0 12px 28px rgba(10, 15, 31, 0.18);
+}
+.hp-hero-badge .k {
+  font-family: var(--df-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--df-fg-mute);
+}
+.hp-hero-badge .v {
+  margin-top: 2px;
+  font-family: var(--df-ja);
+  font-weight: 800;
+  font-size: 17px;
+  color: var(--df-fg);
+}
+.hp-hero-badge .v.red { color: var(--df-red); }
+.hp-hero-badge .v.blue { color: var(--df-blue); }
+.hp-hero-badge--1 { top: 6%; left: max(0px, calc(50% - 268px)); }
+.hp-hero-badge--2 { bottom: 6%; right: max(0px, calc(50% - 268px)); }
+
+.hp-hero-copy { color: #fff; padding-left: clamp(0px, 2vw, 40px); }
+.hp-hero-copy .hp-eyebrow::before { background: #fff; }
+.hp-hero-copy .hp-eyebrow span { color: rgba(255, 255, 255, 0.82); }
+.hp-hero-title {
+  margin: 0;
+  font-family: var(--df-ja);
+  font-weight: 900;
+  line-height: 1.32;
+  letter-spacing: 0.02em;
+}
+.hp-hero-title .sm {
+  display: block;
+  font-size: clamp(22px, 2.4vw, 34px);
+  margin-bottom: 6px;
+}
+.hp-hero-title .lg {
+  display: block;
+  font-size: clamp(38px, 4.6vw, 64px);
+}
+.hp-hero-sub {
+  margin: 24px 0 0;
+  max-width: 460px;
+  font-size: clamp(13px, 1.05vw, 15px);
+  line-height: 2.1;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.86);
+  white-space: pre-line;
+}
+.hp-hero-actions {
+  margin-top: clamp(28px, 3vw, 44px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.hp-hero-meta {
+  margin-top: clamp(28px, 3vw, 44px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  font-family: var(--df-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.62);
+}
+.hp-hero-meta b {
+  display: block;
+  margin-top: 4px;
+  font-weight: 500;
+  color: #fff;
+  letter-spacing: 0.06em;
+  text-transform: none;
+}
+
+/* ---------------------------------------------------------------
+   MISSION — 1カラムの宣言
+   --------------------------------------------------------------- */
+.hp-mission-inner { max-width: 780px; }
+.hp-mission-body {
+  margin: 32px 0 0;
+  font-size: clamp(14px, 1.1vw, 15px);
+  line-height: 2.2;
+  letter-spacing: 0.03em;
+  color: var(--df-fg-mute);
+  white-space: pre-line;
+}
+.hp-mission-corner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 38%;
+  height: clamp(80px, 12vw, 160px);
+  background: color-mix(in srgb, var(--df-blue) 4%, transparent);
+  clip-path: polygon(100% 0, 0 0, 100% 100%);
+  pointer-events: none;
+}
+
+/* ---------------------------------------------------------------
+   共通: セクション見出しブロック
+   --------------------------------------------------------------- */
+.hp-head {
+  max-width: 780px;
+  margin-bottom: clamp(40px, 5vw, 72px);
+}
+.hp-head--split {
+  max-width: none;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+}
+.hp-head--split .hp-head-lead {
+  max-width: 340px;
+  margin: 0;
+  font-size: 14px;
+  line-height: 2;
+  color: var(--df-fg-mute);
+  text-align: right;
+}
+.hp-section--ink .hp-head--split .hp-head-lead { color: rgba(255, 255, 255, 0.7); }
+
+/* ---------------------------------------------------------------
+   ACTIVITIES / LINKS — カードグリッド
+   --------------------------------------------------------------- */
+.hp-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(20px, 2vw, 32px);
+}
+.hp-cards--4 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+
+.hp-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(28px, 3vw, 40px);
+  border-radius: var(--hp-radius);
+  background: var(--df-paper);
+  box-shadow: var(--hp-shadow);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.hp-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 96px;
+  height: 96px;
+  background: color-mix(in srgb, var(--df-blue) 6%, transparent);
+  clip-path: polygon(100% 0, 0 0, 100% 100%);
+  transition: background 0.3s;
+}
+.hp-card:hover { transform: translateY(-6px); box-shadow: var(--hp-shadow-hover); }
+.hp-card:hover::before { background: color-mix(in srgb, var(--df-blue) 12%, transparent); }
+.hp-card:hover .hp-card-no { color: var(--df-blue); }
+.hp-card:hover .hp-more { color: var(--df-blue); }
+.hp-card:hover .hp-more::after { background: var(--df-blue); color: #fff; transform: translateX(2px); }
+
+.hp-card-no {
+  position: relative;
+  font-family: var(--df-display);
+  font-weight: 700;
+  font-size: clamp(40px, 4vw, 58px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: color-mix(in srgb, var(--df-blue) 18%, transparent);
+  margin-bottom: 24px;
+  transition: color 0.5s;
+}
+.hp-card-title {
+  margin: 0 0 6px;
+  font-family: var(--df-display);
+  font-weight: 700;
+  font-size: clamp(19px, 1.7vw, 22px);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+.hp-card-title--ja { font-family: var(--df-ja); font-weight: 800; letter-spacing: 0; }
+.hp-card-sub {
+  margin: 0 0 20px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--df-blue);
+}
+.hp-card-body {
+  margin: 0 0 32px;
+  flex: 1;
+  font-size: 13.5px;
+  line-height: 2;
+  letter-spacing: 0.03em;
+  color: var(--df-fg-mute);
+  white-space: pre-line;
+}
+.hp-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.hp-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: var(--df-bg);
+  font-family: var(--df-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--df-fg-mute);
+}
+.hp-card-cat {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 2;
+  font-family: var(--df-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--df-fg-mute);
+}
+
+/* ---------------------------------------------------------------
+   ABOUT — 2カラム + ハイライト
+   --------------------------------------------------------------- */
+.hp-about-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 5vw, 80px);
+  align-items: start;
+}
+.hp-about-actions { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 14px; }
+.hp-highlights {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(24px, 2.6vw, 40px);
+}
+.hp-highlight {
+  padding-top: 20px;
+  border-top: 2px solid var(--df-line-strong);
+}
+.hp-highlight .k {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--df-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--df-fg-mute);
+  margin-bottom: 12px;
+}
+.hp-highlight .k::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--df-red);
+}
+.hp-highlight:nth-child(even) .k::before { background: var(--df-blue); }
+.hp-highlight .v {
+  font-size: 14.5px;
+  line-height: 1.95;
+  letter-spacing: 0.02em;
+}
+
+/* ---------------------------------------------------------------
+   PROFILE — 定義リスト (会社概要のテーブル相当)
+   --------------------------------------------------------------- */
+.hp-profile-inner {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.7fr) 1.3fr;
+  gap: clamp(32px, 4vw, 72px);
+  align-items: start;
+}
+.hp-table { border-top: 2px solid var(--df-line-strong); }
+.hp-row {
+  display: grid;
+  grid-template-columns: minmax(96px, 160px) 1fr;
+  gap: 16px 24px;
+  padding: 22px 4px;
+  border-bottom: 1px solid var(--df-line);
+}
+.hp-row dt {
+  font-family: var(--df-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--df-fg-mute);
+  padding-top: 3px;
+}
+.hp-row dd {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.8;
+  font-weight: 500;
+}
+.hp-row dd a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, var(--df-fg-mute) 44%, transparent);
+  transition: color 0.15s, text-decoration-color 0.15s;
+}
+.hp-row dd a:hover { color: var(--df-blue); text-decoration-color: var(--df-blue); }
+.hp-muted { font-size: 0.82em; color: var(--df-fg-mute); }
+.hp-gap { display: inline-block; width: 0.5em; }
+
+/* ---------------------------------------------------------------
+   PERSONALITY — 濃色セクション
+   --------------------------------------------------------------- */
+.hp-pers-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: clamp(40px, 5vw, 80px);
+  align-items: center;
+}
+.hp-pers-bites { display: flex; flex-wrap: wrap; gap: 12px; }
+.hp-bite {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  font-size: 14px;
+  color: #fff;
+  transition: background 0.24s, transform 0.24s;
+}
+.hp-bite:hover { background: rgba(255, 255, 255, 0.14); transform: translateY(-2px); }
+.hp-bite .emo { font-size: 18px; line-height: 1; }
+.hp-pers-actions { margin-top: 36px; }
+.hp-btn--onink {
+  background: #fff;
+  color: var(--hp-ink);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+}
+
+/* ---------------------------------------------------------------
+   CONTACT — 締めのCTA帯
+   --------------------------------------------------------------- */
+.hp-contact-inner {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: clamp(32px, 4vw, 72px);
+  align-items: center;
+}
+.hp-contact-big {
+  margin: 0;
+  font-family: var(--df-ja);
+  font-weight: 900;
+  font-size: clamp(32px, 4.6vw, 62px);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.hp-contact-big .red { color: var(--df-red); }
+.hp-contact-big .blue { color: var(--df-blue); }
+.hp-contact-side { display: flex; flex-direction: column; gap: 20px; align-items: flex-start; }
+.hp-contact-note {
+  font-size: 13.5px;
+  line-height: 2;
+  color: var(--df-fg-mute);
+}
+
+/* ---------------------------------------------------------------
+   FOOTER
+   --------------------------------------------------------------- */
+.hp-footer {
+  position: relative;
+  background: var(--hp-ink);
+  color: rgba(255, 255, 255, 0.8);
+  padding: clamp(56px, 7vw, 96px) 0 32px;
+  overflow: hidden;
+}
+.hp-footer-top {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: clamp(32px, 4vw, 64px);
+  padding-bottom: clamp(40px, 5vw, 64px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+.hp-footer-name {
+  font-family: var(--df-display);
+  font-weight: 700;
+  font-size: clamp(28px, 3.4vw, 44px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+.hp-footer-tagline {
+  margin-top: 14px;
+  font-family: var(--df-mono);
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+.hp-footer-desc {
+  margin-top: 24px;
+  max-width: 380px;
+  font-size: 13.5px;
+  line-height: 2;
+  color: rgba(255, 255, 255, 0.66);
+  white-space: pre-line;
+}
+.hp-footer h4 {
+  margin: 0 0 20px;
+  font-family: var(--df-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+.hp-footer-list { display: flex; flex-direction: column; gap: 12px; }
+.hp-footer-list a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.82);
+  transition: color 0.2s;
+}
+.hp-footer-list a:hover { color: #fff; }
+.hp-footer-list--sns a::after { content: '↗'; opacity: 0.5; font-size: 12px; }
+.hp-footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 28px;
+  font-family: var(--df-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.5);
+}
+.hp-footer-bottom a:hover { color: #fff; }

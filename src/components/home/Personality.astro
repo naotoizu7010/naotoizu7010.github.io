@@ -1,0 +1,37 @@
+---
+/* ----------------------------------------------------------------
+   src/components/home/Personality.astro
+   濃色の帯セクション。趣味をピルで並べる。
+   ---------------------------------------------------------------- */
+import { content } from '../../data/content.ts';
+
+const C = content;
+---
+
+<section class="hp-section hp-section--ink hp-section--wm" id="personality">
+  <div class="hp-watermark hp-watermark--right" aria-hidden="true">Person</div>
+
+  <div class="hp-container">
+    <div class="hp-pers-inner">
+      <div class="hp-reveal">
+        <span class="hp-eyebrow"><span>03 / Personality</span></span>
+        <h2 class="hp-h2">{C.personality.heading}</h2>
+        <p class="hp-lead">{C.personality.lead}</p>
+        <div class="hp-pers-actions">
+          <a class="hp-btn hp-btn--onink" href="/personality">
+            もっと人柄を知る（準備中）<span class="hp-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="hp-pers-bites hp-reveal">
+        {C.personality.bites.map((b) => (
+          <span class="hp-bite">
+            <span class="emo">{b.emoji}</span>
+            <span>{b.text}</span>
+          </span>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
