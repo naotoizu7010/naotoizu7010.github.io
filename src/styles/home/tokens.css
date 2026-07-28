@@ -93,12 +93,13 @@
   gap: 12px;
   margin-bottom: 20px;
 }
+/* 旧デザインの「赤いドット付き eyebrow」を、バー + ラベルに置き換えたもの。色は赤のまま */
 .hp-eyebrow::before {
   content: '';
   width: 32px;
   height: 3px;
   border-radius: 999px;
-  background: var(--df-blue);
+  background: var(--df-red);
 }
 .hp-eyebrow span {
   font-family: var(--df-mono);
@@ -106,19 +107,19 @@
   font-weight: 700;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--df-blue);
+  color: var(--df-red);
 }
-.hp-eyebrow--red::before { background: var(--df-red); }
-.hp-eyebrow--red span { color: var(--df-red); }
-.hp-section--ink .hp-eyebrow::before { background: var(--hp-on-dark); }
+.hp-eyebrow--blue::before { background: var(--df-blue); }
+.hp-eyebrow--blue span { color: var(--df-blue); }
+.hp-section--ink .hp-eyebrow::before { background: var(--df-red); }
 .hp-section--ink .hp-eyebrow span { color: rgba(255, 255, 255, 0.8); }
 
 .hp-h2 {
   font-family: var(--df-ja);
   font-weight: 800;
   font-size: clamp(28px, 3.6vw, 48px);
-  line-height: 1.45;
-  letter-spacing: 0.01em;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
   margin: 0;
 }
 .hp-h2 .red { color: var(--df-red); }
@@ -127,8 +128,8 @@
 .hp-lead {
   margin: 24px 0 0;
   font-size: clamp(14px, 1.1vw, 15px);
-  line-height: 2.2;
-  letter-spacing: 0.03em;
+  line-height: 1.9;
+  letter-spacing: 0.02em;
   color: var(--df-fg-mute);
   white-space: pre-line;
 }
@@ -150,6 +151,7 @@
 }
 .hp-watermark--left { top: 12px; left: -2%; }
 .hp-watermark--right { top: 12px; right: -2%; }
+.hp-watermark--red { color: color-mix(in srgb, var(--df-red) 7%, transparent); }
 .hp-section--ink .hp-watermark { color: rgba(255, 255, 255, 0.05); }
 
 /* 透かし文字を置くセクションは、本文をその下に逃がす */
@@ -165,57 +167,54 @@
 }
 .hp-cut--top { top: 0; clip-path: polygon(0 0, 100% 0, 0 100%); }
 .hp-cut--bottom { bottom: 0; clip-path: polygon(0 100%, 100% 0, 100% 100%); }
+.hp-cut--flip.hp-cut--bottom { clip-path: polygon(0 0, 0 100%, 100% 100%); }
 .hp-cut--paper { background: var(--df-paper); }
 .hp-cut--bg { background: var(--df-bg); }
 .hp-cut--ink { background: var(--hp-ink); }
 
-/* ボタン */
+/* ボタン — 旧 .df-footer-cta / .df-pers-detail-link と同じく mono + 赤 */
 .hp-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
   height: 54px;
-  padding: 0 34px;
+  padding: 0 32px;
   border-radius: 999px;
-  font-family: var(--df-text);
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+  font-family: var(--df-mono);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
   white-space: nowrap;
   transition: transform 0.24s, background 0.24s, color 0.24s, box-shadow 0.24s, border-color 0.24s;
 }
-.hp-btn .hp-arrow { font-family: var(--df-mono); font-size: 15px; }
+.hp-btn .hp-arrow { font-size: 16px; }
 .hp-btn:hover { transform: translateY(-2px); }
 .hp-btn--primary {
+  background: var(--df-red);
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(229, 55, 75, 0.28);
+}
+.hp-btn--primary:hover {
   background: var(--df-blue);
   color: #fff;
-  box-shadow: 0 8px 24px rgba(42, 86, 240, 0.3);
+  box-shadow: 0 14px 32px rgba(42, 86, 240, 0.32);
 }
-.hp-btn--primary:hover { box-shadow: 0 14px 32px rgba(42, 86, 240, 0.36); }
-.hp-btn--onpanel {
-  background: #fff;
-  color: var(--hp-panel);
-  box-shadow: 0 8px 24px rgba(10, 15, 31, 0.25);
-}
-.hp-btn--ghost-onpanel {
-  border: 2px solid rgba(255, 255, 255, 0.7);
-  color: #fff;
-}
-.hp-btn--ghost-onpanel:hover { background: #fff; color: var(--hp-panel); }
 .hp-btn--outline {
   border: 2px solid var(--df-line-strong);
   color: var(--df-fg);
 }
 .hp-btn--outline:hover { background: var(--df-fg); color: var(--df-bg); }
 
-/* カード内の「詳しく見る →」 */
+/* カード内の「詳しく見る →」 — 旧 .df-link-card-cta と同じく mono */
 .hp-more {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-size: 14px;
-  font-weight: 700;
+  font-family: var(--df-mono);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
   color: var(--df-fg);
   transition: color 0.24s;
 }
@@ -223,13 +222,12 @@
   content: '→';
   display: grid;
   place-items: center;
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
-  background: var(--df-fg);
-  color: var(--df-bg);
-  font-family: var(--df-mono);
-  font-size: 13px;
+  background: var(--hp-accent, var(--df-red));
+  color: #fff;
+  font-size: 15px;
   transition: background 0.24s, transform 0.24s;
 }
 

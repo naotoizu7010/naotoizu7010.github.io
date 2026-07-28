@@ -17,10 +17,10 @@
   .hp-header-inner { justify-content: space-between; }
   .hp-brand-sub { display: block; }
 
-  /* HERO: 縦積み。白い面は写真の背面だけに絞る */
-  .hp-hero-shape--paper { display: none; }
-  .hp-hero-shape--deep { clip-path: polygon(100% 0, 100% 18%, 68% 0); }
+  /* HERO: 縦積み。青い面は写真の背面だけに絞る */
+  .hp-hero-shape--panel,
   .hp-hero-shape--deep2 { display: none; }
+  .hp-hero-shape--deep { clip-path: polygon(100% 0, 100% 16%, 72% 0); opacity: 0.08; }
   .hp-hero-visual-bg {
     display: block;
     position: absolute;
@@ -28,7 +28,7 @@
     right: calc(var(--hp-pad) * -1);
     top: 24px;
     bottom: calc(clamp(48px, 6vw, 88px) * -1);
-    background: var(--df-paper);
+    background: var(--hp-panel);
     clip-path: polygon(0 12%, 100% 0, 100% 100%, 0 100%);
   }
   .hp-hero-inner {

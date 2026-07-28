@@ -9,7 +9,7 @@ const C = content;
 ---
 
 <section class="hp-section hp-section--paper hp-section--wm" id="links">
-  <div class="hp-watermark hp-watermark--left" aria-hidden="true">Links</div>
+  <div class="hp-watermark hp-watermark--left hp-watermark--red" aria-hidden="true">Links</div>
 
   <div class="hp-container">
     <div class="hp-head hp-head--split hp-reveal">
@@ -31,7 +31,7 @@ const C = content;
             rel={external ? 'noopener' : undefined}
           >
             <span class="hp-card-no">{String(i + 1).padStart(2, '0')}</span>
-            <h3 class="hp-card-title hp-card-title--ja">{l.title}</h3>
+            <h3 class="hp-card-title">{l.title}</h3>
             <p class="hp-card-body">{l.body}</p>
             <span class="hp-more">{external ? '外部サイト' : '詳しく見る'}</span>
           </a>

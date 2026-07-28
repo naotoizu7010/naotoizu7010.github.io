@@ -11,9 +11,9 @@ const C = content;
 
 <section class="hp-hero" id="top">
   <div class="hp-hero-bg" aria-hidden="true">
+    <div class="hp-hero-shape hp-hero-shape--panel"></div>
     <div class="hp-hero-shape hp-hero-shape--deep"></div>
     <div class="hp-hero-shape hp-hero-shape--deep2"></div>
-    <div class="hp-hero-shape hp-hero-shape--paper"></div>
   </div>
 
   <div class="hp-container hp-hero-inner">
@@ -47,15 +47,15 @@ const C = content;
     <div class="hp-hero-copy hp-reveal">
       <span class="hp-eyebrow"><span>{C.hero.en_caption}</span></span>
       <h1 class="hp-hero-title">
-        <span class="sm">{C.hero.title_a}</span>
-        <span class="lg">{C.hero.title_b}</span>
+        <span class="sm"><span class="red">人の</span><span class="blue">流れ</span>を、</span>
+        <span class="lg">読む。</span>
       </h1>
       <p class="hp-hero-sub">{C.hero.sub}</p>
       <div class="hp-hero-actions">
-        <a class="hp-btn hp-btn--onpanel" href="#about">
+        <a class="hp-btn hp-btn--primary" href="#about">
           詳しく見る<span class="hp-arrow" aria-hidden="true">→</span>
         </a>
-        <a class="hp-btn hp-btn--ghost-onpanel" href="#links">リンク一覧</a>
+        <a class="hp-btn hp-btn--outline" href="#links">リンク一覧</a>
       </div>
       <div class="hp-hero-meta">
         <span>Role <b>Undergrad Student</b></span>
@@ -65,5 +65,5 @@ const C = content;
     </div>
   </div>
 
-  <div class="hp-cut hp-cut--bottom hp-cut--paper" aria-hidden="true"></div>
+  <div class="hp-cut hp-cut--bottom hp-cut--flip hp-cut--paper" aria-hidden="true"></div>
 </section>

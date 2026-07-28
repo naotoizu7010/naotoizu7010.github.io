@@ -86,31 +86,42 @@
   align-items: center;
   margin-left: auto;
 }
+/* 旧 .df-nav-link と同じく mono + 赤/青のドット */
 .hp-nav-link {
+  --hp-accent: var(--df-red);
   position: relative;
   display: inline-flex;
   align-items: center;
+  gap: 8px;
   height: var(--hp-header-h);
-  padding: 0 clamp(12px, 1.4vw, 20px);
-  font-size: 13px;
-  font-weight: 700;
+  padding: 0 clamp(12px, 1.4vw, 18px);
+  font-family: var(--df-mono);
+  font-size: 12px;
   letter-spacing: 0.06em;
   transition: color 0.24s;
+}
+.hp-nav-link:nth-child(even) { --hp-accent: var(--df-blue); }
+.hp-nav-link::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--hp-accent);
 }
 .hp-nav-link::after {
   content: '';
   position: absolute;
-  left: clamp(12px, 1.4vw, 20px);
-  right: clamp(12px, 1.4vw, 20px);
+  left: clamp(12px, 1.4vw, 18px);
+  right: clamp(12px, 1.4vw, 18px);
   bottom: 18px;
   height: 3px;
   border-radius: 999px;
-  background: var(--df-blue);
+  background: var(--hp-accent);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.hp-nav-link:hover { color: var(--df-blue); }
+.hp-nav-link:hover { color: var(--hp-accent); }
 .hp-nav-link:hover::after { transform: scaleX(1); }
 
 /* 右側 */
@@ -142,16 +153,19 @@
   height: 42px;
   padding: 0 22px;
   border-radius: 999px;
-  background: var(--df-blue);
+  background: var(--df-red);
   color: #fff;
   font-family: var(--df-mono);
   font-size: 12px;
-  font-weight: 700;
   letter-spacing: 0.14em;
-  box-shadow: 0 4px 16px rgba(42, 86, 240, 0.34);
-  transition: transform 0.24s, box-shadow 0.24s;
+  box-shadow: 0 4px 16px rgba(229, 55, 75, 0.32);
+  transition: transform 0.24s, background 0.24s, box-shadow 0.24s;
 }
-.hp-header-cta:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(42, 86, 240, 0.4); }
+.hp-header-cta:hover {
+  transform: translateY(-1px);
+  background: var(--df-blue);
+  box-shadow: 0 10px 24px rgba(42, 86, 240, 0.38);
+}
 
 /* テーマ切り替え (df-theme-toggle をこのページ用に再スタイル) */
 .hp-header .df-theme-toggle,
@@ -256,18 +270,25 @@
   align-items: center;
   gap: 16px;
   padding: 20px 4px;
-  border-bottom: 1px solid var(--df-line);
+  border-bottom: 1px dashed var(--df-line);
   font-family: var(--df-ja);
   font-size: 20px;
-  font-weight: 800;
+  font-weight: 700;
 }
 .df-menu-num {
   font-family: var(--df-mono);
   font-size: 11px;
-  letter-spacing: 0.16em;
-  color: var(--df-blue);
+  letter-spacing: 0.14em;
+  color: var(--df-red);
 }
-.df-menu-arrow { margin-left: auto; color: var(--df-fg-mute); }
+.df-menu-list li:nth-child(even) .df-menu-num { color: var(--df-blue); }
+.df-menu-arrow {
+  margin-left: auto;
+  font-family: var(--df-display);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--df-fg-mute);
+}
 
 .df-menu-foot {
   display: flex;

@@ -9,23 +9,24 @@
 .hp-hero {
   position: relative;
   padding-top: var(--hp-header-h);
-  background: var(--hp-panel);
+  background: var(--df-paper);
   overflow: hidden;
 }
 .hp-hero-bg { position: absolute; inset: 0; pointer-events: none; }
 .hp-hero-shape { position: absolute; inset: 0; }
+/* 左側に青の面。コピーは紙の側に置いて、赤/青の見出しをそのまま使う */
+.hp-hero-shape--panel {
+  background: var(--hp-panel);
+  clip-path: polygon(0 0, 58% 0, 26% 100%, 0 100%);
+}
 .hp-hero-shape--deep {
   background: var(--hp-panel-deep);
-  clip-path: polygon(100% 0, 100% 30%, 62% 0);
+  clip-path: polygon(0 0, 0 32%, 40% 0);
 }
 .hp-hero-shape--deep2 {
   background: var(--hp-panel-deep);
   opacity: 0.7;
-  clip-path: polygon(100% 8%, 100% 44%, 55% 0, 74% 0);
-}
-.hp-hero-shape--paper {
-  background: var(--df-paper);
-  clip-path: polygon(0 0, 56% 0, 30% 100%, 0 100%);
+  clip-path: polygon(0 10%, 0 46%, 46% 0, 26% 0);
 }
 
 .hp-hero-inner {
@@ -67,9 +68,9 @@
 }
 .hp-hero-badge .v {
   margin-top: 2px;
-  font-family: var(--df-ja);
-  font-weight: 800;
-  font-size: 17px;
+  font-family: var(--df-display);
+  font-weight: 700;
+  font-size: 18px;
   color: var(--df-fg);
 }
 .hp-hero-badge .v.red { color: var(--df-red); }
@@ -77,32 +78,32 @@
 .hp-hero-badge--1 { top: 6%; left: max(0px, calc(50% - 268px)); }
 .hp-hero-badge--2 { bottom: 6%; right: max(0px, calc(50% - 268px)); }
 
-.hp-hero-copy { color: #fff; padding-left: clamp(0px, 2vw, 40px); }
-.hp-hero-copy .hp-eyebrow::before { background: #fff; }
-.hp-hero-copy .hp-eyebrow span { color: rgba(255, 255, 255, 0.82); }
+.hp-hero-copy { color: var(--df-fg); padding-left: clamp(0px, 2vw, 40px); }
 .hp-hero-title {
   margin: 0;
   font-family: var(--df-ja);
   font-weight: 900;
-  line-height: 1.32;
-  letter-spacing: 0.02em;
+  line-height: 1.24;
+  letter-spacing: -0.02em;
 }
+.hp-hero-title .red { color: var(--df-red); }
+.hp-hero-title .blue { color: var(--df-blue); }
 .hp-hero-title .sm {
   display: block;
-  font-size: clamp(22px, 2.4vw, 34px);
-  margin-bottom: 6px;
+  font-size: clamp(30px, 3.4vw, 48px);
+  margin-bottom: 4px;
 }
 .hp-hero-title .lg {
   display: block;
-  font-size: clamp(38px, 4.6vw, 64px);
+  font-size: clamp(44px, 5.4vw, 76px);
 }
 .hp-hero-sub {
   margin: 24px 0 0;
   max-width: 460px;
   font-size: clamp(13px, 1.05vw, 15px);
-  line-height: 2.1;
-  letter-spacing: 0.04em;
-  color: rgba(255, 255, 255, 0.86);
+  line-height: 1.9;
+  letter-spacing: 0.02em;
+  color: var(--df-fg-mute);
   white-space: pre-line;
 }
 .hp-hero-actions {
@@ -120,13 +121,13 @@
   font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.62);
+  color: var(--df-fg-mute);
 }
 .hp-hero-meta b {
   display: block;
   margin-top: 4px;
   font-weight: 500;
-  color: #fff;
+  color: var(--df-fg);
   letter-spacing: 0.06em;
   text-transform: none;
 }
@@ -149,7 +150,7 @@
   right: 0;
   width: 38%;
   height: clamp(80px, 12vw, 160px);
-  background: color-mix(in srgb, var(--df-blue) 4%, transparent);
+  background: color-mix(in srgb, var(--df-red) 5%, transparent);
   clip-path: polygon(100% 0, 0 0, 100% 100%);
   pointer-events: none;
 }
@@ -188,6 +189,10 @@
 }
 .hp-cards--4 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
 
+/* 旧 .df-link-card / .df-act-node と同じく、奇数=赤 / 偶数=青で交互に */
+.hp-cards > .hp-card { --hp-accent: var(--df-red); }
+.hp-cards > .hp-card:nth-child(even) { --hp-accent: var(--df-blue); }
+
 .hp-card {
   position: relative;
   display: flex;
@@ -206,41 +211,40 @@
   right: 0;
   width: 96px;
   height: 96px;
-  background: color-mix(in srgb, var(--df-blue) 6%, transparent);
+  background: color-mix(in srgb, var(--hp-accent) 7%, transparent);
   clip-path: polygon(100% 0, 0 0, 100% 100%);
   transition: background 0.3s;
 }
 .hp-card:hover { transform: translateY(-6px); box-shadow: var(--hp-shadow-hover); }
-.hp-card:hover::before { background: color-mix(in srgb, var(--df-blue) 12%, transparent); }
-.hp-card:hover .hp-card-no { color: var(--df-blue); }
-.hp-card:hover .hp-more { color: var(--df-blue); }
-.hp-card:hover .hp-more::after { background: var(--df-blue); color: #fff; transform: translateX(2px); }
+.hp-card:hover::before { background: color-mix(in srgb, var(--hp-accent) 14%, transparent); }
+.hp-card:hover .hp-card-no { color: var(--hp-accent); }
+.hp-card:hover .hp-more { color: var(--hp-accent); }
+.hp-card:hover .hp-more::after { transform: translateX(2px); }
 
 .hp-card-no {
   position: relative;
-  font-family: var(--df-display);
+  font-family: var(--df-mono);
   font-weight: 700;
-  font-size: clamp(40px, 4vw, 58px);
+  font-size: clamp(38px, 3.8vw, 54px);
   line-height: 1;
-  letter-spacing: -0.02em;
-  color: color-mix(in srgb, var(--df-blue) 18%, transparent);
+  letter-spacing: 0.02em;
+  color: color-mix(in srgb, var(--hp-accent) 22%, transparent);
   margin-bottom: 24px;
   transition: color 0.5s;
 }
 .hp-card-title {
   margin: 0 0 6px;
-  font-family: var(--df-display);
-  font-weight: 700;
+  font-family: var(--df-ja);
+  font-weight: 800;
   font-size: clamp(19px, 1.7vw, 22px);
   line-height: 1.35;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.005em;
 }
-.hp-card-title--ja { font-family: var(--df-ja); font-weight: 800; letter-spacing: 0; }
 .hp-card-sub {
   margin: 0 0 20px;
   font-size: 13px;
   font-weight: 700;
-  color: var(--df-blue);
+  color: var(--hp-accent);
 }
 .hp-card-body {
   margin: 0 0 32px;
@@ -352,9 +356,10 @@
 }
 .hp-row dd {
   margin: 0;
-  font-size: 15px;
+  font-family: var(--df-display);
+  font-size: 16px;
   line-height: 1.8;
-  font-weight: 500;
+  font-weight: 600;
 }
 .hp-row dd a {
   text-decoration: underline;
@@ -475,16 +480,19 @@
   color: rgba(255, 255, 255, 0.5);
 }
 .hp-footer-list { display: flex; flex-direction: column; gap: 12px; }
+/* 旧 .df-footer-sns と同じく Space Grotesk + 赤/青のホバー */
 .hp-footer-list a {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 14px;
+  font-family: var(--df-display);
+  font-size: 16px;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.82);
   transition: color 0.2s;
 }
-.hp-footer-list a:hover { color: #fff; }
+.hp-footer-list li:nth-child(odd) a:hover { color: var(--df-red); }
+.hp-footer-list li:nth-child(even) a:hover { color: var(--df-blue); }
 .hp-footer-list--sns a::after { content: '↗'; opacity: 0.5; font-size: 12px; }
 .hp-footer-bottom {
   display: flex;
