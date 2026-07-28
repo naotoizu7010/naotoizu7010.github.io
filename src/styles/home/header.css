@@ -200,21 +200,23 @@
 .df-theme-toggle-label [data-active='true'] { opacity: 1; color: var(--df-fg); font-weight: 700; }
 .df-theme-toggle-separator { opacity: 0.28; }
 
-/* バーガー */
+/* バーガー — grid だと align-content: stretch で線が広がるので flex で中央に詰める */
 .df-burger {
   display: none;
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
   border: 1px solid var(--df-line);
-  border-radius: 12px;
-  place-items: center;
-  gap: 4px;
+  border-radius: 10px;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
 }
 .df-burger span {
   display: block;
   width: 16px;
-  height: 1.6px;
+  height: 1.5px;
   border-radius: 2px;
   background: var(--df-fg);
 }
@@ -248,17 +250,19 @@
 }
 .df-menu-close {
   position: relative;
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
   border: 1px solid var(--df-line);
-  border-radius: 12px;
+  border-radius: 10px;
 }
 .df-menu-close span {
   position: absolute;
   left: 12px;
   right: 12px;
-  top: 50%;
-  height: 1.6px;
+  top: calc(50% - 0.75px);
+  height: 1.5px;
+  border-radius: 2px;
   background: var(--df-fg);
 }
 .df-menu-close span:first-child { transform: rotate(45deg); }

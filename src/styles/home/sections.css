@@ -31,7 +31,7 @@
 
 .hp-hero-inner {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 0.92fr 1.18fr;
   align-items: center;
   gap: clamp(24px, 3vw, 48px);
   min-height: calc(100svh - var(--hp-header-h));
@@ -79,23 +79,20 @@
 .hp-hero-badge--2 { bottom: 6%; right: max(0px, calc(50% - 268px)); }
 
 .hp-hero-copy { color: var(--df-fg); padding-left: clamp(0px, 2vw, 40px); }
+/* 旧 .df-hero-title と同じ大きさ感 (2行とも同サイズ・詰めた字送り) */
 .hp-hero-title {
   margin: 0;
   font-family: var(--df-ja);
   font-weight: 900;
-  line-height: 1.24;
-  letter-spacing: -0.02em;
+  font-size: clamp(40px, 6.6vw, 104px);
+  line-height: 1;
+  letter-spacing: -0.04em;
 }
 .hp-hero-title .red { color: var(--df-red); }
 .hp-hero-title .blue { color: var(--df-blue); }
-.hp-hero-title .sm {
+.hp-hero-title > span {
   display: block;
-  font-size: clamp(30px, 3.4vw, 48px);
-  margin-bottom: 4px;
-}
-.hp-hero-title .lg {
-  display: block;
-  font-size: clamp(44px, 5.4vw, 76px);
+  white-space: nowrap;
 }
 .hp-hero-sub {
   margin: 24px 0 0;
@@ -105,12 +102,6 @@
   letter-spacing: 0.02em;
   color: var(--df-fg-mute);
   white-space: pre-line;
-}
-.hp-hero-actions {
-  margin-top: clamp(28px, 3vw, 44px);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
 }
 .hp-hero-meta {
   margin-top: clamp(28px, 3vw, 44px);
@@ -290,16 +281,12 @@
    --------------------------------------------------------------- */
 .hp-about-inner {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 0.95fr 1.15fr;
   gap: clamp(40px, 5vw, 80px);
   align-items: start;
 }
 .hp-about-actions { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 14px; }
-.hp-highlights {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: clamp(24px, 2.6vw, 40px);
-}
+.hp-about-highlight { margin-top: 36px; }
 .hp-highlight {
   padding-top: 20px;
   border-top: 2px solid var(--df-line-strong);
@@ -330,15 +317,12 @@
 }
 
 /* ---------------------------------------------------------------
-   PROFILE — 定義リスト (会社概要のテーブル相当)
+   基本情報 — 定義リスト (会社概要のテーブル相当)。About の右カラムに置く
    --------------------------------------------------------------- */
-.hp-profile-inner {
-  display: grid;
-  grid-template-columns: minmax(240px, 0.7fr) 1.3fr;
-  gap: clamp(32px, 4vw, 72px);
-  align-items: start;
+.hp-table {
+  margin: 0;
+  border-top: 2px solid var(--df-line-strong);
 }
-.hp-table { border-top: 2px solid var(--df-line-strong); }
 .hp-row {
   display: grid;
   grid-template-columns: minmax(96px, 160px) 1fr;

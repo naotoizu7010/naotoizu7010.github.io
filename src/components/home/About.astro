@@ -1,19 +1,12 @@
 ---
 /* ----------------------------------------------------------------
    src/components/home/About.astro
-   左に紹介文とCTA、右に4つのハイライト。
+   左に紹介文とCTA、右に基本情報。
+   旧トップページと同じく、基本情報はAboutの中に置く。
    ---------------------------------------------------------------- */
 import { content } from '../../data/content.ts';
 
 const C = content;
-const factOf = (k: string) => C.about.factoids.find((f) => f.k === k)?.v ?? '';
-
-const highlights = [
-  { k: '大事にしていること', v: '何事にも興味を持つこと。好奇心を満たし続けること。' },
-  { k: '専門', v: factOf('専門') },
-  { k: '居住地', v: factOf('居住地') },
-  { k: '出身地', v: factOf('出身地') },
-];
 ---
 
 <section class="hp-section hp-section--bg hp-section--wm" id="about">
@@ -29,21 +22,53 @@ const highlights = [
         </h2>
         <p class="hp-lead">{C.about.lead}</p>
         <p class="hp-lead">{C.about.body}</p>
+
+        <div class="hp-highlight hp-about-highlight">
+          <div class="k">大事にしていること</div>
+          <div class="v">何事にも興味を持つこと。好奇心を満たし続けること。</div>
+        </div>
+
         <div class="hp-about-actions">
           <a class="hp-btn hp-btn--primary" href="/cv">
             CVを見る<span class="hp-arrow" aria-hidden="true">→</span>
           </a>
-          <a class="hp-btn hp-btn--outline" href="#profile">基本情報</a>
         </div>
       </div>
 
-      <div class="hp-highlights hp-reveal">
-        {highlights.map((h) => (
-          <div class="hp-highlight">
-            <div class="k">{h.k}</div>
-            <div class="v">{h.v}</div>
-          </div>
-        ))}
+      <div class="hp-reveal">
+        <span class="hp-eyebrow hp-eyebrow--blue"><span>Profile</span></span>
+        <dl class="hp-table">
+          {C.about.factoids.map((f) => (
+            <div class="hp-row">
+              <dt>{f.k}</dt>
+              <dd>
+                {f.vParts
+                  ? f.vParts.map((part) =>
+                      part.href ? (
+                        <a
+                          href={part.href}
+                          target="_blank"
+                          rel="noopener"
+                          class:list={[part.tone === 'muted' && 'hp-muted']}
+                        >
+                          {part.text}
+                        </a>
+                      ) : (
+                        <span
+                          class:list={[
+                            part.tone === 'muted' && 'hp-muted',
+                            part.tone === 'gap' && 'hp-gap',
+                          ]}
+                        >
+                          {part.text}
+                        </span>
+                      ),
+                    )
+                  : f.v}
+              </dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </div>
   </div>
