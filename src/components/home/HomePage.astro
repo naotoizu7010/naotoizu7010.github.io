@@ -8,7 +8,9 @@
    ---------------------------------------------------------------- */
 import Header from './Header.astro';
 import Hero from './Hero.astro';
-import Mission from './Mission.astro';
+// Mission (My Theme) は作り直し待ちのため非表示。戻すときはこの import と
+// 下の <Mission /> のコメントを外す。詳細は docs/handoff-home.md を参照。
+// import Mission from './Mission.astro';
 import About from './About.astro';
 import Activities from './Activities.astro';
 import Personality from './Personality.astro';
@@ -26,7 +28,7 @@ import '../../styles/home.css';
   <Header />
   <main>
     <Hero />
-    <Mission />
+    {/* <Mission /> — My Theme セクションは作り直し待ちのため非表示 */}
     <About />
     <Activities />
     <Personality />
