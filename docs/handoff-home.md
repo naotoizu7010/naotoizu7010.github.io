@@ -37,7 +37,7 @@
    - 先頭のコメントアウトしてある `<div class="hp-cut hp-cut--top hp-cut--paper">` を戻す
      （上が白いセクションになるので、斜めカットが必要になる）
 
-コンポーネントと CSS (`.hp-mission-inner` / `.hp-mission-body` / `.hp-mission-corner`) は消していないので、
+コンポーネントと CSS (`.hp-mission-inner` / `.hp-mission-body`) は消していないので、
 上の2ファイルを戻すだけで元通り表示される。
 
 ### 作り直すときのメモ
@@ -46,7 +46,8 @@
   本文は `src/data/content.ts` の `about` と `research.items[0].body` から持ってきた文章で、
   **専用のコンテンツをまだ用意していない**。
 - 参考にした JAPANWAVE では、ここは "Our Mission" にあたる1カラムの宣言ブロック。
-  見出し + 本文だけのシンプルな構成で、左上に薄い斜めの面 (`.hp-mission-corner`) を置いている。
+  見出し + 本文だけのシンプルな構成で、右上に薄い赤の斜めの面 (`.hp-corner`) を置いている。
+  `.hp-corner` は About でも使っている共通パーツ (`tokens.css`)。青にしたいときは `.hp-corner--blue`。
 - 白背景のセクションなので、上下の並び (ヒーロー → ここ → About のグレー) の
   明暗の交互が崩れないようにする。
 - 文章を `content.ts` に持たせるなら、`mission: { heading, body }` のような形を足すのがよさそう。

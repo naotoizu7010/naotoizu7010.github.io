@@ -15,17 +15,6 @@
   color: var(--df-fg-mute);
   white-space: pre-line;
 }
-.hp-mission-corner {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 38%;
-  height: clamp(80px, 12vw, 160px);
-  background: color-mix(in srgb, var(--df-red) 5%, transparent);
-  clip-path: polygon(100% 0, 0 0, 100% 100%);
-  pointer-events: none;
-}
-
 /* ---------------------------------------------------------------
    共通: セクション見出しブロック
    --------------------------------------------------------------- */
@@ -172,7 +161,6 @@
   gap: clamp(40px, 5vw, 80px);
   align-items: start;
 }
-.hp-about-actions { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 14px; }
 .hp-about-highlight { margin-top: 36px; }
 .hp-highlight {
   padding-top: 20px;

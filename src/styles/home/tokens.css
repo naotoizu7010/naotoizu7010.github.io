@@ -158,6 +158,20 @@
 /* 透かし文字を置くセクションは、本文をその下に逃がす */
 .hp-section--wm > .hp-container { padding-top: clamp(40px, 6vw, 96px); }
 
+/* セクション右上の薄い斜めの面 */
+.hp-corner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  width: 38%;
+  height: clamp(80px, 12vw, 160px);
+  background: color-mix(in srgb, var(--df-red) 5%, transparent);
+  clip-path: polygon(100% 0, 0 0, 100% 100%);
+  pointer-events: none;
+}
+.hp-corner--blue { background: color-mix(in srgb, var(--df-blue) 5%, transparent); }
+
 /* セクション境目の斜めカット */
 .hp-cut {
   position: absolute;
