@@ -1,4 +1,5 @@
 @import './home/tokens.css';
+@import './home/legacy.css';
 @import './home/header.css';
 @import './home/sections.css';
 @import './home/responsive.css';

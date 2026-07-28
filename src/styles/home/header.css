@@ -146,26 +146,6 @@
 }
 .hp-lang:hover { color: var(--df-blue); border-color: var(--df-blue); }
 
-.hp-header-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  height: 42px;
-  padding: 0 22px;
-  border-radius: 999px;
-  background: var(--df-red);
-  color: #fff;
-  font-family: var(--df-mono);
-  font-size: 12px;
-  letter-spacing: 0.14em;
-  box-shadow: 0 4px 16px rgba(229, 55, 75, 0.32);
-  transition: transform 0.24s, background 0.24s, box-shadow 0.24s;
-}
-.hp-header-cta:hover {
-  transform: translateY(-1px);
-  background: var(--df-blue);
-  box-shadow: 0 10px 24px rgba(42, 86, 240, 0.38);
-}
 
 /* テーマ切り替え (df-theme-toggle をこのページ用に再スタイル) */
 .hp-header .df-theme-toggle,

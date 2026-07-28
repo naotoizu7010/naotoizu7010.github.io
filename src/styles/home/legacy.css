@@ -1,0 +1,308 @@
+/* ===============================================================
+   src/styles/home/legacy.css
+   旧トップページ (data-flow) のヒーローとフッターをそのまま使うための
+   スタイル。data-flow 版から必要な部分だけを持ってきている。
+   - 背景のグリッド / フローライン / ドットもヒーローの見た目のために復元
+   - 横幅だけ、新しいセクションと揃うようコンテナ幅に合わせた
+=============================================================== */
+
+/* コンテナ — 新セクションの .hp-container と同じ幅に揃える */
+.df-grid {
+  width: 100%;
+  max-width: var(--hp-container);
+  margin: 0 auto;
+  padding: 0 var(--hp-pad);
+  position: relative;
+  z-index: 2;
+}
+
+/* ページ背景のグリッド */
+.hp-root::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--df-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--df-grid) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ページ背景 — フローライン / ドット (scripts/data-flow-bg.ts が生成) */
+.df-page-papers,
+.df-page-bg-flows,
+.df-page-bg-dots {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.df-page-papers { z-index: 1; }
+.df-page-bg-flows { z-index: 2; }
+.df-page-bg-dots { z-index: 2; }
+
+.df-page-paper {
+  position: absolute;
+  left: 0;
+  right: 0;
+  background: var(--df-paper);
+  border-top: 1px solid var(--df-line);
+  border-bottom: 1px solid var(--df-line);
+}
+
+.df-page-dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  will-change: transform;
+  transform: translate3d(-9999px, -9999px, 0);
+}
+
+/* フローラインのアニメーション */
+.df-flow-particle {
+  stroke-dasharray: 2 18;
+  stroke-dashoffset: 0;
+  animation: df-march 9s linear infinite;
+  opacity: 0.85;
+}
+.df-flow-particle--slow { animation-duration: 16s; }
+.df-flow-particle--med { animation-duration: 9s; }
+.df-flow-particle--fast { animation-duration: 5.5s; }
+.df-flow-particle--rev { animation-direction: reverse; animation-duration: 12s; }
+.df-flow-particle--white { opacity: 0.55; }
+
+@keyframes df-march {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -400; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .df-flow-particle { animation: none; }
+}
+
+/* ---------------------------------------------------------------
+   HERO
+   --------------------------------------------------------------- */
+.df-hero {
+  /* 固定ヘッダーのぶんだけ下げる (旧デザインの上下パディングは据え置き) */
+  padding: calc(96px + var(--hp-header-h)) 0 100px;
+  position: relative;
+  min-height: 720px;
+  overflow: hidden;
+}
+.df-hero-inner {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+.df-hero-title {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 900;
+  font-size: 116px;
+  line-height: 0.96;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+  margin: 0;
+}
+.df-hero-title .red { color: var(--df-red); }
+.df-hero-title .blue { color: var(--df-blue); }
+.df-hero-en {
+  margin-top: 20px;
+  font-family: var(--df-mono);
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  color: var(--df-fg-mute);
+  text-transform: uppercase;
+}
+.df-hero-sub {
+  margin-top: 32px;
+  font-size: 17px;
+  line-height: 1.8;
+  max-width: 600px;
+  white-space: pre-line;
+}
+.df-hero-meta {
+  margin-top: 44px;
+  display: flex;
+  gap: 28px;
+  font-family: var(--df-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--df-fg-mute);
+}
+.df-hero-meta b { color: var(--df-fg); font-weight: 500; }
+
+.df-hero-right {
+  position: relative;
+  aspect-ratio: 1 / 1.05;
+  width: 100%;
+}
+.df-hero-photo-wrap {
+  position: absolute;
+  inset: 32px;
+  background: var(--df-paper);
+  border: 1px solid var(--df-line);
+  border-radius: 6px;
+  z-index: 3;
+  overflow: hidden;
+}
+.df-hero-stat-card {
+  position: absolute;
+  z-index: 4;
+  background: var(--df-paper);
+  border: 1px solid var(--df-line);
+  padding: 12px 16px;
+  border-radius: 6px;
+  box-shadow: 0 6px 18px rgba(10, 15, 31, 0.06);
+}
+.hp-root[data-theme="dark"] .df-hero-stat-card { box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6); }
+.df-hero-stat-card .k {
+  font-family: var(--df-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: var(--df-fg-mute);
+  text-transform: uppercase;
+}
+.df-hero-stat-card .v {
+  font-family: var(--df-display);
+  font-weight: 700;
+  font-size: 24px;
+  margin-top: 2px;
+}
+.df-hero-stat-card .v.red { color: var(--df-red); }
+.df-hero-stat-card .v.blue { color: var(--df-blue); }
+.df-hero-stat-card-1 { top: 0; left: -20px; }
+.df-hero-stat-card-2 { bottom: -10px; right: -28px; }
+
+@media (min-width: 760px) and (max-width: 1120px) {
+  .df-hero-inner { gap: 40px; }
+  .df-hero-title { font-size: 88px; letter-spacing: -0.035em; }
+  .df-hero-stat-card-1 { top: 4px; left: -8px; }
+  .df-hero-stat-card-2 { bottom: -30px; right: -10px; }
+}
+@media (min-width: 1121px) and (max-width: 1280px) {
+  .df-hero-title { font-size: 100px; }
+  .df-hero-stat-card-1 { left: -12px; }
+  .df-hero-stat-card-2 { right: -16px; }
+}
+
+/* ---------------------------------------------------------------
+   FOOTER
+   --------------------------------------------------------------- */
+.df-footer {
+  background: var(--df-fg);
+  color: var(--df-bg);
+  padding: 80px 0 32px;
+  position: relative;
+  z-index: 3;
+  overflow: hidden;
+}
+.df-footer-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--hp-container);
+  margin: 0 auto;
+  padding: 0 var(--hp-pad);
+}
+.df-footer-top {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 64px;
+  padding-bottom: 56px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+.hp-root[data-theme="dark"] .df-footer-top { border-bottom-color: rgba(0, 0, 0, 0.4); }
+.df-footer-big {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 900;
+  font-size: 72px;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.df-footer-big .red { color: var(--df-red); }
+.df-footer-big .blue { color: var(--df-blue); }
+.df-footer-cta {
+  margin-top: 32px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 24px;
+  background: var(--df-red);
+  color: #fff;
+  font-family: var(--df-mono);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  border-radius: 999px;
+}
+.df-footer-cta:hover { background: var(--df-blue); color: #fff; }
+.df-footer-cta::after { content: "→"; font-size: 18px; }
+.df-footer-sns h4 {
+  font-family: var(--df-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin: 0 0 20px;
+}
+.df-footer-sns ul { display: flex; flex-direction: column; gap: 12px; }
+.df-footer-sns a {
+  font-family: var(--df-display);
+  font-size: 16px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.df-footer-sns a::after { content: "↗"; opacity: 0.55; }
+.df-footer-sns li:nth-child(odd) a:hover { color: var(--df-red); }
+.df-footer-sns li:nth-child(even) a:hover { color: var(--df-blue); }
+.df-footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 28px;
+  font-family: var(--df-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+.df-footer-top-link { opacity: 0.7; }
+
+/* ---------------------------------------------------------------
+   Mobile (旧 data-flow/responsive.css の該当分)
+   --------------------------------------------------------------- */
+@media (max-width: 760px) {
+  .hp-root::before { background-size: 32px 32px; }
+  .df-page-bg-flows { opacity: 0.7; }
+
+  .df-hero { padding: calc(32px + var(--hp-header-h)) 0 56px; min-height: 0; }
+  .df-hero-inner { grid-template-columns: 1fr; gap: 40px; align-items: stretch; }
+  .df-hero-title { font-size: 56px; letter-spacing: -0.035em; }
+  .df-hero-en { font-size: 11px; letter-spacing: 0.14em; }
+  .df-hero-sub { font-size: 15px; margin-top: 20px; }
+  .df-hero-meta { margin-top: 28px; flex-direction: column; gap: 8px; font-size: 11px; }
+  .df-hero-right { width: 100%; aspect-ratio: 1 / 1.1; max-width: 320px; margin: 8px auto 0; }
+  .df-hero-photo-wrap { inset: 24px; }
+  .df-hero-stat-card { padding: 8px 12px; }
+  .df-hero-stat-card .v { font-size: 18px; }
+  .df-hero-stat-card .k { font-size: 8px; }
+  .df-hero-stat-card-1 { top: -8px; left: -12px; }
+  .df-hero-stat-card-2 { bottom: -15px; right: -16px; }
+
+  .df-footer { padding: 56px 0 28px; }
+  .df-footer-top { grid-template-columns: 1fr; gap: 36px; padding-bottom: 32px; }
+  .df-footer-big { font-size: 38px; }
+  .df-footer-cta { padding: 12px 18px; font-size: 11px; }
+  .df-footer-sns a { font-size: 14px; }
+  .df-footer-bottom { flex-direction: column; gap: 10px; align-items: flex-start; text-align: left; }
+}

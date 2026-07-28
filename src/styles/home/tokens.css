@@ -15,6 +15,8 @@
   --df-fg-mute: #6A7286;
   --df-line: #DDE2EC;
   --df-line-strong: #0A0F1F;
+  --df-grid: rgba(10, 15, 31, 0.06);
+  --df-dot-opacity: 0.9;
 
   /* --- フォント: data-flow/core.css と同じ値 --- */
   --df-display: 'Space Grotesk', 'Inter', 'Noto Sans JP', sans-serif;
@@ -30,8 +32,6 @@
   --hp-section-y: clamp(72px, 9vw, 128px);
 
   /* --- 面 (既存パレット内の色のみ) --- */
-  --hp-panel: #2A56F0;      /* ヒーローの主面 = --df-blue のライト値 */
-  --hp-panel-deep: #0A0F1F; /* ヒーローの奥面 = --df-fg のライト値 */
   --hp-ink: #0A0F1F;        /* 濃色セクションの地 */
   --hp-on-dark: #FFFFFF;
 
@@ -41,6 +41,7 @@
   background: var(--df-bg);
   color: var(--df-fg);
   font-family: var(--df-text);
+  position: relative;
   overflow-x: clip;
 }
 
@@ -53,10 +54,8 @@
   --df-fg-mute: #7782A0;
   --df-line: #26304a;
   --df-line-strong: #ECEFFB;
-
-  /* ヒーロー面は白文字の可読性を保つためライト側の青を使う */
-  --hp-panel: #2A56F0;
-  --hp-panel-deep: #060814;
+  --df-grid: rgba(236, 239, 251, 0.06);
+  --df-dot-opacity: 1.12;
   --hp-ink: #101733;
 
   --hp-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
@@ -78,6 +77,8 @@
 
 .hp-section {
   position: relative;
+  /* 背景のフロー/ドット (z-index 2) より前に出す */
+  z-index: 3;
   padding: var(--hp-section-y) 0;
   overflow: hidden;
 }
