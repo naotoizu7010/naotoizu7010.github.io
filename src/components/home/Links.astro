@@ -1,0 +1,42 @@
+---
+/* ----------------------------------------------------------------
+   src/components/home/Links.astro
+   各ページ / 外部リンクをカードグリッドで並べる。
+   ---------------------------------------------------------------- */
+import { content } from '../../data/content.ts';
+
+const C = content;
+---
+
+<section class="hp-section hp-section--paper hp-section--wm" id="links">
+  <div class="hp-watermark hp-watermark--left hp-watermark--red" aria-hidden="true">Links</div>
+
+  <div class="hp-container">
+    <div class="hp-head hp-head--split hp-reveal">
+      <div>
+        <span class="hp-eyebrow"><span>04 / Links</span></span>
+        <h2 class="hp-h2">{C.links.heading}</h2>
+      </div>
+      <p class="hp-head-lead">{C.links.lead}</p>
+    </div>
+
+    <div class="hp-cards hp-cards--4">
+      {C.links.items.map((l, i) => {
+        const external = l.href.startsWith('http');
+        return (
+          <a
+            class="hp-card hp-reveal"
+            href={l.href}
+            target={external ? '_blank' : undefined}
+            rel={external ? 'noopener' : undefined}
+          >
+            <span class="hp-card-no">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="hp-card-title">{l.title}</h3>
+            <p class="hp-card-body">{l.body}</p>
+            <span class="hp-more">{external ? '外部サイト' : '詳しく見る'}</span>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,287 @@
+/* ===============================================================
+   src/styles/home/header.css
+   固定ヘッダー + モバイルメニュー。
+   JS (menu.ts / theme.ts) との互換のため
+   .df-burger / .df-menu / .df-theme-toggle のクラス名は維持する。
+=============================================================== */
+
+.hp-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  background: var(--df-paper);
+  transition: box-shadow 0.4s;
+}
+.hp-header.is-stuck { box-shadow: 0 4px 24px rgba(10, 15, 31, 0.08); }
+.hp-root[data-theme='dark'] .hp-header.is-stuck { box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6); }
+
+.hp-header-inner {
+  max-width: var(--hp-container);
+  margin: 0 auto;
+  padding: 0 var(--hp-pad);
+  height: var(--hp-header-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+/* ブランド */
+.hp-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.hp-brand-mark {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  border: 1.5px solid var(--df-line-strong);
+  border-radius: 50%;
+  flex: 0 0 auto;
+}
+.hp-brand-mark::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  background: var(--df-red);
+}
+.hp-brand-mark::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: -3px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--df-blue);
+  transform: translateX(-50%);
+}
+.hp-brand-name {
+  display: block;
+  font-family: var(--df-display);
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+.hp-brand-sub {
+  display: block;
+  margin-top: 2px;
+  font-family: var(--df-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--df-fg-mute);
+  white-space: nowrap;
+}
+
+/* ナビ */
+.hp-nav {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+/* 旧 .df-nav-link と同じく mono + 赤/青のドット */
+.hp-nav-link {
+  --hp-accent: var(--df-red);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: var(--hp-header-h);
+  padding: 0 clamp(12px, 1.4vw, 18px);
+  font-family: var(--df-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  transition: color 0.24s;
+}
+.hp-nav-link:nth-child(even) { --hp-accent: var(--df-blue); }
+.hp-nav-link::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--hp-accent);
+}
+.hp-nav-link::after {
+  content: '';
+  position: absolute;
+  left: clamp(12px, 1.4vw, 18px);
+  right: clamp(12px, 1.4vw, 18px);
+  bottom: 18px;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--hp-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hp-nav-link:hover { color: var(--hp-accent); }
+.hp-nav-link:hover::after { transform: scaleX(1); }
+
+/* 右側 */
+.hp-header-right {
+  display: flex;
+  align-items: center;
+  gap: clamp(8px, 1vw, 14px);
+  flex-shrink: 0;
+}
+.hp-lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border: 1px solid var(--df-line);
+  border-radius: 999px;
+  font-family: var(--df-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--df-fg-mute);
+  transition: color 0.2s, border-color 0.2s;
+}
+.hp-lang:hover { color: var(--df-blue); border-color: var(--df-blue); }
+
+
+/* テーマ切り替え (df-theme-toggle をこのページ用に再スタイル) */
+.hp-header .df-theme-toggle,
+.df-menu .df-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 13px;
+  border: 1px solid var(--df-line);
+  border-radius: 999px;
+  font-family: var(--df-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--df-fg-mute);
+  transition: color 0.2s, border-color 0.2s;
+}
+.hp-header .df-theme-toggle:hover,
+.df-menu .df-theme-toggle:hover { color: var(--df-fg); border-color: var(--df-fg-mute); }
+.df-theme-toggle .ico {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+  flex: 0 0 auto;
+}
+.hp-root[data-theme='dark'] .df-theme-toggle .ico {
+  border: 0;
+  background: radial-gradient(circle at 62% 38%, transparent 36%, currentColor 37%);
+}
+.df-theme-toggle-label { display: inline-flex; align-items: center; gap: 5px; }
+.df-theme-toggle-label [data-theme-option] { opacity: 0.34; transition: opacity 0.16s; }
+.df-theme-toggle-label [data-active='true'] { opacity: 1; color: var(--df-fg); font-weight: 700; }
+.df-theme-toggle-separator { opacity: 0.28; }
+
+/* バーガー — grid だと align-content: stretch で線が広がるので flex で中央に詰める */
+.df-burger {
+  display: none;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--df-line);
+  border-radius: 10px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+.df-burger span {
+  display: block;
+  width: 16px;
+  height: 1.5px;
+  border-radius: 2px;
+  background: var(--df-fg);
+}
+
+/* モバイルメニュー */
+.df-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  background: var(--df-paper);
+  padding: 24px var(--hp-pad) 40px;
+  display: flex;
+  flex-direction: column;
+  /* 横向きや文字拡大で中身が画面より高くなったとき、
+     menu.ts が body のスクロールを止めるのでここでスクロールできるようにする */
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-12px);
+  transition: opacity 0.28s, transform 0.28s, visibility 0.28s;
+}
+.df-menu.is-open { opacity: 1; visibility: visible; transform: none; }
+.df-menu-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: calc(var(--hp-header-h) - 24px);
+}
+.df-menu-eyebrow {
+  font-family: var(--df-mono);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--df-fg-mute);
+}
+.df-menu-close {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--df-line);
+  border-radius: 10px;
+}
+.df-menu-close span {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  top: calc(50% - 0.75px);
+  height: 1.5px;
+  border-radius: 2px;
+  background: var(--df-fg);
+}
+.df-menu-close span:first-child { transform: rotate(45deg); }
+.df-menu-close span:last-child { transform: rotate(-45deg); }
+
+.df-menu-list { margin-top: 24px; flex: 1; }
+.df-menu-link {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 4px;
+  border-bottom: 1px dashed var(--df-line);
+  font-family: var(--df-ja);
+  font-size: 20px;
+  font-weight: 700;
+}
+.df-menu-num {
+  font-family: var(--df-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--df-red);
+}
+.df-menu-list li:nth-child(even) .df-menu-num { color: var(--df-blue); }
+.df-menu-arrow {
+  margin-left: auto;
+  font-family: var(--df-display);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--df-fg-mute);
+}
+
+.df-menu-foot {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-top: 24px;
+}

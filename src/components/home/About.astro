@@ -1,0 +1,71 @@
+---
+/* ----------------------------------------------------------------
+   src/components/home/About.astro
+   左に紹介文とCTA、右に基本情報。
+   旧トップページと同じく、基本情報はAboutの中に置く。
+   ---------------------------------------------------------------- */
+import { content } from '../../data/content.ts';
+
+const C = content;
+---
+
+<section class="hp-section hp-section--bg hp-section--wm" id="about">
+  {/* 白いセクション (Mission) が上に戻ってきたら、この斜めカットも戻す
+      <div class="hp-cut hp-cut--top hp-cut--paper" aria-hidden="true"></div> */}
+  <div class="hp-corner" aria-hidden="true"></div>
+  <div class="hp-watermark hp-watermark--left hp-watermark--red" aria-hidden="true">About</div>
+
+  <div class="hp-container">
+    <div class="hp-about-inner">
+      <div class="hp-reveal">
+        <span class="hp-eyebrow"><span>01 / About</span></span>
+        <h2 class="hp-h2">
+          {C.about.heading_ja[0]}<br />{C.about.heading_ja[1]}
+        </h2>
+        <p class="hp-lead">{C.about.lead}</p>
+        <p class="hp-lead">{C.about.body}</p>
+
+        <div class="hp-highlight hp-about-highlight">
+          <div class="k">大事にしていること</div>
+          <div class="v">何事にも興味を持つこと。好奇心を満たし続けること。</div>
+        </div>
+      </div>
+
+      <div class="hp-reveal">
+        <span class="hp-eyebrow hp-eyebrow--blue"><span>Profile</span></span>
+        <dl class="hp-table">
+          {C.about.factoids.map((f) => (
+            <div class="hp-row">
+              <dt>{f.k}</dt>
+              <dd>
+                {f.vParts
+                  ? f.vParts.map((part) =>
+                      part.href ? (
+                        <a
+                          href={part.href}
+                          target="_blank"
+                          rel="noopener"
+                          class:list={[part.tone === 'muted' && 'hp-muted']}
+                        >
+                          {part.text}
+                        </a>
+                      ) : (
+                        <span
+                          class:list={[
+                            part.tone === 'muted' && 'hp-muted',
+                            part.tone === 'gap' && 'hp-gap',
+                          ]}
+                        >
+                          {part.text}
+                        </span>
+                      ),
+                    )
+                  : f.v}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>

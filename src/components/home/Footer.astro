@@ -1,0 +1,45 @@
+---
+/* ----------------------------------------------------------------
+   src/components/home/Footer.astro
+   旧トップページ (data-flow) のフッターをそのまま使う。
+   ---------------------------------------------------------------- */
+import { content } from '../../data/content.ts';
+
+const C = content;
+---
+
+<footer class="df-footer">
+  <div class="df-footer-inner">
+    <div class="df-footer-top">
+      <div>
+        <div class="df-footer-big">
+          {C.footer.big_top}<br />
+          <span class="red">{C.footer.big_red}</span><br />
+          <span class="blue">{C.footer.big_blue}</span>
+        </div>
+        <a
+          class="df-footer-cta"
+          href={C.footer.cta_href}
+          target={C.footer.cta_href.startsWith('http') ? '_blank' : undefined}
+          rel={C.footer.cta_href.startsWith('http') ? 'noopener' : undefined}
+        >
+          {C.footer.cta_label}
+        </a>
+      </div>
+      <div class="df-footer-sns">
+        <h4>FIND ME</h4>
+        <ul>
+          {C.footer.sns.map((s) => (
+            <li>
+              <a href={s.href} target="_blank" rel="noopener">{s.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+    <div class="df-footer-bottom">
+      <span>{C.footer.legal}</span>
+      <a class="df-footer-top-link" href="#top">↑ TOP</a>
+    </div>
+  </div>
+</footer>
