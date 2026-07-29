@@ -56,7 +56,8 @@
   --df-line-strong: #ECEFFB;
   --df-grid: rgba(236, 239, 251, 0.06);
   --df-dot-opacity: 1.12;
-  --hp-ink: #101733;
+  /* 上下の白セクション (--df-paper = #101733) と同色にならないよう、地より濃くする */
+  --hp-ink: #060813;
 
   --hp-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
   --hp-shadow-hover: 0 24px 56px rgba(0, 0, 0, 0.66);
