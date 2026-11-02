@@ -172,10 +172,10 @@ export const content = {
         accent: 'red',
       },
       {
-        kind: 'researcher',
+        kind: 'research',
         title: '研究情報',
         body: '業績・所属・論文などの情報まとめ。\n（準備中）',
-        href: '/researcher',
+        href: '/research',
         cta: 'open',
         accent: 'blue',
       },

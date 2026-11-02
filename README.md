@@ -42,7 +42,7 @@ npm run preview
 - `/en`: 英語プロフィールページ
 - `/cv`: CVページ
 - `/personality`: Personalityページ
-- `/researcher`: 研究者向けページ
+- `/research`: 研究者向けページ
 - `/contact`: Contactページ
 - `/oldHP`: 旧日本語ページ
 - `/oldHPen`: 旧英語ページ

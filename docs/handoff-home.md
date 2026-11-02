@@ -94,7 +94,7 @@
 
 ## 触っていないもの
 
-- `/en` `/cv` `/personality` `/researcher` `/contact` などのサブページは旧デザインのまま。
+- `/en` `/cv` `/personality` `/research` `/contact` などのサブページは旧デザインのまま。
   ヘッダーの見た目がトップと揃っていない。
 - `src/components/DataFlowPage.astro` と `src/components/data-flow/` は残してある。
   トップページからは参照していないが、`/personality` が `data-flow.css` を使っている。
