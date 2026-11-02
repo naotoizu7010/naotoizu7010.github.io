@@ -1,5 +1,88 @@
 /* /research 専用の追加分。色・余白・行の組み方は cv.css を使う */
 
+/* 上部の「Back to top」と JP / EN の切り替え */
+.pub-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.pub-lang {
+  display: inline-flex;
+  border: 1px solid var(--cv-line);
+  border-radius: 999px;
+  padding: 2px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.pub-lang:hover {
+  border-color: var(--cv-fg-mute);
+}
+
+.pub-lang span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  padding: 6px 12px;
+  border-radius: 999px;
+  color: var(--cv-fg-mute);
+  transition: color 0.15s, background 0.15s;
+}
+
+.pub-lang:hover span:not(.is-current) {
+  color: var(--cv-fg);
+}
+
+.pub-lang .is-current {
+  background: var(--cv-fg);
+  color: var(--cv-bg);
+}
+
+/* 年の切り替え。今選んでいる年を塗りつぶす */
+.pub-years {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+/* 「すべて」と「All」で幅が変わらないよう、ボタンの幅をそろえる */
+.pub-years button {
+  min-width: 72px;
+  text-align: center;
+  font-family: 'JetBrains Mono', 'Noto Sans JP', monospace;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  padding: 8px 14px;
+  border: 1px solid var(--cv-line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--cv-fg-mute);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.pub-years button:hover {
+  color: var(--cv-fg);
+  border-color: var(--cv-fg-mute);
+}
+
+.pub-years button[aria-pressed='true'] {
+  background: var(--cv-fg);
+  border-color: var(--cv-fg);
+  color: var(--cv-bg);
+}
+
+/* cv.css の display: grid より優先して、絞り込みで隠した業績と節を消す */
+.pub-list li[hidden],
+[data-pub-block][hidden] {
+  display: none;
+}
+
 .pub-group + .pub-group {
   margin-top: 40px;
 }
@@ -7,10 +90,10 @@
 .pub-h3 {
   margin: 0 0 20px;
   font-family: 'Noto Sans JP', sans-serif;
-  font-weight: 700;
-  font-size: 15px;
+  font-weight: 800;
+  font-size: 19px;
   letter-spacing: 0.04em;
-  color: var(--cv-fg-mute);
+  color: var(--cv-fg);
 }
 
 /* 各業績のタイトル。cv.css の .cv-events h3 と同じ見た目にそろえる */

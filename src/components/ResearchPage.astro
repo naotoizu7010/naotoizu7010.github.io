@@ -1,0 +1,213 @@
+---
+/* ----------------------------------------------------------------
+   src/components/ResearchPage.astro
+   研究者向けページの本体。/research と /en/research で共通に使い、
+   lang で見出しや業績の表記を切り替える。
+   論文・発表は区分（type）ごとに新しい順で並べ、受賞は別の節にまとめる。
+   データは src/data/content.ts の publications、見た目は cv.css を共有。
+   ---------------------------------------------------------------- */
+import Base from '../layouts/Base.astro';
+import { publications } from '../data/content.ts';
+import type { Publication } from '../data/content.ts';
+import type { Lang } from '../data/types';
+import '../styles/cv.css';
+import '../styles/research.css';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const t = {
+  ja: {
+    title: 'Research — 大泉直人 / Naoto Oizumi',
+    description: '大泉直人の論文・発表の一覧。',
+    top: '/',
+    publications: '発表・論文',
+    awards: '受賞',
+    inJapanese: '',
+    lastUpdate: '最終更新：',
+    allYears: 'すべて',
+    yearFilter: '年で絞り込む',
+    contact: '連絡先：',
+    contactBody: '各 SNS の DM、または naoto-oizumi[at]aist.go.jp',
+  },
+  en: {
+    title: 'Research — Naoto Oizumi',
+    description: 'Publications and presentations by Naoto Oizumi.',
+    top: '/en',
+    publications: 'Publications',
+    awards: 'Awards',
+    inJapanese: ' (in Japanese)',
+    lastUpdate: 'last update: ',
+    allYears: 'All',
+    yearFilter: 'Filter by year',
+    contact: 'Contact: ',
+    contactBody: 'DM on social media, or naoto-oizumi[at]aist.go.jp',
+  },
+}[lang];
+
+// 見出しの並び順。業績がない区分は表示しない
+const sections: { type: Publication['type']; ja: string; en: string }[] = [
+  { type: 'intl-journal', ja: '国際論文誌', en: 'International Journals' },
+  { type: 'domestic-journal', ja: '国内論文誌', en: 'Domestic Journals' },
+  { type: 'intl-conf', ja: '国際会議', en: 'International Conferences' },
+  { type: 'domestic-conf', ja: '国内会議', en: 'Domestic Conferences' },
+  { type: 'preprint', ja: 'プレプリント', en: 'Preprints' },
+  { type: 'talk', ja: '講演', en: 'Talks' },
+];
+
+const selfNames = ['大泉直人', 'Naoto Oizumi'];
+// 英語の業績は半角カンマ、日本語の業績は全角カンマで著者を区切る
+const authorSep = (authors: string[]) => (/^[\x00-\x7F]+$/.test(authors.join('')) ? ', ' : '，');
+
+// 日本語ページで ja がない業績（英語の業績）は en の表記を使う
+const textOf = (p: Publication) => (lang === 'ja' ? p.ja ?? p.en : p.en);
+const noteOf = (p: Publication) => (p.inJapanese ? t.inJapanese : '');
+
+const sorted = [...publications].sort((a, b) => b.date.localeCompare(a.date));
+const groups = sections
+  .map((s) => ({ label: s[lang], items: sorted.filter((p) => p.type === s.type) }))
+  .filter((g) => g.items.length > 0);
+const awards = sorted.filter((p) => p.award);
+
+const formatDate = (date: string) => date.replace('-', '.');
+const yearOf = (p: Publication) => p.date.slice(0, 4);
+// 年の切り替えに出す年。業績のある年だけを新しい順に並べる
+const years = [...new Set(sorted.map(yearOf))];
+---
+
+<Base title={t.title} description={t.description} lang={lang}>
+  <main class="cv-root">
+    <header class="cv-header">
+      <div class="pub-topbar">
+        <a href={t.top} class="cv-back">← Back to top</a>
+        {/* トグル全体を1つのリンクにして、どこを押してももう一方の言語へ切り替える */}
+        <a
+          class="pub-lang"
+          href={lang === 'ja' ? '/en/research' : '/research'}
+          hreflang={lang === 'ja' ? 'en' : 'ja'}
+          aria-label={lang === 'ja' ? 'Switch to English' : '日本語に切り替え'}
+        >
+          <span class:list={{ 'is-current': lang === 'ja' }}>JP</span>
+          <span class:list={{ 'is-current': lang === 'en' }}>EN</span>
+        </a>
+      </div>
+      <h1 class="cv-name">Research</h1>
+      <p class="cv-sub">{t.lastUpdate}2026/11/2</p>
+      <div class="pub-years" role="group" aria-label={t.yearFilter}>
+        <button type="button" data-year="all" aria-pressed="true">{t.allYears}</button>
+        {years.map((y) => (
+          <button type="button" data-year={y} aria-pressed="false">{y}</button>
+        ))}
+      </div>
+    </header>
+
+    <section class="cv-block" data-pub-block>
+      <h2 class="cv-h2">{t.publications}</h2>
+      {groups.map((g) => (
+        <section class="pub-group" data-pub-block>
+          <h3 class="pub-h3">{g.label}</h3>
+          <ol class="cv-events pub-list">
+            {g.items.map((p) => {
+              const x = textOf(p);
+              return (
+                <li data-year={yearOf(p)}>
+                  <time>{formatDate(p.date)}</time>
+                  <div>
+                    <h4>
+                      {x.title}
+                      {x.subtitle && <><br />{x.subtitle}</>}
+                    </h4>
+                    <p class="pub-authors">
+                      {x.authors.map((a, i) => (
+                        <>
+                          {i > 0 && authorSep(x.authors)}
+                          {selfNames.includes(a) ? <strong>{a}</strong> : a}
+                        </>
+                      ))}
+                    </p>
+                    <p>
+                      {x.venue}{noteOf(p)}
+                      <br />
+                      {x.period}{x.place && `${lang === 'en' ? ', ' : '，'}${x.place}`}
+                    </p>
+                    {p.links && (
+                      <p class="pub-links">
+                        {p.links.map((l) => (
+                          <a href={l.href} target="_blank" rel="noopener">{l[lang]}</a>
+                        ))}
+                      </p>
+                    )}
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
+        </section>
+      ))}
+    </section>
+
+    {awards.length > 0 && (
+      <section class="cv-block" data-pub-block>
+        <h2 class="cv-h2">{t.awards}</h2>
+        <ol class="cv-events pub-list">
+          {awards.map((p) => {
+            const x = textOf(p);
+            const award = p.award!;
+            return (
+              <li data-year={yearOf(p)}>
+                <time>{formatDate(p.date)}</time>
+                <div>
+                  <h4>
+                    {award.href ? (
+                      <a href={award.href} target="_blank" rel="noopener">{award[lang]}</a>
+                    ) : (
+                      award[lang]
+                    )}
+                  </h4>
+                  <p class="pub-award-venue">{x.venue.split(',')[0]}</p>
+                  {lang === 'en' ? (
+                    <p>“{x.title}{x.subtitle && <><br />{x.subtitle}</>}”</p>
+                  ) : (
+                    <p>「{x.title}{x.subtitle && <><br />{x.subtitle}</>}」</p>
+                  )}
+                </div>
+              </li>
+            );
+          })}
+        </ol>
+      </section>
+    )}
+
+    <footer class="cv-foot">
+      <p>
+        {t.contact}
+        <br class="cv-mobile-break" />
+        {t.contactBody}
+      </p>
+      <p class="cv-foot-back">
+        <a href={t.top}>← Back to top</a>
+      </p>
+    </footer>
+  </main>
+</Base>
+
+<script>
+  // 年の切り替え。選んだ年以外の業績を隠し、業績が残らない見出しや節も隠す
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.pub-years button');
+
+  const show = (year: string) => {
+    buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.year === year)));
+    document.querySelectorAll<HTMLElement>('li[data-year]').forEach((li) => {
+      li.hidden = year !== 'all' && li.dataset.year !== year;
+    });
+    // 内側の見出し（区分）から先に判定し、そのあと外側の節を判定する
+    [...document.querySelectorAll<HTMLElement>('[data-pub-block]')].reverse().forEach((block) => {
+      block.hidden = !block.querySelector('li[data-year]:not([hidden])');
+    });
+  };
+
+  buttons.forEach((b) => b.addEventListener('click', () => show(b.dataset.year ?? 'all')));
+</script>
