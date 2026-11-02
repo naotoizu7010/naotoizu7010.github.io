@@ -1,22 +1,123 @@
 ---
 /* ----------------------------------------------------------------
    src/pages/research.astro
-   研究者向けページのComing Soon表示。
-   共通テンプレートは src/components/ComingSoon.astro を使用。
+   研究者向けページ。論文・発表を区分（type）ごとに新しい順で並べ、
+   受賞は別の節にまとめる。
+   データは src/data/content.ts の publications、見た目は cv.css を共有。
    ---------------------------------------------------------------- */
 import Base from '../layouts/Base.astro';
-import ComingSoon from '../components/ComingSoon.astro';
+import { publications } from '../data/content.ts';
+import type { Publication } from '../data/content.ts';
+import '../styles/cv.css';
+import '../styles/research.css';
 
-const redirectSeconds = 5;
+const self = '大泉直人';
+
+// 見出しの並び順。業績がない区分は表示しない
+const sections: { type: Publication['type']; label: string }[] = [
+  { type: 'intl-journal', label: '国際論文誌' },
+  { type: 'domestic-journal', label: '国内論文誌' },
+  { type: 'intl-conf', label: '国際会議' },
+  { type: 'domestic-conf', label: '国内会議' },
+  { type: 'preprint', label: 'プレプリント' },
+  { type: 'talk', label: '講演' },
+];
+
+const sorted = [...publications].sort((a, b) => b.date.localeCompare(a.date));
+const groups = sections
+  .map((s) => ({ ...s, items: sorted.filter((p) => p.type === s.type) }))
+  .filter((g) => g.items.length > 0);
+const awards = sorted.filter((p) => p.award);
+
+const formatDate = (date: string) => date.replace('-', '.');
 ---
 
-<Base
-  title="Research — 準備中 / Naoto Oizumi"
-  description="研究者向けのプロフィールページは準備中です。"
->
-  <meta http-equiv="refresh" content={`${redirectSeconds};url=/`} slot="head" />
-  <ComingSoon
-    body="研究業績・論文・査読歴などをまとめたページを準備しています。"
-    redirectSeconds={redirectSeconds}
-  />
+<Base title="Research — 大泉直人 / Naoto Oizumi" description="大泉直人の論文・発表の一覧。">
+  <main class="cv-root">
+    <header class="cv-header">
+      <a href="/" class="cv-back">← Back to top</a>
+      <h1 class="cv-name">Research <span lang="en">Naoto Oizumi</span></h1>
+      <p class="cv-sub">last update: 2026/11/2</p>
+    </header>
+
+    <section class="cv-block">
+      <h2 class="cv-h2">発表・論文</h2>
+      {groups.map((g) => (
+        <section class="pub-group">
+          <h3 class="pub-h3">{g.label}</h3>
+          <ol class="cv-events pub-list">
+            {g.items.map((p) => (
+              <li>
+                <time>{formatDate(p.date)}</time>
+                <div>
+                  <h4>
+                    {p.title}
+                    {p.subtitle && <><br />{p.subtitle}</>}
+                  </h4>
+                  <p class="pub-authors">
+                    {p.authors.map((a, i) => (
+                      <>
+                        {i > 0 && '，'}
+                        {a === self ? <strong>{a}</strong> : a}
+                      </>
+                    ))}
+                  </p>
+                  <p>
+                    {p.venue}
+                    <br />
+                    {p.period}{p.place && `，${p.place}`}
+                  </p>
+                  {p.links && (
+                    <p class="pub-links">
+                      {p.links.map((l) => (
+                        <a href={l.href} target="_blank" rel="noopener">{l.label}</a>
+                      ))}
+                    </p>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
+      ))}
+    </section>
+
+    {awards.length > 0 && (
+      <section class="cv-block">
+        <h2 class="cv-h2">受賞</h2>
+        <ol class="cv-events pub-list">
+          {awards.map((p) => (
+            <li>
+              <time>{formatDate(p.date)}</time>
+              <div>
+                <h4>
+                  {p.award!.href ? (
+                    <a href={p.award!.href} target="_blank" rel="noopener">{p.award!.name}</a>
+                  ) : (
+                    p.award!.name
+                  )}
+                </h4>
+                <p class="pub-award-venue">{p.venue.split(',')[0]}</p>
+                <p>
+                  「{p.title}
+                  {p.subtitle && <><br />{p.subtitle}</>}」
+                </p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+    )}
+
+    <footer class="cv-foot">
+      <p>
+        連絡先：
+        <br class="cv-mobile-break" />
+        各 SNS の DM、または naoto-oizumi[at]aist.go.jp
+      </p>
+      <p class="cv-foot-back">
+        <a href="/">← Back to top</a>
+      </p>
+    </footer>
+  </main>
 </Base>

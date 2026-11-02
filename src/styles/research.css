@@ -1,0 +1,59 @@
+/* /research 専用の追加分。色・余白・行の組み方は cv.css を使う */
+
+.pub-group + .pub-group {
+  margin-top: 40px;
+}
+
+.pub-h3 {
+  margin: 0 0 20px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  color: var(--cv-fg-mute);
+}
+
+/* 各業績のタイトル。cv.css の .cv-events h3 と同じ見た目にそろえる */
+.pub-list h4 {
+  margin: 0 0 6px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.45;
+  letter-spacing: -0.005em;
+}
+
+.pub-list h4 a {
+  color: var(--cv-fg);
+  border-bottom: 1px solid var(--cv-line);
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.pub-list h4 a:hover {
+  color: var(--cv-link-hover);
+  border-bottom-color: var(--cv-link-hover);
+}
+
+/* 受賞の節では、どの会議での受賞かが賞名と同じくらい目に入るようにする */
+.pub-list .pub-award-venue {
+  margin-bottom: 4px;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--cv-fg);
+}
+
+.pub-list .pub-authors {
+  margin-bottom: 4px;
+  color: var(--cv-fg);
+}
+
+.pub-authors strong {
+  font-weight: 700;
+}
+
+.pub-list .pub-links {
+  margin-top: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+}

@@ -107,6 +107,10 @@
   line-height: 1.35;
   letter-spacing: -0.005em;
 }
+/* Links のカードは説明文がないので、タイトルと「詳しく見る」の間をここで空ける */
+.hp-cards--4 .hp-card-title {
+  margin-bottom: 24px;
+}
 .hp-card-sub {
   margin: 0 0 20px;
   font-size: 13px;

@@ -4,6 +4,7 @@ import type {
   LinkItem,
   NavItem,
   PersonalityBite,
+  Publication,
   ResearchItem,
   SnsItem,
 } from './types';
@@ -14,6 +15,7 @@ export type {
   LinkItem,
   NavItem,
   PersonalityBite,
+  Publication,
   ResearchItem,
   SnsItem,
   TextPart,
@@ -174,7 +176,7 @@ export const content = {
       {
         kind: 'research',
         title: '研究情報',
-        body: '業績・所属・論文などの情報まとめ。\n（準備中）',
+        body: '研究テーマと、論文・発表の一覧。',
         href: '/research',
         cta: 'open',
         accent: 'blue',
@@ -297,3 +299,35 @@ export const cv = {
     },
   ],
 };
+
+/* 業績データ — /research ページで使う。type ごとの見出しの下に新しい順で並べる */
+export const publications: Publication[] = [
+  {
+    date: '2026-12',
+    type: 'domestic-conf',
+    refereed: false,
+    format: 'demo',
+    authors: ['大泉直人', '大西正輝'],
+    title: 'Webで描く動的な可視化のためのプレゼンテーションシステム',
+    subtitle: '―スタジアム来場者のGPS軌跡を例として―',
+    venue: '第34回インタラクティブシステムとソフトウェアに関するワークショップ（WISS 2026）',
+    place: '苗場プリンスホテル',
+    period: '2026年12月9日–11日',
+  },
+  {
+    date: '2026-10',
+    type: 'domestic-conf',
+    refereed: false,
+    format: 'oral',
+    authors: ['大泉直人', '富塚恭任', '大西正輝', '大門拓真', '萩原智行'],
+    title: '人流ビッグデータを用いたＪリーグ来場者の試合日別行動分析',
+    subtitle: '―メルカリスタジアムを対象として―',
+    venue: '第35回地理情報システム学会学術研究発表大会, B1-04',
+    place: '東京科学大学 大岡山キャンパス',
+    period: '2026年10月31日–11月1日',
+    award: { name: '大会優秀発表賞', href: 'https://www.gisa-japan.org/awards/post.html' },
+    links: [
+      { label: '関連：ホームゲーム来場者移動レポート（鹿島アントラーズ）', href: 'https://www.antlers.co.jp/blogs/news/260630ez5xeu' },
+    ],
+  },
+];
