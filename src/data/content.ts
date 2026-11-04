@@ -4,6 +4,7 @@ import type {
   LinkItem,
   NavItem,
   PersonalityBite,
+  Publication,
   ResearchItem,
   SnsItem,
 } from './types';
@@ -14,6 +15,7 @@ export type {
   LinkItem,
   NavItem,
   PersonalityBite,
+  Publication,
   ResearchItem,
   SnsItem,
   TextPart,
@@ -172,10 +174,10 @@ export const content = {
         accent: 'red',
       },
       {
-        kind: 'researcher',
+        kind: 'research',
         title: '研究情報',
-        body: '業績・所属・論文などの情報まとめ。\n（準備中）',
-        href: '/researcher',
+        body: '研究テーマと、論文・発表の一覧。',
+        href: '/research',
         cta: 'open',
         accent: 'blue',
       },
@@ -297,3 +299,64 @@ export const cv = {
     },
   ],
 };
+
+/* 業績データ — /research ページで使う。type ごとの見出しの下に新しい順で並べる */
+export const publications: Publication[] = [
+  {
+    date: '2026-12',
+    type: 'domestic-conf',
+    refereed: false,
+    format: 'demo',
+    inJapanese: true,
+    ja: {
+      authors: ['大泉直人', '大西正輝'],
+      title: 'Webで描く動的な可視化のためのプレゼンテーションシステム',
+      subtitle: '―スタジアム来場者のGPS軌跡を例として―',
+      venue: '第34回インタラクティブシステムとソフトウェアに関するワークショップ（WISS 2026）',
+      place: '苗場プリンスホテル',
+      period: '2026年12月9日–11日',
+    },
+    en: {
+      authors: ['Naoto Oizumi', 'Masaki Onishi'],
+      // WISS は英文タイトルを付けないので、日本語のタイトルをそのまま使う
+      title: 'Webで描く動的な可視化のためのプレゼンテーションシステム',
+      subtitle: '―スタジアム来場者のGPS軌跡を例として―',
+      venue: 'The 34th Workshop on Interactive Systems and Software (WISS 2026)',
+      place: 'Naeba Prince Hotel, Niigata',
+      period: 'Dec. 9–11, 2026',
+    },
+  },
+  {
+    date: '2026-10',
+    type: 'domestic-conf',
+    refereed: false,
+    format: 'oral',
+    inJapanese: true,
+    ja: {
+      authors: ['大泉直人', '富塚恭任', '大西正輝', '大門拓真', '萩原智行'],
+      title: '人流ビッグデータを用いたＪリーグ来場者の試合日別行動分析',
+      subtitle: '―メルカリスタジアムを対象として―',
+      venue: '第35回地理情報システム学会学術研究発表大会, B1-04',
+      place: '東京科学大学 大岡山キャンパス',
+      period: '2026年10月31日–11月1日',
+    },
+    en: {
+      authors: ['Naoto Oizumi', 'Yoshihide Tomizuka', 'Masaki Onishi', 'Takuma Okado', 'Tomoyuki Hagiwara'],
+      title: 'Match-day Behavior Analysis of J.League Attendance Using Geo Big Data',
+      subtitle: '- The Case of Mercari Stadium -',
+      // 学会英語サイトの表記（例: 32nd Annual Conference of the Geographic Information System Association (GISA)）に合わせる
+      venue: 'The 35th Annual Conference of the Geographic Information System Association (GISA), B1-04',
+      place: 'Institute of Science Tokyo, Ookayama Campus',
+      period: 'Oct. 31–Nov. 1, 2026',
+    },
+    // 賞の公式な英語名は見つからないため、英語は自前の訳
+    award: { ja: '大会優秀発表賞', en: 'Excellent Presentation Award', href: 'https://www.gisa-japan.org/awards/post.html' },
+    links: [
+      {
+        ja: '関連：ホームゲーム来場者移動レポート（鹿島アントラーズ）',
+        en: 'Related: Home Game Attendee Mobility Report (Kashima Antlers, in Japanese)',
+        href: 'https://www.antlers.co.jp/blogs/news/260630ez5xeu',
+      },
+    ],
+  },
+];
