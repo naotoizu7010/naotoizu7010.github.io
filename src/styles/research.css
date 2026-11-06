@@ -132,6 +132,17 @@
   color: var(--cv-accent);
 }
 
+/* 他の注記リンクと同じく薄い下線を付け、ホバーで下線を濃くする。文字は赤のまま */
+.pub-list .pub-award a {
+  color: var(--cv-accent);
+  text-decoration-color: color-mix(in srgb, var(--cv-accent) 40%, transparent);
+}
+
+.pub-list .pub-award a:hover {
+  color: var(--cv-accent);
+  text-decoration-color: var(--cv-accent);
+}
+
 .pub-list .pub-authors {
   margin-bottom: 4px;
   color: var(--cv-fg);
