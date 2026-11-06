@@ -316,8 +316,6 @@ export const publications: Publication[] = [
       place: '苗場プリンスホテル',
       period: '2026年12月9日–11日',
     },
-    // TODO: プレビュー用のダミー。公開前に削除する
-    pdf: '/dummy.pdf',
     en: {
       authors: ['Naoto Oizumi', 'Masaki Onishi'],
       // WISS は英文タイトルを付けないので、日本語のタイトルをそのまま使う
@@ -353,10 +351,6 @@ export const publications: Publication[] = [
     },
     // 賞の公式な英語名は見つからないため、英語は自前の訳
     award: { ja: '大会優秀発表賞', en: 'Excellent Presentation Award', href: 'https://www.gisa-japan.org/awards/post.html' },
-    // TODO: プレビュー用のダミー。公開前に実際の値に差し替える
-    pdf: '/dummy.pdf',
-    jstage: 'https://www.jstage.jst.go.jp/',
-    doi: '10.0000/dummy.2026.0001',
     links: [
       {
         ja: '関連：ホームゲーム来場者移動レポート（鹿島アントラーズ）',
