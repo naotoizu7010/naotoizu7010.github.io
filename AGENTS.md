@@ -4,6 +4,12 @@
 
 - 今後の改善タスクや方針は `docs/roadmap.md` を参照する。
 
+## Screenshots
+
+- 見た目に関わる変更をしたら、ライトモードとダークモードの両方のスクリーンショットを撮り、ユーザーに見せる。
+- `npm run build` と `npm run preview` のあと、`node scripts/screenshot.mjs <パス> [CSSセレクタ] [出力先]` で撮れる（出力先の既定は `screenshots/`、Git管理外）。
+- 変更箇所がわかる範囲を撮る。ページ全体が必要ならセレクタを省く。
+
 ## Commit Messages
 
 - 日本語で書く。
