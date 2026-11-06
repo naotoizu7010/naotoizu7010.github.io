@@ -133,7 +133,15 @@ const years = [...new Set(sorted.map(yearOf))];
                       <br />
                       {x.period}{x.place && `${lang === 'en' ? ', ' : '，'}${x.place}`}
                     </p>
-                    {p.award && <p class="pub-award">{p.award[lang]}</p>}
+                    {p.award && (
+                      <p class="pub-award">
+                        {p.award.href ? (
+                          <a href={p.award.href} target="_blank" rel="noopener">{p.award[lang]}</a>
+                        ) : (
+                          p.award[lang]
+                        )}
+                      </p>
+                    )}
                     {p.links && (
                       <p class="pub-links">
                         {p.links.map((l) => (
