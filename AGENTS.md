@@ -6,8 +6,9 @@
 
 ## Screenshots
 
-- 見た目に関わる変更をしたら、ライトモードとダークモードの両方のスクリーンショットを撮り、ユーザーに見せる。
-- `npm run build` と `npm run preview` のあと、`node scripts/screenshot.mjs <パス> [CSSセレクタ] [出力先]` で撮れる（出力先の既定は `screenshots/`、Git管理外）。
+- 何かを変更したら、変更箇所を「PC・スマホ」×「ライト・ダーク」の4通りでスクリーンショットに撮り、ユーザーに見せる。
+- `npm run build` と `npm run preview` のあと、`node scripts/screenshot.mjs <パス> [CSSセレクタ] [出力先]` で4枚まとめて撮れる（PC幅1280px・スマホ幅390px、出力先の既定は `screenshots/`、Git管理外）。
+- playwright が入っていない環境では、アプリ内ブラウザの `resize_window`（`preset: mobile` / `desktop`、`colorScheme: light` / `dark`）で4通りを撮って代用する。
 - 変更箇所がわかる範囲を撮る。ページ全体が必要ならセレクタを省く。
 
 ## Commit Messages
