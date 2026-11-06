@@ -147,3 +147,114 @@
   flex-wrap: wrap;
   gap: 4px 16px;
 }
+
+/* PDF / J-STAGE / DOI のボタン。年の切り替えと同じ丸いボタンの小さい版 */
+.pub-list .pub-actions {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pub-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  line-height: 1;
+  padding: 6px 12px;
+  border: 1px solid var(--cv-line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--cv-fg-mute);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+/* cv.css の .cv-events p a の下線を打ち消す */
+.cv-events p a.pub-btn {
+  text-decoration: none;
+}
+
+.pub-btn:hover,
+.pub-btn:focus-visible,
+.cv-events p a.pub-btn:hover {
+  color: var(--cv-fg);
+  border-color: var(--cv-fg-mute);
+}
+
+.pub-doi.is-copied {
+  background: var(--cv-fg);
+  border-color: var(--cv-fg);
+  color: var(--cv-bg);
+}
+
+/* DOI の URL を出す吹き出し。ホバー・フォーカス・コピー直後に表示する */
+.pub-doi-tip {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 8px);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: var(--cv-fg);
+  color: var(--cv-bg);
+  width: max-content;
+  max-width: min(360px, calc(100vw - 48px));
+  overflow-wrap: anywhere;
+  text-align: left;
+  letter-spacing: 0.02em;
+  box-shadow: 0 6px 20px rgb(0 0 0 / 0.18);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(4px);
+  transition: opacity 0.15s, transform 0.15s, visibility 0.15s;
+  pointer-events: none;
+}
+
+.pub-doi-tip::after {
+  content: '';
+  position: absolute;
+  left: 18px;
+  top: 100%;
+  border: 6px solid transparent;
+  border-top-color: var(--cv-fg);
+}
+
+.pub-doi:hover .pub-doi-tip,
+.pub-doi:focus-visible .pub-doi-tip,
+.pub-doi.is-copied .pub-doi-tip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.pub-doi-url {
+  font-size: 12px;
+}
+
+.pub-doi-hint {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+/* スマホでは吹き出しをボタンではなく行の左端にそろえ、画面からはみ出さないようにする */
+@media (max-width: 600px) {
+  .pub-list .pub-actions {
+    position: relative;
+  }
+
+  .pub-doi {
+    position: static;
+  }
+
+  .pub-doi-tip::after {
+    display: none;
+  }
+}
