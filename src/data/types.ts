@@ -67,4 +67,7 @@ export type Publication = {
   en: PublicationText;
   award?: { ja: string; en: string; href?: string };
   links?: { ja: string; en: string; href: string }[];
+  pdf?: string; // 論文PDFへのURL（またはサイト内のパス）
+  jstage?: string; // J-STAGE の論文ページURL
+  doi?: string; // 「10.」から始まる DOI 本体。表示時に https://doi.org/ を付ける
 };

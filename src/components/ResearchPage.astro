@@ -32,6 +32,8 @@ const t = {
     yearFilter: '年で絞り込む',
     contact: '連絡先：',
     contactBody: '各 SNS の DM、または naoto-oizumi[at]aist.go.jp',
+    copyDoi: 'クリックでDOIのURLをコピー',
+    copied: 'コピーしました',
   },
   en: {
     title: 'Research — Naoto Oizumi',
@@ -45,6 +47,8 @@ const t = {
     yearFilter: 'Filter by year',
     contact: 'Contact: ',
     contactBody: 'DM on social media, or naoto-oizumi[at]aist.go.jp',
+    copyDoi: 'Click to copy DOI URL',
+    copied: 'Copied!',
   },
 }[lang];
 
@@ -71,6 +75,8 @@ const groups = sections
   .map((s) => ({ label: s[lang], items: sorted.filter((p) => p.type === s.type) }))
   .filter((g) => g.items.length > 0);
 const awards = sorted.filter((p) => p.award);
+
+const doiUrl = (doi: string) => `https://doi.org/${doi}`;
 
 const formatDate = (date: string) => date.replace('-', '.');
 const yearOf = (p: Publication) => p.date.slice(0, 4);
@@ -133,6 +139,31 @@ const years = [...new Set(sorted.map(yearOf))];
                       <br />
                       {x.period}{x.place && `${lang === 'en' ? ', ' : '，'}${x.place}`}
                     </p>
+                    {(p.pdf || p.jstage || p.doi) && (
+                      <p class="pub-actions">
+                        {p.pdf && (
+                          <a class="pub-btn" href={p.pdf} target="_blank" rel="noopener">PDF</a>
+                        )}
+                        {p.jstage && (
+                          <a class="pub-btn" href={p.jstage} target="_blank" rel="noopener">J-STAGE</a>
+                        )}
+                        {p.doi && (
+                          <button
+                            type="button"
+                            class="pub-btn pub-doi"
+                            data-doi={doiUrl(p.doi)}
+                            data-copied={t.copied}
+                            aria-label={`DOI: ${doiUrl(p.doi)}（${t.copyDoi}）`}
+                          >
+                            DOI
+                            <span class="pub-doi-tip" aria-hidden="true">
+                              <span class="pub-doi-url">{doiUrl(p.doi)}</span>
+                              <span class="pub-doi-hint">{t.copyDoi}</span>
+                            </span>
+                          </button>
+                        )}
+                      </p>
+                    )}
                     {p.links && (
                       <p class="pub-links">
                         {p.links.map((l) => (
@@ -210,4 +241,33 @@ const years = [...new Set(sorted.map(yearOf))];
   };
 
   buttons.forEach((b) => b.addEventListener('click', () => show(b.dataset.year ?? 'all')));
+
+  // DOI ボタン。クリックで DOI の URL をコピーし、吹き出しを「コピーしました」に切り替える
+  document.querySelectorAll<HTMLButtonElement>('.pub-doi').forEach((btn) => {
+    const hint = btn.querySelector<HTMLElement>('.pub-doi-hint');
+    const original = hint?.textContent ?? '';
+    let timer: number | undefined;
+
+    btn.addEventListener('click', async () => {
+      const url = btn.dataset.doi ?? '';
+      try {
+        await navigator.clipboard.writeText(url);
+      } catch {
+        // clipboard API が使えない環境向けの予備
+        const ta = document.createElement('textarea');
+        ta.value = url;
+        document.body.append(ta);
+        ta.select();
+        document.execCommand('copy');
+        ta.remove();
+      }
+      btn.classList.add('is-copied');
+      if (hint) hint.textContent = btn.dataset.copied ?? '';
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        btn.classList.remove('is-copied');
+        if (hint) hint.textContent = original;
+      }, 1600);
+    });
+  });
 </script>
