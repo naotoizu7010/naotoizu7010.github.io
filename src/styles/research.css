@@ -125,6 +125,13 @@
   color: var(--cv-fg);
 }
 
+/* 業績一覧でも受賞した発表がひと目でわかるよう、賞名を赤で添える */
+.pub-list .pub-award {
+  margin-top: 4px;
+  font-weight: 700;
+  color: var(--cv-accent);
+}
+
 .pub-list .pub-authors {
   margin-bottom: 4px;
   color: var(--cv-fg);
