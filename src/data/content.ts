@@ -3,6 +3,7 @@ import type {
   FactItem,
   LinkItem,
   NavItem,
+  NewsItem,
   PersonalityBite,
   Publication,
   ResearchItem,
@@ -14,6 +15,7 @@ export type {
   FactItem,
   LinkItem,
   NavItem,
+  NewsItem,
   PersonalityBite,
   Publication,
   ResearchItem,
@@ -45,6 +47,24 @@ export const content = {
     { label: 'Personality', href: '#personality' },
     { label: 'Links', href: '#links' },
   ] satisfies NavItem[],
+
+  /* News — ヒーロー直下のお知らせ。新しいものを上に足す。トップには先頭から5件まで出す */
+  news: [
+    {
+      date: '2026-11-01',
+      tag: 'AWARD',
+      accent: 'red',
+      title: '第35回地理情報システム学会学術研究発表大会で大会優秀発表賞を受賞しました',
+      href: 'https://www.gisa-japan.org/awards/post.html',
+    },
+    {
+      date: '2026-10-31',
+      tag: 'TALK',
+      accent: 'blue',
+      title: '第35回地理情報システム学会学術研究発表大会で、Jリーグ来場者の行動分析について発表しました',
+      href: '/research/',
+    },
+  ] satisfies NewsItem[],
 
   /* About */
   about: {

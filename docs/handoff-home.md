@@ -14,6 +14,7 @@
 | # | セクション | 背景 | ファイル |
 | --- | --- | --- | --- |
 | 1 | ヒーロー | 地の色 (グリッド + ドット) | `src/components/home/Hero.astro` |
+| — | News (お知らせ) | 白 | `src/components/home/News.astro` (中身は `content.ts` の `news`。0件なら出ない) |
 | — | ~~Mission (My Theme)~~ | 白 | `src/components/home/Mission.astro` **← 非表示中** |
 | 2 | About + 基本情報 | 薄グレー | `src/components/home/About.astro` |
 | 3 | Activities | 白 | `src/components/home/Activities.astro` |
@@ -33,9 +34,9 @@
 1. `src/components/home/HomePage.astro`
    - `// import Mission from './Mission.astro';` のコメントを外す
    - `{/* <Mission /> */}` のコメントを外す
-2. `src/components/home/About.astro`
-   - 先頭のコメントアウトしてある `<div class="hp-cut hp-cut--top hp-cut--paper">` を戻す
-     （上が白いセクションになるので、斜めカットが必要になる）
+2. About の上の斜めカット (`hp-cut--paper`) は、News を置いたときにもう戻してある。
+   ただし Mission も News も白なので、ヒーロー → News → Mission と並べると白が続く。
+   どちらかを灰色にするか、並び順を考え直す。
 
 コンポーネントと CSS (`.hp-mission-inner` / `.hp-mission-body`) は消していないので、
 上の2ファイルを戻すだけで元通り表示される。

@@ -34,6 +34,15 @@ export type LinkItem = {
   accent?: 'red' | 'blue' | 'fg';
 };
 
+/* トップのお知らせ1件分。date は 'YYYY-MM-DD' で、新しい順に並べるのに使う */
+export type NewsItem = {
+  date: string;
+  tag: string; // 'AWARD' 'TALK' 'MEDIA' 'UPDATE' など。英大文字で短く
+  accent?: 'red' | 'blue'; // タグの色。省略すると灰色
+  title: string;
+  href?: string; // 外部リンクは新しいタブで開く
+};
+
 export type SnsItem = {
   label: string;
   href: string;

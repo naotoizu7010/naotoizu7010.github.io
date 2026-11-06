@@ -1,0 +1,60 @@
+---
+/* ----------------------------------------------------------------
+   src/components/home/News.astro
+   ヒーロー直下のお知らせ。左に見出し、右に「日付 / タグ / タイトル」の行を並べる。
+   中身は content.ts の news。0件のときはセクションごと出さない。
+   ---------------------------------------------------------------- */
+import { content } from '../../data/content.ts';
+
+const MAX = 5;
+const items = [...content.news]
+  .sort((a, b) => b.date.localeCompare(a.date))
+  .slice(0, MAX);
+
+const fmt = (d: string) => d.replaceAll('-', '.');
+const isExternal = (href: string) => /^https?:\/\//.test(href);
+---
+
+{items.length > 0 && (
+  <section class="hp-section hp-section--paper hp-news" id="news">
+    <div class="hp-cut hp-cut--top hp-cut--bg" aria-hidden="true"></div>
+
+    <div class="hp-container">
+      <div class="hp-news-inner">
+        <div class="hp-news-head hp-reveal">
+          <span class="hp-eyebrow"><span>News</span></span>
+          <h2 class="hp-h2">お知らせ</h2>
+        </div>
+
+        <ul class="hp-news-list hp-reveal">
+          {items.map((n) => {
+            const body = (
+              <>
+                <time class="hp-news-date" datetime={n.date}>{fmt(n.date)}</time>
+                <span class={`hp-news-tag${n.accent ? ` hp-news-tag--${n.accent}` : ''}`}>{n.tag}</span>
+                <span class="hp-news-title">{n.title}</span>
+                {n.href && <span class="hp-news-arrow" aria-hidden="true">→</span>}
+              </>
+            );
+            return (
+              <li>
+                {n.href ? (
+                  <a
+                    class="hp-news-row"
+                    href={n.href}
+                    target={isExternal(n.href) ? '_blank' : undefined}
+                    rel={isExternal(n.href) ? 'noopener' : undefined}
+                  >
+                    {body}
+                  </a>
+                ) : (
+                  <div class="hp-news-row">{body}</div>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </div>
+  </section>
+)}

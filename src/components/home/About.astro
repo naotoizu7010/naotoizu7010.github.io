@@ -10,9 +10,10 @@ const C = content;
 ---
 
 <section class="hp-section hp-section--bg hp-section--wm" id="about">
-  {/* 白いセクション (Mission) が上に戻ってきたら、この斜めカットも戻す
-      <div class="hp-cut hp-cut--top hp-cut--paper" aria-hidden="true"></div> */}
   <div class="hp-corner" aria-hidden="true"></div>
+  {/* 上の白いセクション (News) からの斜めカット。右上の三角 (hp-corner) が
+      白い部分にはみ出さないよう、三角より後ろに置いて上に重ねる */}
+  <div class="hp-cut hp-cut--top hp-cut--paper" aria-hidden="true"></div>
   <div class="hp-watermark hp-watermark--left hp-watermark--red" aria-hidden="true">About</div>
 
   <div class="hp-container">

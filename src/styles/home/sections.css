@@ -4,6 +4,74 @@
 =============================================================== */
 
 /* ---------------------------------------------------------------
+   NEWS — 左に見出し、右に日付リスト
+   --------------------------------------------------------------- */
+/* 一覧だけの軽いセクションなので、上下の余白は他より詰める。上は斜めカットの分を足す */
+.hp-news {
+  padding: calc(clamp(40px, 6vw, 88px) + clamp(24px, 3vw, 40px)) 0 clamp(56px, 7vw, 96px);
+}
+.hp-news-inner {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.3fr) 1fr;
+  gap: clamp(32px, 5vw, 80px);
+  align-items: start;
+}
+.hp-news-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--df-line);
+}
+.hp-news-list li { border-bottom: 1px solid var(--df-line); }
+
+.hp-news-row {
+  display: grid;
+  grid-template-columns: 96px 76px 1fr 24px;
+  align-items: center;
+  gap: 20px;
+  /* 塗ったときに文字が端に付かないよう、左右にも余白をとる */
+  padding: 22px 16px;
+  color: var(--df-fg);
+}
+.hp-news-date {
+  font-family: var(--df-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--df-fg-mute);
+}
+.hp-news-tag {
+  justify-self: start;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--df-line);
+  font-family: var(--df-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--df-fg-mute);
+}
+.hp-news-tag--red { border-color: var(--df-red); color: var(--df-red); }
+.hp-news-tag--blue { border-color: var(--df-blue); color: var(--df-blue); }
+.hp-news-title {
+  font-family: var(--df-ja);
+  font-size: 14.5px;
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+  transition: color 0.24s;
+}
+.hp-news-arrow {
+  font-size: 16px;
+  color: var(--df-fg-mute);
+  transition: color 0.24s, transform 0.24s;
+}
+/* ホバーでは文字色を変えず、行の面をうっすら塗る */
+a.hp-news-row { transition: background 0.24s; }
+a.hp-news-row:hover { background: color-mix(in srgb, var(--df-fg) 4%, transparent); }
+a.hp-news-row:hover .hp-news-arrow { color: var(--df-fg); transform: translateX(4px); }
+@media (prefers-reduced-motion: reduce) {
+  a.hp-news-row:hover .hp-news-arrow { transform: none; }
+}
+
+/* ---------------------------------------------------------------
    MISSION — 1カラムの宣言
    --------------------------------------------------------------- */
 .hp-mission-inner { max-width: 780px; }
