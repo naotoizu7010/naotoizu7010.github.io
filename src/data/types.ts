@@ -67,6 +67,7 @@ export type PublicationText = {
 
 /* 業績1件分。type ごとに見出しを分けて表示する。refereed / format は表示しない記録用 */
 export type Publication = {
+  id?: string; // /research/#<id> でこの業績へ、/research/#award-<id> で受賞欄へ飛べるようにするアンカー。お知らせなどからリンクするときに付ける
   date: string; // 'YYYY-MM'。新しい順に並べるのに使う
   type: 'intl-journal' | 'domestic-journal' | 'intl-conf' | 'domestic-conf' | 'preprint' | 'talk';
   refereed?: boolean;

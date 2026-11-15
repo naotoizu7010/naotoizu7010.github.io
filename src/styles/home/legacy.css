@@ -113,14 +113,6 @@
 }
 .df-hero-title .red { color: var(--df-red); }
 .df-hero-title .blue { color: var(--df-blue); }
-.df-hero-en {
-  margin-top: 20px;
-  font-family: var(--df-mono);
-  font-size: 13px;
-  letter-spacing: 0.18em;
-  color: var(--df-fg-mute);
-  text-transform: uppercase;
-}
 .df-hero-sub {
   margin-top: 32px;
   font-size: 17px;
@@ -128,69 +120,27 @@
   max-width: 600px;
   white-space: pre-line;
 }
-.df-hero-meta {
-  margin-top: 44px;
-  display: flex;
-  gap: 28px;
-  font-family: var(--df-mono);
-  font-size: 12px;
-  letter-spacing: 0.06em;
-  color: var(--df-fg-mute);
-}
-.df-hero-meta b { color: var(--df-fg); font-weight: 500; }
-
 .df-hero-right {
-  position: relative;
-  aspect-ratio: 1 / 1.05;
   width: 100%;
+  max-width: 440px;
+  justify-self: end;
 }
 .df-hero-photo-wrap {
-  position: absolute;
-  inset: 32px;
+  aspect-ratio: 1 / 1;
   background: var(--df-paper);
   border: 1px solid var(--df-line);
   border-radius: 6px;
-  z-index: 3;
   overflow: hidden;
 }
-.df-hero-stat-card {
-  position: absolute;
-  z-index: 4;
-  background: var(--df-paper);
-  border: 1px solid var(--df-line);
-  padding: 12px 16px;
-  border-radius: 6px;
-  box-shadow: 0 6px 18px rgba(10, 15, 31, 0.06);
-}
-.hp-root[data-theme="dark"] .df-hero-stat-card { box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6); }
-.df-hero-stat-card .k {
-  font-family: var(--df-mono);
-  font-size: 9px;
-  letter-spacing: 0.18em;
-  color: var(--df-fg-mute);
-  text-transform: uppercase;
-}
-.df-hero-stat-card .v {
-  font-family: var(--df-display);
-  font-weight: 700;
-  font-size: 24px;
-  margin-top: 2px;
-}
-.df-hero-stat-card .v.red { color: var(--df-red); }
-.df-hero-stat-card .v.blue { color: var(--df-blue); }
-.df-hero-stat-card-1 { top: 0; left: -20px; }
-.df-hero-stat-card-2 { bottom: -10px; right: -28px; }
+/* ピクセルアートは拡大してもにじませない */
+.df-hero-photo-wrap img { image-rendering: pixelated; }
 
 @media (min-width: 760px) and (max-width: 1120px) {
   .df-hero-inner { gap: 40px; }
   .df-hero-title { font-size: 88px; letter-spacing: -0.035em; }
-  .df-hero-stat-card-1 { top: 4px; left: -8px; }
-  .df-hero-stat-card-2 { bottom: -30px; right: -10px; }
 }
 @media (min-width: 1121px) and (max-width: 1280px) {
   .df-hero-title { font-size: 100px; }
-  .df-hero-stat-card-1 { left: -12px; }
-  .df-hero-stat-card-2 { right: -16px; }
 }
 
 /* ---------------------------------------------------------------
@@ -288,16 +238,8 @@
   .df-hero { padding: calc(32px + var(--hp-header-h)) 0 56px; min-height: 0; }
   .df-hero-inner { grid-template-columns: 1fr; gap: 40px; align-items: stretch; }
   .df-hero-title { font-size: 56px; letter-spacing: -0.035em; }
-  .df-hero-en { font-size: 11px; letter-spacing: 0.14em; }
   .df-hero-sub { font-size: 15px; margin-top: 20px; }
-  .df-hero-meta { margin-top: 28px; flex-direction: column; gap: 8px; font-size: 11px; }
-  .df-hero-right { width: 100%; aspect-ratio: 1 / 1.1; max-width: 320px; margin: 8px auto 0; }
-  .df-hero-photo-wrap { inset: 24px; }
-  .df-hero-stat-card { padding: 8px 12px; }
-  .df-hero-stat-card .v { font-size: 18px; }
-  .df-hero-stat-card .k { font-size: 8px; }
-  .df-hero-stat-card-1 { top: -8px; left: -12px; }
-  .df-hero-stat-card-2 { bottom: -15px; right: -16px; }
+  .df-hero-right { max-width: 280px; justify-self: center; margin-top: 8px; }
 
   .df-footer { padding: 56px 0 28px; }
   .df-footer-top { grid-template-columns: 1fr; gap: 36px; padding-bottom: 32px; }

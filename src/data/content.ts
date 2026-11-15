@@ -55,14 +55,14 @@ export const content = {
       tag: 'AWARD',
       accent: 'red',
       title: '第35回地理情報システム学会学術研究発表大会で大会優秀発表賞を受賞しました',
-      href: 'https://www.gisa-japan.org/awards/post.html',
+      href: '/research/#award-gisa2026',
     },
     {
       date: '2026-10-31',
       tag: 'TALK',
       accent: 'blue',
       title: '第35回地理情報システム学会学術研究発表大会で、Jリーグ来場者の行動分析について発表しました',
-      href: '/research/',
+      href: '/research/#gisa2026',
     },
   ] satisfies NewsItem[],
 
@@ -347,6 +347,7 @@ export const publications: Publication[] = [
     },
   },
   {
+    id: 'gisa2026',
     date: '2026-10',
     type: 'domestic-conf',
     refereed: false,

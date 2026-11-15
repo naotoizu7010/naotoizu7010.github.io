@@ -119,7 +119,7 @@ const years = [...new Set(sorted.map(yearOf))];
             {g.items.map((p) => {
               const x = textOf(p);
               return (
-                <li data-year={yearOf(p)}>
+                <li data-year={yearOf(p)} id={p.id}>
                   <time>{formatDate(p.date)}</time>
                   <div>
                     <h4>
@@ -197,7 +197,7 @@ const years = [...new Set(sorted.map(yearOf))];
             const x = textOf(p);
             const award = p.award!;
             return (
-              <li data-year={yearOf(p)}>
+              <li data-year={yearOf(p)} id={p.id && `award-${p.id}`}>
                 <time>{formatDate(p.date)}</time>
                 <div>
                   <h4>

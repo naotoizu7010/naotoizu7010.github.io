@@ -255,6 +255,49 @@
   opacity: 0.7;
 }
 
+/* お知らせなどから /research/#<id> で飛んできたとき、その業績の背景を2回明滅させて場所を知らせる。
+   box-shadow で背景を外側へ広げ、行の配置は動かさない */
+:root {
+  /* ライトはグレー寄り、ダークは青寄り */
+  --pub-flash: color-mix(in srgb, var(--cv-fg) 9%, transparent);
+  --pub-flash-still: color-mix(in srgb, var(--cv-fg) 6%, transparent);
+}
+
+html[data-pre-theme='dark'] {
+  --pub-flash: color-mix(in srgb, var(--cv-link-hover) 14%, transparent);
+  --pub-flash-still: color-mix(in srgb, var(--cv-link-hover) 10%, transparent);
+}
+
+.pub-list li {
+  scroll-margin-top: 32px;
+  border-radius: 6px;
+}
+
+.pub-list li:target {
+  animation: pub-target-flash 1.4s ease-in-out 2;
+}
+
+@keyframes pub-target-flash {
+  0%,
+  100% {
+    background: transparent;
+    box-shadow: 0 0 0 14px transparent;
+  }
+  50% {
+    background: var(--pub-flash);
+    box-shadow: 0 0 0 14px var(--pub-flash);
+  }
+}
+
+/* 動きを減らす設定では、明滅の代わりに薄い背景を付けたままにする */
+@media (prefers-reduced-motion: reduce) {
+  .pub-list li:target {
+    animation: none;
+    background: var(--pub-flash-still);
+    box-shadow: 0 0 0 14px var(--pub-flash-still);
+  }
+}
+
 /* スマホでは吹き出しをボタンではなく行の左端にそろえ、画面からはみ出さないようにする */
 @media (max-width: 600px) {
   .pub-list .pub-actions {
